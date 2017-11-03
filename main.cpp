@@ -1,12 +1,14 @@
 #include <iostream>
+#include <string>
+#include <cstring>
 #include <fstream>
 
 #include "errors.h"
+#include "Enigma.h"
 
 using namespace std;
 
 int open_file(char* path){
-  cout << "path " << path << endl;
   char character;
   ifstream in_stream;
   // in_stream.exceptions ( ifstream::failbit );
@@ -39,17 +41,27 @@ int open_file(char* path){
 
 int main(int argc, char** argv){
 
-  // cout << "argc " << argc << endl;
-  //
-  // cout << "plugboards " << argv[1] << endl;
-  // cout << "reflector " << argv[2] << endl;
+  cout << "argc " << argc << endl;
+
+  cout << "plugboards " << argv[1] << endl;
+  cout << "reflector " << argv[2] << endl;
+
   // This is a list of rotors
-  // for(int i = 3; argv[i] != '\0'; i++){
-  //     cout << argv[i] << endl;
-  // }
+  for(int i = 3; i < argc-1; i++){
+      cout << argv[i] << endl;
+  }
+
+  cout << "Starting position " << argv[argc-1] << endl;
+
+  // TODO Create an instance of Enigma
 
   // TODO Insufficient # of parameters
   int error = open_file(argv[2]);
   cout << "error? " << error << endl;
+  string message;
+  cout << "Type a message you want to encrypt " << endl;
+  cin >> message;
+  cout << "Encrypted message is " << endl;
+
   return 0;
 }
