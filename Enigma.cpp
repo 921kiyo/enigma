@@ -15,7 +15,6 @@ Enigma::Enigma(int argc, char** argv){
   for(int i = 3; i < argc-1; i++){
     rotors[count] = new Rotor(argv[i]);
     count++;
-    cout << "hello " << endl;
   }
 
 }

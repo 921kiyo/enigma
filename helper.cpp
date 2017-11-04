@@ -2,28 +2,79 @@
 #include <fstream>
 #include <cstring>
 #include "helper.h"
+#include "errors.h"
 
 using namespace std;
 
+int get_array_length(const char* path){
+  int counter = 0;
+  int num;
+  fstream in_stream;
+  in_stream.open(path);
+  // in_stream >> num;
+  while(!in_stream.eof()){
+    in_stream >> num;
+    counter++;
+  }
+  in_stream.close();
+  // TODO Double check this -1
+  return counter-1;
+}
+
 void map_input_to_array(const char* path, int* array){
-  int num, array_length;
-  array_length = sizeof(array);
-  
+  int i=0;
+
   fstream in_stream;
 
   in_stream.open(path);
 
   if(in_stream.fail()){
     cout << "failing... " << endl;
+    // return ERROR_OPENING_CONFIGURATION_FILE
   }
-
-  for(int i = 0; i< array_length; i++){
+  int num;
+  // in_stream >> num;
+  while(!in_stream.eof()){
     in_stream >> num;
     array[i] = num;
-    cout << num << endl;
+    i++;
   }
+  in_stream.close();
 }
 
-bool is_number_range_correct(int* array){
+// Check if the array only contains numbers between 0 and 25
+bool is_number_range_correct(int* array, int length){
+  cout << "lenght" << length << endl;
+  for(int i = 0; i< length; i++){
+    cout << array[i] << endl;
+    if(array[i] > 25 || array[i] < 0){
+      return false;
+    }
+  }
   return true;
 }
+
+// TODO Is this efficient?
+bool is_duplicate_int(int* array, int range){
+
+  for(int i = range; i> 0; i--){
+    // is_appeared_before(array, array[i], i)
+    for(int x = 0; x < i-1; x++ ){
+      if(array[x] == array[i]){
+        cout << "duplicate! " << endl;
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// bool is_appeared_before(int* array, int num, int position){
+//   for(int x = 0; x < position-1; x++ ){
+//     if(array[x] == array[i]){
+//       cout << "duplicate! " << endl;
+//       cout << "array[x] " << array[x] << endl;
+//       return true;
+//     }
+//   }
+// }

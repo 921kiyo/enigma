@@ -11,14 +11,15 @@ Rotor::Rotor(const char* path){
 }
 
 int Rotor::check_input(const char* path){
-  int input_array[80];
-  for(int i = 0; i< 80; i++){
-    input_array[i] = -1;
-  }
-  map_input_to_array(path, input_array);
-  for(int i = 0; i<80; i++){
-    cout << "input array" << i << " " << input_array[i] << endl;
-  }
+
+  int array_length = get_array_length(path);
+  int num_array[array_length];
+  map_input_to_array(path, num_array);
+
+  
+  // for(int i = 0; i<array_length; i++){
+  //   cout << "input array" << i << " " << num_array[i] << endl;
+  // }
 
   // cout << "path " << path << endl;
   // int num;
