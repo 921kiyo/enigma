@@ -16,30 +16,16 @@ int Rotor::check_input(const char* path){
   int num_array[array_length];
   map_input_to_array(path, num_array);
 
-  
+  // TODO Double check if this checking is enough
+  cout << "hello " << endl;
+  if(is_duplicate_int(num_array, 25)){
+    cout << "invalid rotor mapping " << endl;
+    return INVALID_ROTOR_MAPPING;
+  }
+
   // for(int i = 0; i<array_length; i++){
   //   cout << "input array" << i << " " << num_array[i] << endl;
   // }
 
-  // cout << "path " << path << endl;
-  // int num;
-  // int rotors[26];
-  // fstream in_stream;
-  // in_stream.open(path);
-  // if(in_stream.fail()){
-  //   cout << "failing... " << endl;
-  // }
-  // // in_stream.get(num);
-  // for(int i = 0; i< 26; i++){
-  //   in_stream >> num;
-  //   rotors[i] = num;
-  //   cout << num << endl;
-  // }
-
-  // while(!in_stream.eof()){
-  //   cout << "num " << num << endl;
-  //   in_stream >> num;
-  // }
-  // in_stream.close();
   return NO_ERROR;
 }

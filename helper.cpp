@@ -44,9 +44,7 @@ void map_input_to_array(const char* path, int* array){
 
 // Check if the array only contains numbers between 0 and 25
 bool is_number_range_correct(int* array, int length){
-  cout << "lenght" << length << endl;
   for(int i = 0; i< length; i++){
-    cout << array[i] << endl;
     if(array[i] > 25 || array[i] < 0){
       return false;
     }
@@ -57,24 +55,21 @@ bool is_number_range_correct(int* array, int length){
 // TODO Is this efficient?
 bool is_duplicate_int(int* array, int range){
 
-  for(int i = range; i> 0; i--){
-    // is_appeared_before(array, array[i], i)
-    for(int x = 0; x < i-1; x++ ){
-      if(array[x] == array[i]){
-        cout << "duplicate! " << endl;
-        return true;
-      }
+  for(int i = range-1; i>= 0; i--){
+    if(is_appeared_before(array, array[i], i)){
+      return true;
     }
   }
   return false;
 }
 
-// bool is_appeared_before(int* array, int num, int position){
-//   for(int x = 0; x < position-1; x++ ){
-//     if(array[x] == array[i]){
-//       cout << "duplicate! " << endl;
-//       cout << "array[x] " << array[x] << endl;
-//       return true;
-//     }
-//   }
-// }
+bool is_appeared_before(int* array, int num, int position){
+  for(int x = 0; x < position; x++ ){
+    if(array[x] == array[position]){
+      cout << "duplicate! " << endl;
+      cout << "array[x] " << array[x] << endl;
+      return true;
+    }
+  }
+  return false;
+}

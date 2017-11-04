@@ -9,6 +9,6 @@ bool is_number_range_correct(int* array, int length);
 
 bool is_duplicate_int(int* array, int range);
 
-// bool is_appeared_before(int* array, int num, int length);
+bool is_appeared_before(int* array, int num, int length);
 
 #endif
