@@ -17,15 +17,16 @@ int Rotor::check_input(const char* path){
   map_input_to_array(path, num_array);
 
   // TODO Double check if this checking is enough
-  cout << "hello " << endl;
   if(is_duplicate_int(num_array, 25)){
     cout << "invalid rotor mapping " << endl;
     return INVALID_ROTOR_MAPPING;
   }
 
-  // for(int i = 0; i<array_length; i++){
-  //   cout << "input array" << i << " " << num_array[i] << endl;
-  // }
+  if(!is_number_range_correct(num_array, array_length)){
+    cout << "out of range " << endl;
+    return INVALID_INDEX;
+  }
+
 
   return NO_ERROR;
 }

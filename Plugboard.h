@@ -3,6 +3,7 @@
 
 class Plugboard{
 private:
+  // TODO USE THIS
   int contacts[3];
 public:
   Plugboard(const char* path);
