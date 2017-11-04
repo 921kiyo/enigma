@@ -30,22 +30,29 @@ int Plugboard::check_input(const char* path){
   if(in_stream.fail()){
     return ERROR_OPENING_CONFIGURATION_FILE;
   }
-  // in_stream.getline(line, MAX_LENGTH);
-  //
-  // string str;
-  // for(char* tok = strtok(line, " "); tok != NULL; tok=strtok(NULL, " ")){
-  //   count++;
-  //   str = str(tok);
-  //   cout << "tok " << tok << endl;
-  //   cout << "num " << num << endl;
-  // }
-  char letter;
-  in_stream.get(letter);
-  while(!in_stream.eof()){
-    // in_stream.get(letter);
-    // cin > ws;
-    // cout << ws << endl;
+  in_stream.getline(line, MAX_LENGTH);
+
+  string str;
+  for(char* tok = strtok(line, " "); tok != NULL; tok=strtok(NULL, " ")){
+    count++;
+    // str = str(tok);
+    cout << "tok " << tok << endl;
+    // cout << "num " << num << endl;
   }
+  // char letter;
+  // in_stream.get(letter);
+  // while(!in_stream.eof()){
+  //   // in_stream >> letter;
+  //    in_stream >> ws;
+  //   //  cout << "letter " << letter << endl;
+  //   //  in_stream.get(letter);
+  //   // in_stream.getline(line, MAX_LENGTH);
+  //
+  //   count++;
+  //   cout << count << endl;
+  //   // cout << ws << endl;
+  // }
+  cout << "line " << line << endl;
   if(count%2!=0){
     #ifndef DEBUG
     cout << "failing: not odd number " << INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS << endl;
