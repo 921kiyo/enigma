@@ -4,6 +4,7 @@
 #include <fstream>
 // #include <sstream>
 #include "Plugboard.h"
+#include "helper.h"
 #include "errors.h"
 
 using namespace std;
@@ -24,7 +25,7 @@ int Plugboard::check_input(const char* path){
   #ifndef DEBUG
   cout << "path is  " << path << endl;
   #endif
-
+  // TODO Change it from char to int
   ifstream in_stream;
   in_stream.open(path);
 
@@ -93,7 +94,7 @@ int Plugboard::check_input(const char* path){
     return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
   }
 
-
+  cout << "plugboard no problem " << endl;
   in_stream.close();
   // Check the extension is pd
 }

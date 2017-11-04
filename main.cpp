@@ -5,9 +5,6 @@
 
 #include "errors.h"
 #include "Enigma.h"
-#include "Plugboard.h"
-#include "Rotor.h"
-#include "Reflector.h"
 
 using namespace std;
 
@@ -46,15 +43,12 @@ int main(int argc, char** argv){
 
   cout << "argc " << argc << endl;
 
-  cout << "plugboards " << argv[1] << endl;
-  Plugboard plugboard(argv[1]);
+  // cout << "plugboards " << argv[1] << endl;
+  // Plugboard plugboard(argv[1]);
   // cout << "reflector " << argv[2] << endl;
 
-  // This is a list of rotors
-  // for(int i = 3; i < argc-1; i++){
-  //     cout << argv[i] << endl;
-  // }
 
+  Enigma enigma(argc, argv);
   // cout << "Starting position " << argv[argc-1] << endl;
 
   // TODO Create an instance of Enigma

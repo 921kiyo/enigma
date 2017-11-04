@@ -1,4 +1,4 @@
-OBJ = main.o Plugboard.o Reflector.o Rotor.o
+OBJ = main.o Enigma.o Plugboard.o Reflector.o Rotor.o helper.o
 EXE = enigma
 GPP = g++
 DEBUG = -Wall -g
@@ -11,11 +11,15 @@ $(EXE): $(OBJ)
 
 main.o: Enigma.h errors.h
 
-Plugboard.o: Plugboard.h
+Enigma.o: Enigma.h Plugboard.h Reflector.h Rotor.h helper.h errors.h
 
-Reflector.o: Reflector.h
+Plugboard.o: Plugboard.h helper.h errors.h
 
-Rotor.o: Rotor.h
+Reflector.o: Reflector.h helper.h errors.h
+
+Rotor.o: Rotor.h helper.h errors.h
+
+helper.o: helper.h
 
 clean:
 	rm -f $(OBJ) $(EXE)

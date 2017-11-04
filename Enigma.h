@@ -7,10 +7,10 @@
 
 class Enigma{
 private:
-  Plugboard* plugboard;
-  Reflector* reflector;
+Rotor **rotors;
+
 public:
-  Enigma(Plugboard* _plugboard, Reflector* _reflector );
+  Enigma(int argc, char** argv);
   // at least 3 rotors
 
 };
