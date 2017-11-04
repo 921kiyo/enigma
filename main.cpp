@@ -5,6 +5,9 @@
 
 #include "errors.h"
 #include "Enigma.h"
+#include "Plugboard.h"
+#include "Rotor.h"
+#include "Reflector.h"
 
 using namespace std;
 
@@ -44,24 +47,25 @@ int main(int argc, char** argv){
   cout << "argc " << argc << endl;
 
   cout << "plugboards " << argv[1] << endl;
-  cout << "reflector " << argv[2] << endl;
+  Plugboard plugboard(argv[1]);
+  // cout << "reflector " << argv[2] << endl;
 
   // This is a list of rotors
-  for(int i = 3; i < argc-1; i++){
-      cout << argv[i] << endl;
-  }
+  // for(int i = 3; i < argc-1; i++){
+  //     cout << argv[i] << endl;
+  // }
 
-  cout << "Starting position " << argv[argc-1] << endl;
+  // cout << "Starting position " << argv[argc-1] << endl;
 
   // TODO Create an instance of Enigma
 
   // TODO Insufficient # of parameters
-  int error = open_file(argv[2]);
-  cout << "error? " << error << endl;
-  string message;
-  cout << "Type a message you want to encrypt " << endl;
-  cin >> message;
-  cout << "Encrypted message is " << endl;
+  // int error = open_file(argv[2]);
+  // cout << "error? " << error << endl;
+  // string message;
+  // cout << "Type a message you want to encrypt " << endl;
+  // cin >> message;
+  // cout << "Encrypted message is " << endl;
 
   return 0;
 }

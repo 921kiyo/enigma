@@ -5,21 +5,15 @@ class Plugboard{
 private:
   int contacts[3];
 public:
-  Plugboard(){
+  Plugboard(const char* path);
 
-  }
+  void swap_letters();
 
-  void swap_letters(){
+  void send_to_rotor();
 
-  }
+  void send_back_output();
 
-  void send_to_rotor(){
-
-  }
-
-  void send_back_output(){
-    
-  }
+  int check_input(const char* path);
 
 };
 
