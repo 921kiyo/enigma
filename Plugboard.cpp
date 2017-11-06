@@ -37,10 +37,6 @@ int Plugboard::check_input(const char* path){
   // string str;
   // int letter_length, tenth_digit, first_digit, digit;
 
-
-
-
-
   // if(count%2!=0){
   //   #ifndef DEBUG
   //   cout << "failing: not odd number " << INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS << endl;

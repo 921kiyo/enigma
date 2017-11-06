@@ -27,6 +27,19 @@ int Rotor::check_input(const char* path){
     return INVALID_INDEX;
   }
 
+  // cout << "array length " << array_length << endl;
+
+  num_of_notches = array_length - ALPHABET_LENGTH;
+
+  cout << "num_of_notches " << num_of_notches << endl;
 
   return NO_ERROR;
+}
+
+void Rotor::rotate_forward(int* array){
+
+}
+
+void Rotor::rotate_backward(int* array){
+
 }

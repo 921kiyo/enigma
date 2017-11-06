@@ -24,6 +24,7 @@ helper.o: helper.h
 clean:
 	rm -f $(OBJ) $(EXE)
 
+# Even if a file called clean exists, clean command will always run when PHONY exists
 .PHONY: clean
 
 # enigma: main.cpp errors.h

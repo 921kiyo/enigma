@@ -6,20 +6,23 @@
 
 using namespace std;
 
+// TODO more description here
+// I double checked with Dr.Fidelis about using global helper functions
+
 int get_array_length(const char* path){
   int counter = 0;
   int num;
   fstream in_stream;
   in_stream.open(path);
   while(!in_stream.eof() && in_stream >> num){
-    // in_stream >> num;
+  // while(!in_stream.eof()){
+  //   in_stream >> num;
     // in_stream >> ws;
-    // cout << "num" << num << endl;
     counter++;
   }
   in_stream.close();
-  // TODO Double check this -1
-  return counter-1;
+
+  return counter;
 }
 
 void map_input_to_array(const char* path, int* array){

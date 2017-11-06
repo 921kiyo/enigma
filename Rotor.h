@@ -5,13 +5,15 @@ const int ALPHABET_LENGTH = 26;
 class Rotor{
 private:
   int contacts[ALPHABET_LENGTH];
+  int num_of_notches;
+  int* notches;
 public:
   Rotor(const char* path);
   int check_input(const char* path);
   void rotate();
   bool is_key_pressed();
-  void move_forward();
-  void move_backward();
+  void rotate_forward(int* array);
+  void rotate_backward(int* array);
 };
 
 #endif
