@@ -11,9 +11,10 @@ int get_array_length(const char* path){
   int num;
   fstream in_stream;
   in_stream.open(path);
-  // in_stream >> num;
-  while(!in_stream.eof()){
-    in_stream >> num;
+  while(!in_stream.eof() && in_stream >> num){
+    // in_stream >> num;
+    // in_stream >> ws;
+    // cout << "num" << num << endl;
     counter++;
   }
   in_stream.close();
