@@ -52,12 +52,19 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
   // Can I use recursion here??
 
   // Step1 rotate the rotor
-  // rotors[0]->rotate_forward();
+  rotors[0]->rotate_forward();
+  // Step2
   current_index = rotors[0]->convert_forward(current_index);
   current_index = rotors[1]->convert_forward(current_index);
   current_index = rotors[2]->convert_forward(current_index);
   current_index = reflector->convert_forward(current_index);
+  cout << "helo " << current_index << endl;
+  current_index = rotors[2]->convert_backward(current_index);
+  current_index = rotors[1]->convert_backward(current_index);
+  current_index = rotors[0]->convert_backward(current_index);
   cout << "current_index " << current_index << endl;
+  encrypted_message[1] = current_index + 65;
+  cout << "encrypt_message[1] " << encrypted_message[1] << endl;
   // for(int i = 0; i < array_length ; i++ ){
   //   rotors[i]->convert_forward(letter_abs_position);
   // }

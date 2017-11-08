@@ -46,16 +46,26 @@ void Rotor::rotate_forward(){
   cout << "starting_position " << starting_position << endl;
 }
 
+// Do I need this?
 void Rotor::rotate_backward(){
   starting_position--;
 }
 
 int Rotor::convert_forward(int input_index){
-  cout << "contacts[input_index] " << contacts[input_index-1] << endl;
-  return contacts[input_index-1];
+  // cout << "contacts[input_index] " << contacts[input_index] << endl;
+  cout << "contacts[input_index] " << input_index << endl;
+  cout << "starting_position1 " << starting_position << endl;
+  int index = (input_index + starting_position) % ALPHABET_LENGTH;
+  cout << "index " << index << endl;
+  return contacts[index];
 }
 
 int Rotor::convert_backward(int input_index){
-  cout << "contacts[input_index] " << contacts[input_index-1] << endl;
-  return contacts[input_index-1];
+  for(int i = 0; i < ALPHABET_LENGTH; i++){
+      if(input_index == contacts[i]){
+        cout << "contacts backward[input_index] " << i << endl;
+        return i;
+      }
+  }
+
 }
