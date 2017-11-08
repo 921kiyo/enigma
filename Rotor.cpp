@@ -51,6 +51,20 @@ void Rotor::rotate_backward(){
   starting_position--;
 }
 
+int Rotor::get_current_position(){
+  return starting_position;
+}
+
+bool Rotor::is_current_position_in_notch(){
+  for(int i= 0; i< num_of_notches; i++){
+    if(starting_position == notches[i]){
+      cout << "yes notche!! " << endl;
+      return true;
+    }
+  }
+  return false;
+}
+
 int Rotor::convert_forward(int input_index){
   // cout << "contacts[input_index] " << contacts[input_index] << endl;
   cout << "contacts[input_index] " << input_index << endl;

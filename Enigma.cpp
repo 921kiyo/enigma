@@ -50,15 +50,22 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
   // cout << "letter_abs_position " << letter_abs_position << endl;
 
   // Can I use recursion here??
-
+  int rotor_no = 0;
   // Step1 rotate the rotor
   rotors[0]->rotate_forward();
   // Step2
   current_index = rotors[0]->convert_forward(current_index);
+  // cout << "aa " << rotors[0]->get_current_position() << endl;
+  if(rotors[0]->is_current_position_in_notch()){
+    if(rotor_no <= 3){
+      rotors[1]->rotate_forward();
+    }
+  }
+
   current_index = rotors[1]->convert_forward(current_index);
   current_index = rotors[2]->convert_forward(current_index);
   current_index = reflector->convert_forward(current_index);
-  cout << "helo " << current_index << endl;
+  cout << "reversing from here... " << current_index << endl;
   current_index = rotors[2]->convert_backward(current_index);
   current_index = rotors[1]->convert_backward(current_index);
   current_index = rotors[0]->convert_backward(current_index);

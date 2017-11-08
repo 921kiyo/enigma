@@ -17,6 +17,8 @@ public:
   void rotate_backward();
   int convert_forward(int input_index);
   int convert_backward(int input_index);
+  int get_current_position();
+  bool is_current_position_in_notch();
 };
 
 #endif
