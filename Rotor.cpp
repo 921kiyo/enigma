@@ -54,3 +54,8 @@ int Rotor::convert_forward(int input_index){
   cout << "contacts[input_index] " << contacts[input_index-1] << endl;
   return contacts[input_index-1];
 }
+
+int Rotor::convert_backward(int input_index){
+  cout << "contacts[input_index] " << contacts[input_index-1] << endl;
+  return contacts[input_index-1];
+}

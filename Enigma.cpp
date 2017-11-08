@@ -46,18 +46,18 @@ int Enigma::get_rotor_position(const char* path, int position){
 
 void Enigma::encrypt_message(const char* message, char* encrypted_message){
   int array_length = strlen(message);
-
-
-  int letter_abs_position = message[1] -65;
+  int current_index = message[1] -65;
   // cout << "letter_abs_position " << letter_abs_position << endl;
 
   // Can I use recursion here??
 
   // Step1 rotate the rotor
   // rotors[0]->rotate_forward();
-  int a = rotors[0]->convert_forward(letter_abs_position);
-  int b = rotors[1]->convert_forward(a);
-  int c = rotors[2]->convert_forward(b);
+  current_index = rotors[0]->convert_forward(current_index);
+  current_index = rotors[1]->convert_forward(current_index);
+  current_index = rotors[2]->convert_forward(current_index);
+  current_index = reflector->convert_forward(current_index);
+  cout << "current_index " << current_index << endl;
   // for(int i = 0; i < array_length ; i++ ){
   //   rotors[i]->convert_forward(letter_abs_position);
   // }

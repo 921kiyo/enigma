@@ -16,6 +16,7 @@ public:
   void rotate_forward();
   void rotate_backward();
   int convert_forward(int input_index);
+  int convert_backward(int input_index);
 };
 
 #endif

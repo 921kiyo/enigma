@@ -29,4 +29,25 @@ int Reflector::check_input(const char* path){
     cout << "out of range " << endl;
     return INVALID_INDEX;
   }
+
+  // If not problem with input, then start mapping to pair arrays
+  for(int i = 0; i< array_length; i++){
+    if(i%2 == 0){
+      pair_input[i/2] = num_array[i];
+    }
+    else{
+      pair_output[i/2] = num_array[i];
+    }
+  }
+}
+
+int Reflector::convert_forward(int input){
+  for(int i = 0; i< PAIR_SIZE; i++){
+    if(input == pair_input[i]){
+      return pair_output[i];
+    }
+    if(input == pair_output[i]){
+      return pair_input[i];
+    }
+  }
 }
