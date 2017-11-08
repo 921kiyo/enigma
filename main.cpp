@@ -49,19 +49,20 @@ int main(int argc, char** argv){
   // Plugboard plugboard(argv[1]);
   // cout << "reflector " << argv[2] << endl;
 
-
   Enigma enigma(argc, argv);
-  // cout << "Starting position " << argv[argc-1] << endl;
+  char message[80] = "hello";
 
-  // TODO Create an instance of Enigma
+  char* encrypted_message;
+  // cout << "Type a message you want to encrypt " << endl;
+  // cin >> message;
+  // cout << "Encrypted message is " << endl;
+  enigma.encrypt_message(message);
 
   // TODO Insufficient # of parameters
   // int error = open_file(argv[2]);
   // cout << "error? " << error << endl;
-  // string message;
-  // cout << "Type a message you want to encrypt " << endl;
-  // cin >> message;
-  // cout << "Encrypted message is " << endl;
+
+
 
   return 0;
 }
