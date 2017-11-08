@@ -41,10 +41,16 @@ int Rotor::check_input(const char* path){
   return NO_ERROR;
 }
 
-void Rotor::rotate_forward(int* array){
+void Rotor::rotate_forward(){
   starting_position++;
+  cout << "starting_position " << starting_position << endl;
 }
 
-void Rotor::rotate_backward(int* array){
+void Rotor::rotate_backward(){
   starting_position--;
+}
+
+int Rotor::convert_forward(int input_index){
+  cout << "contacts[input_index] " << contacts[input_index-1] << endl;
+  return contacts[input_index-1];
 }

@@ -13,8 +13,9 @@ public:
   int check_input(const char* path_rot);
   void rotate();
   bool is_key_pressed();
-  void rotate_forward(int* array);
-  void rotate_backward(int* array);
+  void rotate_forward();
+  void rotate_backward();
+  int convert_forward(int input_index);
 };
 
 #endif

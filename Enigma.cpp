@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include "Enigma.h"
 
 #include "Rotor.h"
@@ -43,6 +44,21 @@ int Enigma::get_rotor_position(const char* path, int position){
   return -1;
 }
 
-char* Enigma::encrypt_message(char* message){
-  return "hlo";
+void Enigma::encrypt_message(const char* message, char* encrypted_message){
+  int array_length = strlen(message);
+
+
+  int letter_abs_position = message[1] -65;
+  // cout << "letter_abs_position " << letter_abs_position << endl;
+
+  // Can I use recursion here??
+
+  // Step1 rotate the rotor
+  // rotors[0]->rotate_forward();
+  int a = rotors[0]->convert_forward(letter_abs_position);
+  int b = rotors[1]->convert_forward(a);
+  int c = rotors[2]->convert_forward(b);
+  // for(int i = 0; i < array_length ; i++ ){
+  //   rotors[i]->convert_forward(letter_abs_position);
+  // }
 }

@@ -50,19 +50,17 @@ int main(int argc, char** argv){
   // cout << "reflector " << argv[2] << endl;
 
   Enigma enigma(argc, argv);
-  char message[80] = "hello";
+  char message[80] = "BBB";
+  char encrypted_message[80];
 
-  char* encrypted_message;
+  // char* encrypted_message;
   // cout << "Type a message you want to encrypt " << endl;
   // cin >> message;
   // cout << "Encrypted message is " << endl;
-  enigma.encrypt_message(message);
-
+  enigma.encrypt_message(message, encrypted_message);
   // TODO Insufficient # of parameters
   // int error = open_file(argv[2]);
   // cout << "error? " << error << endl;
 
-
-
-  return 0;
+return 0;
 }
