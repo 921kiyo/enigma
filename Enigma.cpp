@@ -17,7 +17,7 @@ Enigma::Enigma(int argc, char** argv){
   for(int i = 0; i < num_of_rotors; i++){
     starting_position = get_rotor_position(argv[argc-1], i);
     cout << "starting_position " << starting_position << endl;
-    rotors[i] = new Rotor(argv[i+3]);
+    rotors[i] = new Rotor(argv[i+3], starting_position);
   }
 }
 
@@ -29,7 +29,6 @@ int Enigma::get_rotor_position(const char* path, int position){
   if(in_stream.fail() && in_stream >> num){
     cout << "error opening file for rotor position" << endl;
     // TODO error message
-
   }
   while(!in_stream.eof() && in_stream >> num){
     if(position == counter){
@@ -37,6 +36,7 @@ int Enigma::get_rotor_position(const char* path, int position){
     }
     counter++;
   }
+  // Does this always close input stream?
   in_stream.close();
-  return 1;
+  return -1;
 }

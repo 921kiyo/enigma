@@ -6,8 +6,12 @@
 
 using namespace std;
 
-Rotor::Rotor(const char* path){
-  check_input(path);
+Rotor::Rotor(const char* path, int position){
+  if(check_input(path) == NO_ERROR){
+
+      starting_position = position;
+  }
+
 }
 
 int Rotor::check_input(const char* path){
@@ -27,12 +31,16 @@ int Rotor::check_input(const char* path){
     return INVALID_INDEX;
   }
 
-  // cout << "array length " << array_length << endl;
-
+  // If not error, them map them to each attributes
   num_of_notches = array_length - ALPHABET_LENGTH;
+  // cout << "num_of_notches " << num_of_notches << endl;
+  map_input_to_array(path, contacts);
 
-  cout << "num_of_notches " << num_of_notches << endl;
-
+  notches = new int[num_of_notches];
+  for(int i = 0; i< num_of_notches; i++){
+    notches[i] = num_array[i+ALPHABET_LENGTH];
+    // cout << "notches[i] " << notches[i] << endl;
+  }
   return NO_ERROR;
 }
 
@@ -43,7 +51,3 @@ void Rotor::rotate_forward(int* array){
 void Rotor::rotate_backward(int* array){
 
 }
-
-// int Rotor::get_starting_position(){
-//
-// }
