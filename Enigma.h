@@ -12,7 +12,7 @@ Rotor **rotors;
 public:
   Enigma(int argc, char** argv);
   // at least 3 rotors
-
+  int get_rotor_position(const char* path, int position);
 };
 
 #endif

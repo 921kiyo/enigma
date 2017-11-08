@@ -8,8 +8,8 @@ private:
   int num_of_notches;
   int* notches;
 public:
-  Rotor(const char* path_rot, const char* path_pos, int index_pos);
-  int check_input(const char* path);
+  Rotor(const char* path_rot);
+  int check_input(const char* path_rot);
   void rotate();
   bool is_key_pressed();
   void rotate_forward(int* array);
