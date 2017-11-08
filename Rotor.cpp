@@ -6,8 +6,10 @@
 
 using namespace std;
 
-Rotor::Rotor(const char* path){
-  check_input(path);
+Rotor::Rotor(const char* path_rot, const char* path_pos, int index_pos){
+  // cout << "index_pos " << index_pos << endl;
+  cout << "path_pos " << path_pos << endl;
+  check_input(path_rot);
 }
 
 int Rotor::check_input(const char* path){
@@ -43,3 +45,7 @@ void Rotor::rotate_forward(int* array){
 void Rotor::rotate_backward(int* array){
 
 }
+
+// int Rotor::get_starting_position(){
+//
+// }

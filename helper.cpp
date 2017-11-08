@@ -38,8 +38,7 @@ void map_input_to_array(const char* path, int* array){
   }
   int num;
   // in_stream >> num;
-  while(!in_stream.eof()){
-    in_stream >> num;
+  while(!in_stream.eof() && in_stream >> num){
     array[i] = num;
     i++;
   }

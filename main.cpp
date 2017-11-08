@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// TODO Delete this
+// ./enigma plugboards/I.pb reflectors/I.rf rotors/II.rot rotors/I.rot rotors/III.rot rotors/I.pos
 int open_file(char* path){
   char character;
   ifstream in_stream;
