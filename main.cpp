@@ -40,12 +40,7 @@ int open_file(char* path){
   return NO_ERROR;
 }
 
-
 int main(int argc, char** argv){
-
-  // cout << "plugboards " << argv[1] << endl;
-  // Plugboard plugboard(argv[1]);
-  // cout << "reflector " << argv[2] << endl;
 
   Enigma enigma(argc, argv);
   char message[80];

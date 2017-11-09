@@ -17,6 +17,7 @@ public:
 
   int check_input(const char* path);
   int convert_forward(int input);
+  void hello();
 
 };
 
