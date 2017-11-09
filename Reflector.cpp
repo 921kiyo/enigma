@@ -12,7 +12,6 @@ Reflector::Reflector(const char* path){
 
 int Reflector::check_input(const char* path){
   int array_length = get_array_length(path);
-  cout << "array lengt " << array_length << endl;
   int num_array[array_length];
   map_input_to_array(path, num_array);
 

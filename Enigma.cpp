@@ -13,7 +13,7 @@ Enigma::Enigma(int argc, char** argv){
   plugboard = new Plugboard(argv[1]);
   reflector = new Reflector(argv[2]);
 
-  int num_of_rotors = argc-4;
+  num_of_rotors = argc-4;
   rotors = new Rotor*[num_of_rotors];
   cout << "num_of_rotors " << num_of_rotors << endl;
   int starting_position;
@@ -45,34 +45,47 @@ int Enigma::get_rotor_position(const char* path, int position){
 }
 
 void Enigma::encrypt_message(const char* message, char* encrypted_message){
-  int array_length = strlen(message);
-  int current_index = message[1] -65;
-  // cout << "letter_abs_position " << letter_abs_position << endl;
+  int message_length = strlen(message);
+  int current_index;
+  // cout << "starting_position " << current_index << endl;
+    // TODO Can I use recursion here??
+  for(int i = 0; i < message_length; i++){
+    // DO not put integer here! Use const int
+    current_index = message[i] -65;
+    cout << "just after ascii " << current_index << endl;
 
-  // Can I use recursion here??
-  int rotor_no = 0;
-  // Step1 rotate the rotor
-  rotors[0]->rotate_forward();
-  // Step2
-  current_index = rotors[0]->convert_forward(current_index);
-  // cout << "aa " << rotors[0]->get_current_position() << endl;
-  if(rotors[0]->is_current_position_in_notch()){
-    if(rotor_no <= 3){
-      rotors[1]->rotate_forward();
+    rotor_process(current_index);
+    encrypted_message[i] = current_index + 65;
+
+    cout << "encrypt_message[" << i << "] " << encrypted_message[i] << endl;
+    cout << "--------------------" << endl;
+  }
+  encrypted_message[message_length] = '\0';
+
+}
+
+void Enigma::rotor_process(int& current_index){
+    // TODO Can I use recursion here??
+    // First rotate the right most rotor by one
+  rotors[num_of_rotors-1]->rotate_forward();
+  // cout << "kjdsal "  << current_index << endl;
+  // current_index += rotors[num_of_rotors-1]->get_current_position();
+
+  // cout << "22222 "  << current_index << endl;
+  for(int i = num_of_rotors; i > 0; i--){
+    current_index = rotors[i-1]->convert_forward(current_index);
+    cout << "current_index " << i << " " << current_index << endl;
+    if(rotors[i-1]->is_current_position_in_notch()){
+      if(i-1 != 0){
+        rotors[i-2]->rotate_forward();
+      }
     }
   }
-
-  current_index = rotors[1]->convert_forward(current_index);
-  current_index = rotors[2]->convert_forward(current_index);
+  // cout << "current index? " << current_index << endl;
   current_index = reflector->convert_forward(current_index);
   cout << "reversing from here... " << current_index << endl;
-  current_index = rotors[2]->convert_backward(current_index);
-  current_index = rotors[1]->convert_backward(current_index);
-  current_index = rotors[0]->convert_backward(current_index);
-  cout << "current_index " << current_index << endl;
-  encrypted_message[1] = current_index + 65;
-  cout << "encrypt_message[1] " << encrypted_message[1] << endl;
-  // for(int i = 0; i < array_length ; i++ ){
-  //   rotors[i]->convert_forward(letter_abs_position);
-  // }
+  for(int i = 0; i < num_of_rotors; i++){
+    current_index = rotors[i]->convert_backward(current_index);
+    cout << "current_index " << current_index << endl;
+  }
 }

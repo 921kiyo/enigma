@@ -43,7 +43,6 @@ int Rotor::check_input(const char* path){
 
 void Rotor::rotate_forward(){
   starting_position++;
-  cout << "starting_position " << starting_position << endl;
 }
 
 // Do I need this?
@@ -58,7 +57,7 @@ int Rotor::get_current_position(){
 bool Rotor::is_current_position_in_notch(){
   for(int i= 0; i< num_of_notches; i++){
     if(starting_position == notches[i]){
-      cout << "yes notche!! " << endl;
+      cout << "yes notch!! " << endl;
       return true;
     }
   }
@@ -66,19 +65,19 @@ bool Rotor::is_current_position_in_notch(){
 }
 
 int Rotor::convert_forward(int input_index){
-  // cout << "contacts[input_index] " << contacts[input_index] << endl;
-  cout << "contacts[input_index] " << input_index << endl;
-  cout << "starting_position1 " << starting_position << endl;
+  cout << "starting_position " << starting_position << endl;
   int index = (input_index + starting_position) % ALPHABET_LENGTH;
-  cout << "index " << index << endl;
   return contacts[index];
 }
 
 int Rotor::convert_backward(int input_index){
+  cout << "starting position in backward " << starting_position << endl;
+  input_index = input_index;
   for(int i = 0; i < ALPHABET_LENGTH; i++){
+      // cout << "contacts " << contacts[i] << endl;
       if(input_index == contacts[i]){
-        cout << "contacts backward[input_index] " << i << endl;
-        return i;
+        // cout << "contacts backward[input_index] " << i << endl;
+        return i - starting_position;
       }
   }
 

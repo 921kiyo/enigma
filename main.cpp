@@ -9,7 +9,7 @@
 using namespace std;
 
 // TODO Delete this
-// ./enigma plugboards/I.pb reflectors/I.rf rotors/II.rot rotors/I.rot rotors/III.rot rotors/I.pos
+// ./enigma plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos
 int open_file(char* path){
   char character;
   ifstream in_stream;
@@ -43,21 +43,19 @@ int open_file(char* path){
 
 int main(int argc, char** argv){
 
-  cout << "argc " << argc << endl;
-
   // cout << "plugboards " << argv[1] << endl;
   // Plugboard plugboard(argv[1]);
   // cout << "reflector " << argv[2] << endl;
 
   Enigma enigma(argc, argv);
-  char message[80] = "BBB";
+  char message[80];
   char encrypted_message[80];
 
-  // char* encrypted_message;
-  // cout << "Type a message you want to encrypt " << endl;
-  // cin >> message;
-  // cout << "Encrypted message is " << endl;
+  cout << "Type a message you want to encrypt " << endl;
+  cin >> message;
+
   enigma.encrypt_message(message, encrypted_message);
+  cout << "Encrypted message is " << encrypted_message << endl;
   // TODO Insufficient # of parameters
   // int error = open_file(argv[2]);
   // cout << "error? " << error << endl;
