@@ -8,7 +8,7 @@ $(EXE): $(OBJ)
 
 %.o: %.cpp
 	$(GPP) $(DEBUG) -c $<
-
+# include -MMD
 main.o: Enigma.h errors.h
 
 Enigma.o: Enigma.h Plugboard.h Reflector.h Rotor.h helper.h errors.h

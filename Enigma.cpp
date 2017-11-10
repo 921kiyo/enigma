@@ -10,6 +10,7 @@
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
+  // Does not have to use new here
   plugboard = new Plugboard(argv[1]);
   reflector = new Reflector(argv[2]);
 

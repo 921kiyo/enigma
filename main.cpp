@@ -46,9 +46,9 @@ int main(int argc, char** argv){
   char message[80];
   char encrypted_message[80];
 
-  cout << "Type a message you want to encrypt " << endl;
+  // cout << "Type a message you want to encrypt " << endl;
   cin >> message;
-
+  //
   enigma.encrypt_message(message, encrypted_message);
   cout << "Encrypted message is " << encrypted_message << endl;
   // TODO Insufficient # of parameters
