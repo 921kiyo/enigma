@@ -1,31 +1,34 @@
-OBJ = main.o Enigma.o Plugboard.o Reflector.o Rotor.o helper.o
 EXE = enigma
-GPP = g++
-DEBUG = -Wall -g
+CC = g++
+CFLAGS = -Wall -g -std=c++11
+INC = -I include
 
-$(EXE): $(OBJ)
-	$(GPP) $(OBJ) -o $@
+SRC_DIR = src
+TEST_DIR = test
 
-%.o: %.cpp
-	$(GPP) $(DEBUG) -c $<
-# include -MMD
-main.o: Enigma.h errors.h
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 
-Enigma.o: Enigma.h Plugboard.h Reflector.h Rotor.h helper.h errors.h
+TEST_FILES = $(wildcard $(TEST_DIR)/*cpp)
+# Exclude tester.cpp
+TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
 
-Plugboard.o: Plugboard.h helper.h errors.h
+INC_DIR = include
+HEADER_FILES = $(INC_DIR)/*.h
 
-Reflector.o: Reflector.h helper.h errors.h
+# $(EXE): $(OBJ)
+# 	$(CC) $(OBJ) -o $@
+$(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
+	$(CC) -o $(EXE) main.cpp $(SRC_FILES) -I $(INC_DIR) $(CFLAGS)
 
-Rotor.o: Rotor.h helper.h errors.h
+tester.o: $(TEST_DIR)/tester.cpp
+	$(CC) -o tester.o -c $(TEST_DIR)/tester.cpp $(CFLAGS) \
+		-I $(INC_DIR)
 
-helper.o: helper.h
+tester: tester.o $(TEST_FILES) $(SRC_FILES) $(HEADER_FILES)
+	$(CC) -o tester $(TEST_FILES) tester.o $(SRC_FILES) -I $(INC_DIR) $(CFLAGS)
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(EXE) tester tester.o
 
 # Even if a file called clean exists, clean command will always run when PHONY exists
-.PHONY: clean
-
-# enigma: main.cpp errors.h
-# 	g++ -Wall -g main.cpp -o enigma
+.PHONY: clean test
