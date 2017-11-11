@@ -1,4 +1,5 @@
 #include <iostream>
+#include "fstream"
 
 #include "Plugboard.h"
 #include "helper.h"
@@ -6,45 +7,52 @@
 
 using namespace std;
 
-// #define DEBUG
-
 // Constructor
 Plugboard::Plugboard(const char* path){
   check_input(path);
-  // map_input(path);
+  map_input(path);
 }
 
 int Plugboard::check_input(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+
+  if(in_stream.fail()){
+    cout << "failing... " << endl;
+    return ERROR_OPENING_CONFIGURATION_FILE;
+  }
+
+  while(!in_stream.eof() && in_stream >> num){
+    counter++;
+  }
+
+  if(!is_number_range_correct(num)){
+    cout << "out of range " << endl;
+    return INVALID_INDEX;
+  }
+
+  if(counter%2!=0){
+    cout << "odd number " << endl;
+    return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
+  }
+
+  // Check the extension is pd
+  return NO_ERROR;
+}
+
+void Plugboard::map_input(const char* path){
 
   int array_length = get_array_length(path);
   int num_array[array_length];
   map_input_to_array(path, num_array);
 
   if(is_duplicate_int(num_array, array_length)){
-    return IMPOSSIBLE_PLUGBOARD_CONFIGURATION;
+    //  How do you return this?
+    cout << IMPOSSIBLE_PLUGBOARD_CONFIGURATION << endl;
   }
 
-  if(!is_number_range_correct(num_array, array_length)){
-    cout << "out of range " << endl;
-    return INVALID_INDEX;
-  }
-
-  if(array_length%2!=0){
-    cout << "odd number " << endl;
-    return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
-  }
-
-  if(array_length%2!=0){
-    #ifndef DEBUG
-    cout << "failing: not odd number " << INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS << endl;
-    #endif
-    return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
-  }
-  //
-  // cout << "plugboard no problem " << endl;
-  // in_stream.close();
-  // Check the extension is pd
-  // If not problem with input, then start mapping to pair arrays
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
       pair_input[i/2] = num_array[i];

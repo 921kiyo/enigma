@@ -26,18 +26,14 @@ int get_array_length(const char* path){
 }
 
 void map_input_to_array(const char* path, int* array){
+  // TODO Delete this
   int i=0;
 
   fstream in_stream;
 
   in_stream.open(path);
 
-  if(in_stream.fail()){
-    cout << "failing... " << endl;
-    // return ERROR_OPENING_CONFIGURATION_FILE
-  }
   int num;
-  // in_stream >> num;
   while(!in_stream.eof() && in_stream >> num){
     array[i] = num;
     i++;
@@ -46,11 +42,9 @@ void map_input_to_array(const char* path, int* array){
 }
 
 // Check if the array only contains numbers between 0 and 25
-bool is_number_range_correct(int* array, int length){
-  for(int i = 0; i< length; i++){
-    if(array[i] > 25 || array[i] < 0){
-      return false;
-    }
+bool is_number_range_correct(int num){
+  if(num > 25 || num < 0){
+    return false;
   }
   return true;
 }

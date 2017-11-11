@@ -8,6 +8,8 @@
 
 using namespace std;
 
+#define ENIGMA_DEBUG
+
 Enigma::Enigma(int argc, char** argv){
   // Does not have to use new here
   // if used new, put delete in destructor
@@ -52,39 +54,49 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
     current_index = message[i] -65;
 
     rotor_process(current_index);
-    // cout << "ascii index " << current_index << endl;
+    #ifndef ENIGMA_DEBUG
+    cout << "ascii index " << current_index << endl;
+    #endif
     encrypted_message[i] = current_index + 65;
-
   }
   encrypted_message[message_length] = '\0';
-
 }
 
 void Enigma::rotor_process(int& current_index){
   // TODO Can I use recursion here??
 
   // TODO pass reference instead
-  // cout << "current index before plugboard " << current_index << endl;
+  #ifndef ENIGMA_DEBUG
+  cout << "current index before plugboard " << current_index << endl;
+  #endif
   current_index = plugboard->convert_forward(current_index);
-  // cout << "current index after plugboard " << current_index << endl;
+  #ifndef ENIGMA_DEBUG
+  cout << "current index after plugboard " << current_index << endl;
+  #endif
+
 
   // First rotate the right most rotor by one
   rotors[num_of_rotors-1]->rotate_forward();
   for(int i = num_of_rotors; i > 0; i--){
     current_index = rotors[i-1]->convert_forward(current_index);
-    // cout << "current_index i " << i << " and index " << current_index << endl;
-    if(rotors[i-1]->is_current_position_in_notch()){
-      if(i-1 > 0){
-        // cout << "notch detected! " << endl;
-        rotors[i-2]->rotate_forward();
-      }
-    }
+    #ifndef ENIGMA_DEBUG
+    cout << "current_index i " << i << " and index " << current_index << endl;
+    #endif
+    // if(rotors[i-1]->is_current_position_in_notch()){
+    //   if(i-1 > 0){
+    //     rotors[i-2]->rotate_forward();
+    //   }
+    // }
   }
   current_index = reflector->convert_forward(current_index);
-  // cout << "reversing from here... " << current_index << endl;
+  #ifndef ENIGMA_DEBUG
+  cout << "reversing from here... " << current_index << endl;
+  #endif
   for(int i = 0; i < num_of_rotors; i++){
     current_index = rotors[i]->convert_backward(current_index);
-    // cout << "current_index " << current_index << endl;
+    #ifndef ENIGMA_DEBUG
+    cout << "current_index " << current_index << endl;
+    #endif
   }
   current_index = plugboard->convert_forward(current_index);
 }

@@ -7,13 +7,33 @@
 using namespace std;
 
 Rotor::Rotor(const char* path, int start_position){
-  if(check_input(path) == NO_ERROR){
-      current_position = start_position;
-      // cout << "Hey!! current_position " << current_position << endl;
-  }
+  check_input(path);
+  map_input(path, start_position);
 }
 
 int Rotor::check_input(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+  if(in_stream.fail()){
+    cout << "failing... " << endl;
+    return ERROR_OPENING_CONFIGURATION_FILE;
+  }
+
+  while(!in_stream.eof() && in_stream >> num){
+    counter++;
+  }
+
+  if(!is_number_range_correct(num)){
+    cout << "out of range " << endl;
+    return INVALID_INDEX;
+  }
+
+  return NO_ERROR;
+}
+void Rotor::map_input(const char* path, int start_position){
+  current_position = start_position;
 
   int array_length = get_array_length(path);
   int num_array[array_length];
@@ -22,12 +42,7 @@ int Rotor::check_input(const char* path){
   // TODO Double check if this checking is enough
   if(is_duplicate_int(num_array, 25)){
     cout << "invalid rotor mapping " << endl;
-    return INVALID_ROTOR_MAPPING;
-  }
-
-  if(!is_number_range_correct(num_array, array_length)){
-    cout << "out of range " << endl;
-    return INVALID_INDEX;
+    // return INVALID_ROTOR_MAPPING;
   }
 
   // If not error, them map them to each attributes
@@ -38,7 +53,7 @@ int Rotor::check_input(const char* path){
     notches[i] = num_array[i+ALPHABET_LENGTH];
     // cout << "notches[i] " << notches[i] << endl;
   }
-  return NO_ERROR;
+
 }
 
 void Rotor::rotate_forward(){

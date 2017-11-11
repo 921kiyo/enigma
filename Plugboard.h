@@ -9,6 +9,7 @@ private:
 public:
   Plugboard(const char* path);
   int check_input(const char* path);
+  void map_input(const char* path);
   int convert_forward(int input);
 };
 

@@ -19,6 +19,7 @@ int main(int argc, char** argv){
 
   cin >> message;
   enigma.encrypt_message(message, encrypted_message);
+  cout << encrypted_message << endl;
 
 return 0;
 }

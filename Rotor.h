@@ -11,6 +11,7 @@ private:
 public:
   Rotor(const char* path_rot, int start_position);
   int check_input(const char* path_rot);
+  void map_input(const char* path, int start_position);
   void rotate_forward();
   int convert_forward(int input_index);
   int convert_backward(int input_index);
