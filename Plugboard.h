@@ -8,16 +8,8 @@ private:
   int pair_output[PAIR_MAX_SIZE];
 public:
   Plugboard(const char* path);
-  // TODO Delete these
-  void swap_letters();
-
-  void send_to_rotor();
-
-  void send_back_output();
-
   int check_input(const char* path);
   int convert_forward(int input);
-
 };
 
 #endif

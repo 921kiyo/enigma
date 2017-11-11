@@ -6,10 +6,10 @@
 
 using namespace std;
 
-Rotor::Rotor(const char* path, int position){
+Rotor::Rotor(const char* path, int start_position){
   if(check_input(path) == NO_ERROR){
-      starting_position = position;
-      // cout << "Hey!! starting_position " << starting_position << endl;
+      current_position = start_position;
+      // cout << "Hey!! current_position " << current_position << endl;
   }
 }
 
@@ -32,7 +32,6 @@ int Rotor::check_input(const char* path){
 
   // If not error, them map them to each attributes
   num_of_notches = array_length - ALPHABET_LENGTH;
-  // cout << "num_of_notches " << num_of_notches << endl;
   map_input_to_array(path, contacts);
   notches = new int[num_of_notches];
   for(int i = 0; i< num_of_notches; i++){
@@ -43,25 +42,19 @@ int Rotor::check_input(const char* path){
 }
 
 void Rotor::rotate_forward(){
-  starting_position++;
-  starting_position = starting_position % ALPHABET_LENGTH;
-  // cout << "after rorate forward, start is " << starting_position << endl;
-}
-
-// Do I need this?
-void Rotor::rotate_backward(){
-  starting_position--;
+  current_position++;
+  current_position = current_position % ALPHABET_LENGTH;
+  // cout << "after rorate forward, start is " << current_position << endl;
 }
 
 int Rotor::get_current_position(){
-  return starting_position;
+  return current_position;
 }
 
 bool Rotor::is_current_position_in_notch(){
   for(int i= 0; i< num_of_notches; i++){
-    if(starting_position == notches[i]){
-      cout << "yes notch!! " << endl;
-      cout << "starting_position " << starting_position << endl;
+    if(current_position == notches[i]){
+      cout << "yes notch at " << current_position << endl;
       return true;
     }
   }
@@ -69,19 +62,18 @@ bool Rotor::is_current_position_in_notch(){
 }
 
 int Rotor::convert_forward(int input_index){
-  // cout << "starting_position " << starting_position << endl;
-  int index = (input_index + starting_position) % ALPHABET_LENGTH;
+  // cout << "current_position " << current_position << endl;
+  int index = (input_index + current_position) % ALPHABET_LENGTH;
   return contacts[index];
 }
 
 int Rotor::convert_backward(int input_index){
   // cout << "starting position in backward " << starting_position << endl;
-  // input_index = input_index;
   for(int i = 0; i < ALPHABET_LENGTH; i++){
       // cout << "contacts " << contacts[i] << endl;
       if(input_index == contacts[i]){
         // cout << "contacts backward[input_index] " << i << endl;
-        input_index = i - starting_position;
+        input_index = i - current_position;
         if(input_index < 0){
           return ALPHABET_LENGTH + input_index;
         }

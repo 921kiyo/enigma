@@ -1,7 +1,6 @@
 yes notch!! 
-starting_position 22
+current_position 22
 yes notch!! 
-starting_position 22
+current_position 22
 yes notch!! 
-starting_position 22
-Encrypted message is AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+current_position 22

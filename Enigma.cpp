@@ -2,7 +2,6 @@
 #include <fstream>
 #include <cstring>
 #include "Enigma.h"
-
 #include "Rotor.h"
 #include "Plugboard.h"
 #include "Reflector.h"
@@ -11,12 +10,12 @@ using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
   // Does not have to use new here
+  // if used new, put delete in destructor
   plugboard = new Plugboard(argv[1]);
   reflector = new Reflector(argv[2]);
 
   num_of_rotors = argc-4;
   rotors = new Rotor*[num_of_rotors];
-  // cout << "num_of_rotors " << num_of_rotors << endl;
   int starting_position;
   for(int i = 0; i < num_of_rotors; i++){
     starting_position = get_rotor_position(argv[argc-1], i);
@@ -52,7 +51,6 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
     // TODO not put integer here! Use const int
     current_index = message[i] -65;
 
-
     rotor_process(current_index);
     // cout << "ascii index " << current_index << endl;
     encrypted_message[i] = current_index + 65;
@@ -69,9 +67,9 @@ void Enigma::rotor_process(int& current_index){
   // cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard->convert_forward(current_index);
   // cout << "current index after plugboard " << current_index << endl;
+
   // First rotate the right most rotor by one
   rotors[num_of_rotors-1]->rotate_forward();
-
   for(int i = num_of_rotors; i > 0; i--){
     current_index = rotors[i-1]->convert_forward(current_index);
     // cout << "current_index i " << i << " and index " << current_index << endl;
