@@ -1,19 +1,7 @@
-current index before plugboard 8
-current index after plugboard 25
-current_index i 3 and index 1
-current_index i 2 and index 9
-current_index i 1 and index 25
-reversing from here... 3
-current_index 6
-current_index 17
-current_index 7
-current index before plugboard 8
-current index after plugboard 25
-current_index i 3 and index 3
-current_index i 2 and index 10
-current_index i 1 and index 13
-reversing from here... 17
-current_index 23
-current_index 8
-current_index 14
-Encrypted message is HO
+yes notch!! 
+starting_position 22
+yes notch!! 
+starting_position 22
+yes notch!! 
+starting_position 22
+Encrypted message is AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

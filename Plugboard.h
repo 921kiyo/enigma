@@ -8,7 +8,7 @@ private:
   int pair_output[PAIR_MAX_SIZE];
 public:
   Plugboard(const char* path);
-
+  // TODO Delete these
   void swap_letters();
 
   void send_to_rotor();

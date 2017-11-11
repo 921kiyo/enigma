@@ -9,6 +9,7 @@ using namespace std;
 Rotor::Rotor(const char* path, int position){
   if(check_input(path) == NO_ERROR){
       starting_position = position;
+      // cout << "Hey!! starting_position " << starting_position << endl;
   }
 }
 
@@ -43,6 +44,8 @@ int Rotor::check_input(const char* path){
 
 void Rotor::rotate_forward(){
   starting_position++;
+  starting_position = starting_position % ALPHABET_LENGTH;
+  // cout << "after rorate forward, start is " << starting_position << endl;
 }
 
 // Do I need this?
@@ -58,6 +61,7 @@ bool Rotor::is_current_position_in_notch(){
   for(int i= 0; i< num_of_notches; i++){
     if(starting_position == notches[i]){
       cout << "yes notch!! " << endl;
+      cout << "starting_position " << starting_position << endl;
       return true;
     }
   }
