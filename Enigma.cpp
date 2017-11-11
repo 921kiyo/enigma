@@ -65,14 +65,18 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
 
 void Enigma::rotor_process(int& current_index){
   // TODO Can I use recursion here??
+
+  // TODO pass reference instead
+  cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard->convert_forward(current_index);
+  cout << "current index after plugboard " << current_index << endl;
 
   // First rotate the right most rotor by one
   rotors[num_of_rotors-1]->rotate_forward();
 
   for(int i = num_of_rotors; i > 0; i--){
     current_index = rotors[i-1]->convert_forward(current_index);
-    // cout << "current_index " << i << " " << current_index << endl;
+    cout << "current_index i " << i << " and index " << current_index << endl;
     if(rotors[i-1]->is_current_position_in_notch()){
       if(i-1 != 0){
         rotors[i-2]->rotate_forward();
@@ -80,10 +84,10 @@ void Enigma::rotor_process(int& current_index){
     }
   }
   current_index = reflector->convert_forward(current_index);
-  // cout << "reversing from here... " << current_index << endl;
+  cout << "reversing from here... " << current_index << endl;
   for(int i = 0; i < num_of_rotors; i++){
     current_index = rotors[i]->convert_backward(current_index);
-    // cout << "current_index " << current_index << endl;
+    cout << "current_index " << current_index << endl;
   }
 
   current_index = plugboard->convert_forward(current_index);

@@ -9,7 +9,7 @@
 using namespace std;
 
 // TODO Delete this
-// ./enigma plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos
+// ./enigma plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
 int open_file(char* path){
   char character;
   ifstream in_stream;

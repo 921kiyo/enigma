@@ -58,10 +58,6 @@ int Plugboard::check_input(const char* path){
   }
 }
 
-void Plugboard::hello(){
-  cout << "hello " << endl;
-}
-
 int Plugboard::convert_forward(int input){
   for(int i = 0; i< PAIR_MAX_SIZE; i++){
     if(input == pair_input[i]){
