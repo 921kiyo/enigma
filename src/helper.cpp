@@ -25,10 +25,6 @@ int get_array_length(const char* path){
   return counter;
 }
 
-string sayHi(){
-  return string("hello world");
-}
-
 void map_input_to_array(const char* path, int* array){
   // TODO Delete this
   int i=0;

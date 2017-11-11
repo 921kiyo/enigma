@@ -11,8 +11,3 @@
 TEST_CASE("testing here ", "hello"){
   REQUIRE(is_number_range_correct(1) == true);
 }
-// TEST_CASE("simple test") {
-//     SECTION("sub test") {
-//         REQUIRE("Hi there" == sayHi());
-//     }
-// }

@@ -14,6 +14,4 @@ bool is_duplicate_int(int* array, int range);
 
 bool is_appeared_before(int* array, int num, int length);
 
-string sayHi();
-
 #endif
