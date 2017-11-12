@@ -1,6 +1,5 @@
 #include "Plugboard.h"
 #include "SubComponent.h"
-#include "helper.h"
 #include "errors.h"
 
 #include <iostream>

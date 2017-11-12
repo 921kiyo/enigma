@@ -1,5 +1,4 @@
 #include "Reflector.h"
-#include "helper.h"
 #include "errors.h"
 
 #include <iostream>

@@ -1,6 +1,5 @@
 #include "Rotor.h"
 #include "errors.h"
-#include "helper.h"
 
 #include <iostream>
 #include <fstream>

@@ -1,6 +1,5 @@
 #include "Component.h"
 #include "errors.h"
-#include "helper.h"
 #include <iostream>
 #include <fstream>
 
