@@ -79,4 +79,6 @@ int Rotor::convertBackward(int input_index){
         }
       }
   }
+  // Double check this!!
+  return input_index;
 }

@@ -17,7 +17,8 @@ public:
   // virtual void returnInvalidMappingError() = 0;
   // virtual void returnIncorrectParamsError() = 0;
   // virtual void returnInvalidIndexError() = 0;
-
+  
+  virtual ~Component();
 };
 
 #endif

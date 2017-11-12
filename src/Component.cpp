@@ -7,7 +7,9 @@
 using namespace std;
 // Do you need a constructor when the class does not have any attributes?
 // Component::Component(){}
-
+Component::~Component(){
+  cout << "Base Destructor\t" << endl;
+}
 int Component::checkInput(const char* path){
   // TODO Check the extension is pd
   int num;

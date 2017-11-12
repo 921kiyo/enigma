@@ -12,7 +12,7 @@ TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
 HEADER_FILES = $(wildcard $(INC_DIR)/*.h)
 
 # run: $(EXE)
-# 	valgrind --leak-check=full --show-leak-kinds=all  ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
+# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all  ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
 
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -o $(EXE)

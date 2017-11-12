@@ -18,6 +18,7 @@ int SubComponent::convertForward(int input){
       return input_pair1_[i];
     }
   }
+  return input;
 }
 
 void SubComponent::mapInput(const char* path){
