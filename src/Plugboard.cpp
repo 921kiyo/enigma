@@ -1,19 +1,19 @@
-#include <iostream>
-#include "fstream"
-
 #include "Plugboard.h"
 #include "helper.h"
 #include "errors.h"
+
+#include <iostream>
+#include "fstream"
 
 using namespace std;
 
 // Constructor
 Plugboard::Plugboard(const char* path){
-  check_input(path);
-  map_input(path);
+  checkInput(path);
+  mapInput(path);
 }
 
-int Plugboard::check_input(const char* path){
+int Plugboard::checkInput(const char* path){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -28,7 +28,7 @@ int Plugboard::check_input(const char* path){
     counter++;
   }
 
-  if(!is_number_range_correct(num)){
+  if(!isNumberRangeCorrect(num)){
     cout << "out of range " << endl;
     return INVALID_INDEX;
   }
@@ -42,34 +42,34 @@ int Plugboard::check_input(const char* path){
   return NO_ERROR;
 }
 
-void Plugboard::map_input(const char* path){
+void Plugboard::mapInput(const char* path){
 
-  int array_length = get_array_length(path);
+  int array_length = getArrayLength(path);
   int num_array[array_length];
-  map_input_to_array(path, num_array);
+  mapInputToArray(path, num_array);
 
-  if(is_duplicate_int(num_array, array_length)){
+  if(isDuplicateInt(num_array, array_length)){
     //  How do you return this?
     cout << IMPOSSIBLE_PLUGBOARD_CONFIGURATION << endl;
   }
 
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
-      pair_input[i/2] = num_array[i];
+      pair_input_[i/2] = num_array[i];
     }
     else{
-      pair_output[i/2] = num_array[i];
+      pair_output_[i/2] = num_array[i];
     }
   }
 }
 
-int Plugboard::convert_forward(int input){
+int Plugboard::convertForward(int input){
   for(int i = 0; i< PAIR_MAX_SIZE; i++){
-    if(input == pair_input[i]){
-      return pair_output[i];
+    if(input == pair_input_[i]){
+      return pair_output_[i];
     }
-    else if(input == pair_output[i]){
-      return pair_input[i];
+    else if(input == pair_output_[i]){
+      return pair_input_[i];
     }
     else{
       return input;

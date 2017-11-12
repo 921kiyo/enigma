@@ -1,17 +1,18 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+// Is this necessary??
 #include <iostream>
 using namespace std;
 
-int get_array_length(const char* path);
+int getArrayLength(const char* path);
 
-void map_input_to_array(const char* path, int* array);
+void mapInputToArray(const char* path, int* array);
 
-bool is_number_range_correct(int num);
+bool isNumberRangeCorrect(int num);
 
-bool is_duplicate_int(int* array, int range);
+bool isDuplicateInt(int* array, int range);
 
-bool is_appeared_before(int* array, int num, int length);
+bool isAppearedBefore(int* array, int num, int length);
 
 #endif

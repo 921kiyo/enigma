@@ -1,17 +1,18 @@
-#include <iostream>
-#include <fstream>
 #include "Reflector.h"
 #include "helper.h"
 #include "errors.h"
 
+#include <iostream>
+#include <fstream>
+
 using namespace std;
 
 Reflector::Reflector(const char* path){
-  check_input(path);
-  map_input(path);
+  checkInput(path);
+  mapInput(path);
 }
 
-int Reflector::check_input(const char* path){
+int Reflector::checkInput(const char* path){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -31,19 +32,19 @@ int Reflector::check_input(const char* path){
     return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
   }
 
-  if(!is_number_range_correct(num)){
+  if(!isNumberRangeCorrect(num)){
     cout << "out of range " << endl;
     return INVALID_INDEX;
   }
   return NO_ERROR;
 }
 
-void Reflector::map_input(const char* path){
-  int array_length = get_array_length(path);
+void Reflector::mapInput(const char* path){
+  int array_length = getArrayLength(path);
   int num_array[array_length];
-  map_input_to_array(path, num_array);
+  mapInputToArray(path, num_array);
 
-  if(is_duplicate_int(num_array, array_length)){
+  if(isDuplicateInt(num_array, array_length)){
     cout << "INVALID_REFLECTOR_MAPPING " << endl;
     cout << INVALID_REFLECTOR_MAPPING << endl;
   }
@@ -51,21 +52,21 @@ void Reflector::map_input(const char* path){
   // If not problem with input, then start mapping to pair arrays
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
-      pair_input[i/2] = num_array[i];
+      pair_input_[i/2] = num_array[i];
     }
     else{
-      pair_output[i/2] = num_array[i];
+      pair_output_[i/2] = num_array[i];
     }
   }
 }
 
-int Reflector::convert_forward(int input){
+int Reflector::convertForward(int input){
   for(int i = 0; i< PAIR_SIZE; i++){
-    if(input == pair_input[i]){
-      return pair_output[i];
+    if(input == pair_input_[i]){
+      return pair_output_[i];
     }
-    if(input == pair_output[i]){
-      return pair_input[i];
+    if(input == pair_output_[i]){
+      return pair_input_[i];
     }
   }
 }

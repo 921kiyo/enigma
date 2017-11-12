@@ -4,19 +4,19 @@
 const int ALPHABET_LENGTH = 26;
 class Rotor{
 private:
-  int contacts[ALPHABET_LENGTH];
-  int current_position;
-  int num_of_notches;
-  int* notches;
+  int contacts_[ALPHABET_LENGTH];
+  int current_position_;
+  int num_of_notches_;
+  int* notches_;
 public:
   Rotor(const char* path_rot, int start_position);
-  int check_input(const char* path_rot);
-  void map_input(const char* path, int start_position);
-  void rotate_forward();
-  int convert_forward(int input_index);
-  int convert_backward(int input_index);
-  int get_current_position();
-  bool is_current_position_in_notch();
+  int checkInput(const char* path_rot);
+  void mapInput(const char* path, int start_position);
+  void rotateForward();
+  int convertForward(int input_index);
+  int convertBackward(int input_index);
+  int getCurrentPosition();
+  bool isCurrentPositionInNotch();
 };
 
 #endif

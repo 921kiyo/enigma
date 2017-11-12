@@ -1,15 +1,16 @@
+#include "helper.h"
+#include "errors.h"
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include "helper.h"
-#include "errors.h"
 
 using namespace std;
 
 // TODO more description here
 // I double checked with Dr.Fidelis about using global helper functions
 
-int get_array_length(const char* path){
+int getArrayLength(const char* path){
   int counter = 0;
   int num;
   fstream in_stream;
@@ -25,7 +26,7 @@ int get_array_length(const char* path){
   return counter;
 }
 
-void map_input_to_array(const char* path, int* array){
+void mapInputToArray(const char* path, int* array){
   // TODO Delete this
   int i=0;
 
@@ -42,7 +43,7 @@ void map_input_to_array(const char* path, int* array){
 }
 
 // Check if the array only contains numbers between 0 and 25
-bool is_number_range_correct(int num){
+bool isNumberRangeCorrect(int num){
   if(num > 25 || num < 0){
     return false;
   }
@@ -50,21 +51,19 @@ bool is_number_range_correct(int num){
 }
 
 // TODO Is this efficient?
-bool is_duplicate_int(int* array, int range){
+bool isDuplicateInt(int* array, int range){
 
   for(int i = range-1; i>= 0; i--){
-    if(is_appeared_before(array, array[i], i)){
+    if(isAppearedBefore(array, array[i], i)){
       return true;
     }
   }
   return false;
 }
 
-bool is_appeared_before(int* array, int num, int position){
+bool isAppearedBefore(int* array, int num, int position){
   for(int x = 0; x < position; x++ ){
     if(array[x] == array[position]){
-      cout << "duplicate! " << endl;
-      cout << "array[x] " << array[x] << endl;
       return true;
     }
   }

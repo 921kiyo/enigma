@@ -4,13 +4,14 @@
 const int PAIR_MAX_SIZE = 13;
 class Plugboard{
 private:
-  int pair_input[PAIR_MAX_SIZE];
-  int pair_output[PAIR_MAX_SIZE];
+  // TODO change name here
+  int pair_input_[PAIR_MAX_SIZE];
+  int pair_output_[PAIR_MAX_SIZE];
 public:
   Plugboard(const char* path);
-  int check_input(const char* path);
-  void map_input(const char* path);
-  int convert_forward(int input);
+  int checkInput(const char* path);
+  void mapInput(const char* path);
+  int convertForward(int input);
 };
 
 #endif

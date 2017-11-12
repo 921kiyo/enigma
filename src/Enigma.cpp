@@ -1,10 +1,11 @@
-#include <iostream>
-#include <fstream>
-#include <cstring>
 #include "Enigma.h"
 #include "Rotor.h"
 #include "Plugboard.h"
 #include "Reflector.h"
+
+#include <iostream>
+#include <fstream>
+#include <cstring>
 
 using namespace std;
 
@@ -13,19 +14,19 @@ using namespace std;
 Enigma::Enigma(int argc, char** argv){
   // Does not have to use new here
   // if used new, put delete in destructor
-  plugboard = new Plugboard(argv[1]);
-  reflector = new Reflector(argv[2]);
+  plugboard_ = new Plugboard(argv[1]);
+  reflector_ = new Reflector(argv[2]);
 
-  num_of_rotors = argc-4;
-  rotors = new Rotor*[num_of_rotors];
+  num_of_rotors_ = argc-4;
+  rotors_ = new Rotor*[num_of_rotors_];
   int starting_position;
-  for(int i = 0; i < num_of_rotors; i++){
-    starting_position = get_rotor_position(argv[argc-1], i);
-    rotors[i] = new Rotor(argv[i+3], starting_position);
+  for(int i = 0; i < num_of_rotors_; i++){
+    starting_position = getRotorPosition(argv[argc-1], i);
+    rotors_[i] = new Rotor(argv[i+3], starting_position);
   }
 }
 
-int Enigma::get_rotor_position(const char* path, int position){
+int Enigma::getRotorPosition(const char* path, int position){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -45,7 +46,7 @@ int Enigma::get_rotor_position(const char* path, int position){
   return -1;
 }
 
-void Enigma::encrypt_message(const char* message, char* encrypted_message){
+void Enigma::encryptMessage(const char* message, char* encrypted_message){
   int message_length = strlen(message);
   int current_index;
     // TODO Can I use recursion here??
@@ -53,7 +54,7 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
     // TODO not put integer here! Use const int
     current_index = message[i] -65;
 
-    rotor_process(current_index);
+    rotorProcess(current_index);
     #ifndef ENIGMA_DEBUG
     cout << "ascii index " << current_index << endl;
     #endif
@@ -62,41 +63,41 @@ void Enigma::encrypt_message(const char* message, char* encrypted_message){
   encrypted_message[message_length] = '\0';
 }
 
-void Enigma::rotor_process(int& current_index){
+void Enigma::rotorProcess(int& current_index){
   // TODO Can I use recursion here??
 
   // TODO pass reference instead
   #ifndef ENIGMA_DEBUG
   cout << "current index before plugboard " << current_index << endl;
   #endif
-  current_index = plugboard->convert_forward(current_index);
+  current_index = plugboard_->convertForward(current_index);
   #ifndef ENIGMA_DEBUG
   cout << "current index after plugboard " << current_index << endl;
   #endif
 
 
   // First rotate the right most rotor by one
-  rotors[num_of_rotors-1]->rotate_forward();
-  for(int i = num_of_rotors; i > 0; i--){
-    current_index = rotors[i-1]->convert_forward(current_index);
+  rotors_[num_of_rotors_-1]->rotateForward();
+  for(int i = num_of_rotors_; i > 0; i--){
+    current_index = rotors_[i-1]->convertForward(current_index);
     #ifndef ENIGMA_DEBUG
     cout << "current_index i " << i << " and index " << current_index << endl;
     #endif
-    // if(rotors[i-1]->is_current_position_in_notch()){
-    //   if(i-1 > 0){
-    //     rotors[i-2]->rotate_forward();
-    //   }
-    // }
+    if(rotors_[i-1]->isCurrentPositionInNotch()){
+      if(i-1 > 0){
+        rotors_[i-2]->rotateForward();
+      }
+    }
   }
-  current_index = reflector->convert_forward(current_index);
+  current_index = reflector_->convertForward(current_index);
   #ifndef ENIGMA_DEBUG
   cout << "reversing from here... " << current_index << endl;
   #endif
-  for(int i = 0; i < num_of_rotors; i++){
-    current_index = rotors[i]->convert_backward(current_index);
+  for(int i = 0; i < num_of_rotors_; i++){
+    current_index = rotors_[i]->convertBackward(current_index);
     #ifndef ENIGMA_DEBUG
     cout << "current_index " << current_index << endl;
     #endif
   }
-  current_index = plugboard->convert_forward(current_index);
+  current_index = plugboard_->convertForward(current_index);
 }

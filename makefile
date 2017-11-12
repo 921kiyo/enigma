@@ -15,8 +15,6 @@ TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
 INC_DIR = include
 HEADER_FILES = $(INC_DIR)/*.h
 
-# $(EXE): $(OBJ)
-# 	$(CC) $(OBJ) -o $@
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
 	$(CC) -o $(EXE) main.cpp $(SRC_FILES) -I $(INC_DIR) $(CFLAGS)
 
@@ -30,5 +28,4 @@ tester: tester.o $(TEST_FILES) $(SRC_FILES) $(HEADER_FILES)
 clean:
 	rm -f $(EXE) tester tester.o
 
-# Even if a file called clean exists, clean command will always run when PHONY exists
 .PHONY: clean test
