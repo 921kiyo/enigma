@@ -3,7 +3,7 @@
 #include <cstring>
 #include <fstream>
 
-#include "errors.h"
+#include "../include/errors.h"
 #include "Enigma.h"
 
 using namespace std;
