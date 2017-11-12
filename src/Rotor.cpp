@@ -16,27 +16,6 @@ Rotor::~Rotor(){
   delete[] notches_;
 }
 
-int Rotor::checkInput(const char* path){
-  int num;
-  int counter = 0;
-  fstream in_stream;
-  in_stream.open(path);
-  if(in_stream.fail()){
-    cout << "failing... " << endl;
-    return ERROR_OPENING_CONFIGURATION_FILE;
-  }
-
-  while(!in_stream.eof() && in_stream >> num){
-    counter++;
-  }
-
-  if(!isNumberRangeCorrect(num)){
-    cout << "out of range " << endl;
-    return INVALID_INDEX;
-  }
-
-  return NO_ERROR;
-}
 void Rotor::mapInput(const char* path, int start_position){
   current_position_ = start_position;
 

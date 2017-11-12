@@ -1,6 +1,8 @@
 #ifndef ROTOR_H
 #define ROTOR_H
 
+#include "Component.h"
+
 const int ALPHABET_LENGTH = 26;
 class Rotor: public Component{
 private:
@@ -11,7 +13,6 @@ private:
 public:
   Rotor(const char* path_rot, int start_position);
   ~Rotor();
-  int checkInput(const char* path_rot);
   void mapInput(const char* path, int start_position);
   void rotateForward();
   int convertForward(int input_index);

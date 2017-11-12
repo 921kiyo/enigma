@@ -15,6 +15,7 @@ Plugboard::Plugboard(const char* path){
 
 int Plugboard::checkInput(const char* path){
   int num;
+  // Do I need counter?
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
