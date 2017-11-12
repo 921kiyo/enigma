@@ -1,16 +1,14 @@
 #ifndef REFLECTOR_H
 #define REFLECTOR_H
 
-const int PAIR_SIZE = 13;
-class Reflector{
-private:
-  int pair_input_[PAIR_SIZE];
-  int pair_output_[PAIR_SIZE];
+#include "SubComponent.h"
+
+class Reflector: public SubComponent{
 public:
   Reflector(const char* path);
-  int checkInput(const char* path);
-  void mapInput(const char* path);
-  int convertForward(int input);
+  int checkParameters(const int counter);
+  // void mapInput(const char* path);
+  void returnConfigError();
 };
 
 #endif

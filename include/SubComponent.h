@@ -1,11 +1,22 @@
 #ifndef SUBCOMPONENT_H
 #define SUBCOMPONENT_H
 
-const int PAIR_SIZE = 13;
+#include "Component.h"
 
-class SubComponent: public Component(){
-  int input_pair1[PAIR_SIZE];
-  int input_pair2[PAIR_SIZE];
-}
+class SubComponent: public Component{
+protected:
+  // C++ 11 initialization
+  static const int PAIR_SIZE_{13};
+  // Plugboard not necessarily SIZE 13???
+  int input_pair1_[PAIR_SIZE_];
+  int input_pair2_[PAIR_SIZE_];
+public:
+  // int check
+  // Could be protected
+  void mapInput(const char* path);
+  int convertForward(int input);
+  virtual int checkParameters(int counter) = 0;
+  virtual void returnConfigError() = 0;
+};
 
 #endif
