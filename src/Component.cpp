@@ -48,6 +48,7 @@ int Component::getArrayLength(const char* path){
   return counter;
 }
 
+// This could be optimized!!
 void Component::mapInputToArray(const char* path, int* array){
   // TODO Delete this
   int i=0;
@@ -64,7 +65,6 @@ void Component::mapInputToArray(const char* path, int* array){
   in_stream.close();
 }
 
-// Check if the array only contains numbers between 0 and 25
 bool Component::isNumberRangeCorrect(int num){
   if(num > 25 || num < 0){
     return false;

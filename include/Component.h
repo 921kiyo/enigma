@@ -8,6 +8,7 @@ public:
   int checkInput(const char* path);
   int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
+  // Check if the array only contains numbers between 0 and 25
   bool isNumberRangeCorrect(int num);
   bool isDuplicateInt(int* array, int range);
   // This does not need to be in public
@@ -17,7 +18,7 @@ public:
   // virtual void returnInvalidMappingError() = 0;
   // virtual void returnIncorrectParamsError() = 0;
   // virtual void returnInvalidIndexError() = 0;
-  
+
   virtual ~Component();
 };
 
