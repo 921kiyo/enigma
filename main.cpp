@@ -3,7 +3,6 @@
 #include <cstring>
 #include <fstream>
 
-
 #include "errors.h"
 #include "Enigma.h"
 
