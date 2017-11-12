@@ -16,14 +16,14 @@ HEADER_FILES = $(wildcard $(INC_DIR)/*.h)
 # 	valgrind --leak-check=full --show-leak-kinds=all  ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
 
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
-	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -I $(INC_DIR) -o $(EXE)
+	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -I$(INC_DIR) -o $(EXE)
 
 tester.o: $(TEST_DIR)/tester.cpp
 	$(CC) -o tester.o -c $(TEST_DIR)/tester.cpp $(CFLAGS) \
-		-I $(INC_DIR)
+		-I$(INC_DIR)
 
 tester: tester.o $(TEST_FILES) $(SRC_FILES) $(HEADER_FILES)
-	$(CC) -o tester $(TEST_FILES) tester.o $(SRC_FILES) -I $(INC_DIR) $(CFLAGS)
+	$(CC) -o tester $(TEST_FILES) tester.o $(SRC_FILES) -I$(INC_DIR) $(CFLAGS)
 
 clean:
 	rm -f $(EXE) tester tester.o
