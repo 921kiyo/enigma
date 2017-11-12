@@ -2,7 +2,7 @@
 #define ROTOR_H
 
 const int ALPHABET_LENGTH = 26;
-class Rotor{
+class Rotor: public Component{
 private:
   int contacts_[ALPHABET_LENGTH];
   int current_position_;
