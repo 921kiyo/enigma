@@ -1,6 +1,6 @@
 EXE = enigma
 CC = g++
-CFLAGS = -I../include -Wall -g -O0 -std=c++11
+CFLAGS = -I include -Wall -g -O0 -std=c++11
 
 SRC_DIR = src
 TEST_DIR = test
