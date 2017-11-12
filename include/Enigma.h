@@ -14,6 +14,7 @@ Reflector *reflector_;
 
 public:
   Enigma(int argc, char** argv);
+  ~Enigma();
   // at least 3 rotors
   // They could be private
   int getRotorPosition(const char* path, int position);

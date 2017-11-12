@@ -1,6 +1,6 @@
 EXE = enigma
 CC = g++
-CFLAGS = -Wall -g -std=c++11
+CFLAGS = -Wall -g -O0 -std=c++11
 INC = -I include
 
 SRC_DIR = src
@@ -14,6 +14,9 @@ TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
 
 INC_DIR = include
 HEADER_FILES = $(INC_DIR)/*.h
+
+run: $(EXE)
+	valgrind --leak-check=full --show-leak-kinds=all  ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
 
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
 	$(CC) -o $(EXE) main.cpp $(SRC_FILES) -I $(INC_DIR) $(CFLAGS)

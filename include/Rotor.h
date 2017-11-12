@@ -10,6 +10,7 @@ private:
   int* notches_;
 public:
   Rotor(const char* path_rot, int start_position);
+  ~Rotor();
   int checkInput(const char* path_rot);
   void mapInput(const char* path, int start_position);
   void rotateForward();

@@ -12,6 +12,10 @@ Rotor::Rotor(const char* path, int start_position){
   mapInput(path, start_position);
 }
 
+Rotor::~Rotor(){
+  delete[] notches_;
+}
+
 int Rotor::checkInput(const char* path){
   int num;
   int counter = 0;

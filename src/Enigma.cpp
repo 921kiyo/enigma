@@ -26,6 +26,15 @@ Enigma::Enigma(int argc, char** argv){
   }
 }
 
+Enigma::~Enigma(){
+  delete plugboard_;
+  delete reflector_;
+  for(int i = 0; i < num_of_rotors_; i++){
+    delete rotors_[i];
+  }
+  delete[] rotors_;
+}
+
 int Enigma::getRotorPosition(const char* path, int position){
   int num;
   int counter = 0;
