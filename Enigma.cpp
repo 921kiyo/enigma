@@ -12,14 +12,24 @@
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
-  plugboard_ = new Plugboard(argv[1]);
-  reflector_ = new Reflector(argv[2]);
-  num_of_rotors_ = argc-4;
-  rotors_ = new Rotor*[num_of_rotors_];
+  try{
+    plugboard_ = new Plugboard(argv[1]);
+    reflector_ = new Reflector(argv[2]);
+    num_of_rotors_ = argc-4;
+    rotors_ = new Rotor*[num_of_rotors_];
+  }catch(const std::bad_array_new_length &e){
+    cout << e.what() << endl;
+  }
+
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
-    rotors_[i] = new Rotor(argv[i+3], starting_position);
+    try{
+        rotors_[i] = new Rotor(argv[i+3], starting_position);
+    }catch(const std::bad_array_new_length &e){
+      cout << e.what() << endl;
+    }
+
   }
 }
 

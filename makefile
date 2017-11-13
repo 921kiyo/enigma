@@ -13,8 +13,8 @@ HEADER_FILES = $(wildcard *.h)
 ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
 rotors/III.rot rotors/I.pos < input.txt > output.txt
 
-# TEST = ./$(EXE) plugboards/test.pb reflectors/test.rf rotors/test.rot rotors/test.rot \
-# rotors/test.rot rotors/test.pos < input.txt > output.txt
+TEST = ./$(EXE) plugboards/test.pb reflectors/test.rf rotors/test.rot rotors/test.rot \
+rotors/test.rot rotors/test.pos < input.txt > output.txt
 
 # run: $(EXE)
 # 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
