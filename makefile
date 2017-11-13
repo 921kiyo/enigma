@@ -2,10 +2,9 @@ EXE = enigma
 CC = g++
 CFLAGS = -I include -Wall -g -O0 -std=c++11
 
-SRC_DIR = src
 TEST_DIR = test
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+SRC_FILES = $(wildcard *.cpp)
 TEST_FILES = $(wildcard $(TEST_DIR)/*cpp)
 # Exclude tester.cpp
 TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
