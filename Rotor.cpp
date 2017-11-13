@@ -9,10 +9,7 @@ using namespace std;
 Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
   mapInput(path);
-  // Map current position;
-  cout << "start_position is  " << start_position << endl;
   current_position_ = start_position;
-  cout << "current position is  " << current_position_ << endl;
 }
 
 Rotor::~Rotor(){
@@ -53,7 +50,7 @@ void Rotor::rotateDown(){
 
 void Rotor::rotateUp(){
   current_position_ = (current_position_ - 1 + ALPHABET_LENGTH_)% ALPHABET_LENGTH_;
-  cout << "after rorate forward, current position is " << current_position_ << endl;
+  // cout << "after rorate forward, current position is " << current_position_ << endl;
 }
 
 int Rotor::shuffleUp(int input_index){

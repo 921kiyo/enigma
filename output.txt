@@ -1,18 +1,1 @@
-start_position is  0
-current position is  0
-current index before plugboard 7
-current index after plugboard 17
-getCurrentPosition 1
-current_index1 18
-current_index2 25
-getCurrentPosition 1
-current_index3 24
-reversing from here... 6
-getCurrentPosition 1
-current_index1 7
-contacts backward[input_index] 11
-current_index2 11
-getCurrentPosition 1
-current_index3 10
-ascii index 25
-Z
+N
