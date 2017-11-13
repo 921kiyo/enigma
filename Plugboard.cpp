@@ -17,7 +17,8 @@ Plugboard::Plugboard(const char* path){
 
 void Plugboard::checkParameters(const int counter){
     // cout << "counter " << counter << endl;
-    if(counter%2!=0){
+    if(counter%2!=0 || counter != ALPHABET_LENGTH_){
+      cout << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
       throw INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
     }
 }

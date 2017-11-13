@@ -14,7 +14,8 @@ Reflector::Reflector(const char* path){
 }
 
 void Reflector::checkParameters(const int counter){
-    if(counter != ALPHABET_LENGTH_){
+    if(counter%2!=0 || counter != ALPHABET_LENGTH_){
+      cout << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
       throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
     }
 }
