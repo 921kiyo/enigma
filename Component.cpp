@@ -5,7 +5,7 @@
 
 using namespace std;
 Component::~Component(){
-  cout << "Base Destructor\t" << endl;
+  // cout << "Base Destructor\t" << endl;
 }
 int Component::checkInput(const char* path){
   // TODO Check the extension is pd

@@ -50,7 +50,7 @@ int Rotor::getCurrentPosition(){
 bool Rotor::isCurrentPositionInNotch(){
   for(int i= 0; i< num_of_notches_; i++){
     if(current_position_ == notches_[i]){
-      cout << "yes notch at " << current_position_ << endl;
+      // cout << "yes notch at " << current_position_ << endl;
       return true;
     }
   }
