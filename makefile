@@ -1,6 +1,6 @@
 EXE = enigma
 CC = g++
-CFLAGS = -I include -Wall -g -O0 -std=c++11
+CFLAGS = -Wall -g -std=c++11
 
 TEST_DIR = test
 
@@ -14,7 +14,7 @@ ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
 rotors/III.rot rotors/I.pos < input.txt > output.txt
 
 # run: $(EXE)
-# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
+# 	-O0 valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -o $(EXE)
