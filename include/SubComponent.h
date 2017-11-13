@@ -8,8 +8,9 @@ protected:
   // C++ 11 initialization
   static const int PAIR_SIZE_{13};
   // Plugboard not necessarily SIZE 13???
-  int input_pair1_[PAIR_SIZE_];
-  int input_pair2_[PAIR_SIZE_];
+  // C++ 11 default value initialization
+  int input_pair1_[PAIR_SIZE_] = {0};
+  int input_pair2_[PAIR_SIZE_] = {0};
 public:
   // int check
   // Could be protected
