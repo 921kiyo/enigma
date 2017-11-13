@@ -16,8 +16,8 @@ rotors/III.rot rotors/I.pos < input.txt > output.txt
 # run: $(EXE)
 # 	-O0 valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 
-$(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
-	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -o $(EXE)
+$(EXE): $(SRC_FILES) $(HEADER_FILES)
+	$(CC) $(CFLAGS) $(SRC_FILES) -o $(EXE)
 
 tester.o: $(TEST_DIR)/tester.cpp
 	$(CC) -o tester.o -c $(TEST_DIR)/tester.cpp $(CFLAGS)

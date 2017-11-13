@@ -10,13 +10,13 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-  Enigma enigma(argc, argv);
-  char message[80];
-  char encrypted_message[80];
+Enigma enigma(argc, argv);
+char message[80];
+char encrypted_message[80];
 
-  cin >> message;
-  enigma.encryptMessage(message, encrypted_message);
-  cout << encrypted_message << endl;
+cin >> message;
+enigma.encryptMessage(message, encrypted_message);
+cout << encrypted_message << endl;
 
 return 0;
 }
