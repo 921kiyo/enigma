@@ -16,7 +16,7 @@ char message[200];
 char encrypted_message[200];
 cin >> message;
 enigma.encryptMessage(message, encrypted_message);
-cout << encrypted_message << endl;
+cout << encrypted_message;
 
 return NO_ERROR;
 }
