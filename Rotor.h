@@ -13,7 +13,10 @@ public:
   Rotor(const char* path_rot, int start_position);
   ~Rotor();
   void mapInput(const char* path);
-  void rotateForward();
+  void rotateUp();
+  void rotateDown();
+  int shuffleUp(int input_index);
+  int shuffleDown(int input_index);
   int convertForward(int input_index);
   int convertBackward(int input_index);
   int getCurrentPosition();

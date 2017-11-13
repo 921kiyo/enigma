@@ -10,6 +10,9 @@ Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
   mapInput(path);
   // Map current position;
+  cout << "start_position is  " << start_position << endl;
+  current_position_ = start_position;
+  cout << "current position is  " << current_position_ << endl;
 }
 
 Rotor::~Rotor(){
@@ -42,13 +45,27 @@ void Rotor::mapInput(const char* path){
   }
 }
 
-void Rotor::rotateForward(){
-  current_position_++;
-  current_position_ = current_position_ % ALPHABET_LENGTH_;
+// Do I ever need this?
+void Rotor::rotateDown(){
+  current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
   // cout << "after rorate forward, start is " << current_position << endl;
 }
 
+void Rotor::rotateUp(){
+  current_position_ = (current_position_ - 1 + ALPHABET_LENGTH_)% ALPHABET_LENGTH_;
+  cout << "after rorate forward, current position is " << current_position_ << endl;
+}
+
+int Rotor::shuffleUp(int input_index){
+  return (input_index - getCurrentPosition() + ALPHABET_LENGTH_) % ALPHABET_LENGTH_;
+}
+
+int Rotor::shuffleDown(int input_index){
+  return (input_index + getCurrentPosition()) % ALPHABET_LENGTH_;
+}
+
 int Rotor::getCurrentPosition(){
+  cout << "getCurrentPosition " << current_position_ << endl;
   return current_position_;
 }
 
@@ -64,23 +81,16 @@ bool Rotor::isCurrentPositionInNotch(){
 
 int Rotor::convertForward(int input_index){
   // cout << "current_position " << current_position << endl;
-  int index = (input_index + current_position_) % ALPHABET_LENGTH_;
-  return contacts_[index];
+  return contacts_[input_index];
 }
 
 int Rotor::convertBackward(int input_index){
-  // cout << "starting position in backward " << starting_position << endl;
+  // cout << "starting position in backward " << input_index << endl;
   for(int i = 0; i < ALPHABET_LENGTH_; i++){
-      // cout << "contacts " << contacts[i] << endl;
+      // cout << "contacts " << contacts_[i] << endl;
       if(input_index == contacts_[i]){
-        // cout << "contacts backward[input_index] " << i << endl;
-        input_index = i - current_position_;
-        if(input_index < 0){
-          return ALPHABET_LENGTH_ + input_index;
-        }
-        else{
-          return input_index;
-        }
+        cout << "contacts backward[input_index] " << i << endl;
+          return i;
       }
   }
   // Double check this!!
