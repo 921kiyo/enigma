@@ -14,20 +14,23 @@ int Component::checkInput(const char* path){
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
-    // cout << "failing... " << endl;
-    // return ERROR_OPENING_CONFIGURATION_FILE;
     throw ERROR_OPENING_CONFIGURATION_FILE;
   }
-  while(!in_stream.eof() && in_stream >> num){
+  // while(!in_stream.eof() && in_stream >> num){
+  in_stream >> num;
+  while(!in_stream.eof()){
     if(!isNumberRangeCorrect(num)){
-
-      // return INVALID_INDEX;
       throw INVALID_INDEX;
     }
+
+    if(in_stream.fail()){
+      // How to generalize this message?
+      cout << "Non-numeric Output for test: Plugboard Error Conditions:" << endl;
+      throw NON_NUMERIC_CHARACTER;
+    }else{
+      in_stream >> num;
+    }
     counter++;
-    // If non-numeric character
-    // cout << "non numeric character..." << endl;
-    // return NON_NUMERIC_CHARACTER;
   }
   // return NO_ERROR;
   return counter;
@@ -39,9 +42,6 @@ int Component::getArrayLength(const char* path){
   fstream in_stream;
   in_stream.open(path);
   while(!in_stream.eof() && in_stream >> num){
-  // while(!in_stream.eof()){
-  //   in_stream >> num;
-    // in_stream >> ws;
     counter++;
   }
   in_stream.close();
