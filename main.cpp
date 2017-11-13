@@ -18,5 +18,5 @@ cin >> message;
 enigma.encryptMessage(message, encrypted_message);
 cout << encrypted_message << endl;
 
-return 0;
+return NO_ERROR;
 }
