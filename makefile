@@ -11,8 +11,11 @@ TEST_FILES = $(wildcard $(TEST_DIR)/*cpp)
 TEST_FILES := $(filter-out $(TEST_DIR)/tester.cpp, $(TEST_FILES))
 HEADER_FILES = $(wildcard $(INC_DIR)/*.h)
 
-# run: $(EXE)
-# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all  ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot rotors/III.rot rotors/I.pos < input.txt > output.txt
+ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
+rotors/III.rot rotors/I.pos < input.txt > output.txt
+
+run: $(EXE)
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 
 $(EXE): main.cpp $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) main.cpp $(SRC_FILES) -o $(EXE)
@@ -22,6 +25,9 @@ tester.o: $(TEST_DIR)/tester.cpp
 
 tester: tester.o $(TEST_FILES) $(SRC_FILES) $(HEADER_FILES)
 	$(CC) -o tester $(TEST_FILES) tester.o $(SRC_FILES) $(CFLAGS)
+
+runtest: tester
+	$(ARG)
 
 clean:
 	rm -f $(EXE) tester tester.o

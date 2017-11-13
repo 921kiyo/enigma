@@ -7,7 +7,6 @@ class Reflector: public SubComponent{
 public:
   Reflector(const char* path);
   int checkParameters(const int counter);
-  // void mapInput(const char* path);
   void returnConfigError();
 };
 
