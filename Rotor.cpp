@@ -62,7 +62,6 @@ int Rotor::shuffleDown(int input_index){
 }
 
 int Rotor::getCurrentPosition(){
-  cout << "getCurrentPosition " << current_position_ << endl;
   return current_position_;
 }
 
@@ -86,7 +85,7 @@ int Rotor::convertBackward(int input_index){
   for(int i = 0; i < ALPHABET_LENGTH_; i++){
       // cout << "contacts " << contacts_[i] << endl;
       if(input_index == contacts_[i]){
-        cout << "contacts backward[input_index] " << i << endl;
+        // cout << "contacts backward[input_index] " << i << endl;
           return i;
       }
   }
