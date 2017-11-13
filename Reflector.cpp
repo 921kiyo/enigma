@@ -7,16 +7,16 @@
 using namespace std;
 
 Reflector::Reflector(const char* path){
-  checkInput(path);
+  int counter;
+  counter = checkInput(path);
+  checkParameters(counter);
   mapInput(path);
 }
 
-int Reflector::checkParameters(const int counter){
+void Reflector::checkParameters(const int counter){
     if(counter != ALPHABET_LENGTH_){
-      cout << "INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS " << endl;
-      return INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
+      throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
     }
-    return NO_ERROR;
 }
 
 void Reflector::returnConfigError(){

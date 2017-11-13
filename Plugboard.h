@@ -6,7 +6,7 @@
 class Plugboard: public SubComponent{
 public:
   Plugboard(const char* path);
-  int checkParameters(const int counter);
+  void checkParameters(const int counter);
   void returnConfigError();
 };
 

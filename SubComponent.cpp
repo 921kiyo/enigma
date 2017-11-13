@@ -31,7 +31,7 @@ void SubComponent::mapInput(const char* path){
     //  How do you return this?
     returnConfigError();
   }
-
+  // cout << "array_length " << array_length << endl;
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
       input_pair1_[i/2] = num_array[i];

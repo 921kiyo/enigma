@@ -16,7 +16,7 @@ public:
   // Could be protected
   void mapInput(const char* path);
   int convertForward(int input);
-  virtual int checkParameters(int counter) = 0;
+  virtual void checkParameters(const int counter) = 0;
   virtual void returnConfigError() = 0;
 };
 

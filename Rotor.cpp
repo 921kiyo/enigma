@@ -23,8 +23,8 @@ void Rotor::mapInput(const char* path){
 
   // TODO Double check if this checking is enough
   if(isDuplicateInt(num_array, 25)){
-    cout << "invalid rotor mapping " << endl;
-    // return INVALID_ROTOR_MAPPING;
+    // cout << "invalid rotor mapping " << endl;
+    throw INVALID_ROTOR_MAPPING;
   }
 
   // If not error, them map them to each attributes

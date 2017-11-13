@@ -14,20 +14,23 @@ int Component::checkInput(const char* path){
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
-    cout << "failing... " << endl;
-    return ERROR_OPENING_CONFIGURATION_FILE;
+    // cout << "failing... " << endl;
+    // return ERROR_OPENING_CONFIGURATION_FILE;
+    throw ERROR_OPENING_CONFIGURATION_FILE;
   }
   while(!in_stream.eof() && in_stream >> num){
     if(!isNumberRangeCorrect(num)){
-      cout << "out of range " << endl;
-      return INVALID_INDEX;
+
+      // return INVALID_INDEX;
+      throw INVALID_INDEX;
     }
     counter++;
     // If non-numeric character
     // cout << "non numeric character..." << endl;
     // return NON_NUMERIC_CHARACTER;
   }
-  return NO_ERROR;
+  // return NO_ERROR;
+  return counter;
 }
 
 int Component::getArrayLength(const char* path){

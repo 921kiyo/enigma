@@ -9,19 +9,19 @@ using namespace std;
 
 // Constructor
 Plugboard::Plugboard(const char* path){
-  checkInput(path);
+  int counter;
+  counter = checkInput(path);
+  checkParameters(counter);
   mapInput(path);
 }
 
-// TODO You need to call this somewhere
-int Plugboard::checkParameters(const int counter){
+void Plugboard::checkParameters(const int counter){
+    // cout << "counter " << counter << endl;
     if(counter%2!=0){
-      cout << "odd number " << endl;
-      return INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
+      throw INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
     }
-    return NO_ERROR;
 }
 
 void Plugboard::returnConfigError(){
-    cout << IMPOSSIBLE_PLUGBOARD_CONFIGURATION << endl;
+    throw IMPOSSIBLE_PLUGBOARD_CONFIGURATION;
 }
