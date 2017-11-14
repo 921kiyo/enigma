@@ -14,12 +14,14 @@ using namespace std;
 Enigma::Enigma(int argc, char** argv){
   try{
     plugboard_ = new Plugboard(argv[1]);
+    cout << "newed plugboard" << endl;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...1 " << endl;
     cout << e.what() << endl;
   }
   try{
     reflector_ = new Reflector(argv[2]);
+    cout << "newed reflector" << endl;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...2 " << endl;
     cout << e.what() << endl;
@@ -28,6 +30,7 @@ Enigma::Enigma(int argc, char** argv){
     num_of_rotors_ = argc-4;
     if(num_of_rotors_ > 0){
       rotors_ = new Rotor*[num_of_rotors_];
+      cout << "newed rotor array" << endl;
     }
   }catch(const std::bad_array_new_length &e){
     cout << "newing...3 " << endl;
@@ -37,9 +40,11 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
+    cout << "newed starting position" << endl;
     // if starting_position is -1, do something!!
     try{
         rotors_[i] = new Rotor(argv[i+3], starting_position);
+        cout << "newed rotor " << i << endl;
     }catch(const std::bad_array_new_length &e){
 
       cout << e.what() << endl;

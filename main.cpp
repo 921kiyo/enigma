@@ -9,7 +9,6 @@
 using namespace std;
 
 int main(int argc, char** argv){
-
   if(argc < 3 || argc == 4){
     cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
