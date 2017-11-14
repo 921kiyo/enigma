@@ -15,14 +15,14 @@ Enigma::Enigma(int argc, char** argv){
   try{
     plugboard_ = new Plugboard(argv[1]);
     is_plugboard_initialized = true;
-    cout << "newed plugboard" << endl;
+    // cout << "newed plugboard" << endl;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...1 " << endl;
     cout << e.what() << endl;
   }
   try{
     reflector_ = new Reflector(argv[2]);
-    cout << "newed reflector" << endl;
+    // cout << "newed reflector" << endl;
     is_reflector_initialized = true;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...2 " << endl;
@@ -30,10 +30,10 @@ Enigma::Enigma(int argc, char** argv){
   }
   try{
     num_of_rotors_ = argc-4;
-    cout << "num_of_rotors_ " << num_of_rotors_ << endl;
+    // cout << "num_of_rotors_ " << num_of_rotors_ << endl;
     if(num_of_rotors_ > 0){
       rotors_ = new Rotor*[num_of_rotors_];
-      cout << "newed rotor array" << endl;
+      // cout << "newed rotor array" << endl;
     }
   }catch(const std::bad_array_new_length &e){
     cout << "newing...3 " << endl;
@@ -43,11 +43,11 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
-    cout << "newed starting position" << endl;
+    // cout << "newed starting position" << endl;
     // if starting_position is -1, do something!!
     try{
         rotors_[i] = new Rotor(argv[i+3], starting_position);
-        cout << "newed rotor " << i << endl;
+        // cout << "newed rotor " << i << endl;
     }catch(const std::bad_array_new_length &e){
 
       cout << e.what() << endl;
@@ -164,7 +164,7 @@ void Enigma::rotorProcess(int& current_index){
       // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i-1]->shuffleUp(current_index);
       // cout << "current_index3 " << current_index << endl;
-      cout << "current_index i " << i << " and index " << current_index << endl;
+      // cout << "current_index i " << i << " and index " << current_index << endl;
 
       // TODO need to fix!!
       if(rotors_[i-1]->isCurrentPositionInNotch()){
@@ -176,16 +176,16 @@ void Enigma::rotorProcess(int& current_index){
   }
 
   current_index = reflector_->convertForward(current_index);
-  cout << "reversing from here... " << current_index << endl;
+  // cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
       current_index = rotors_[i]->shuffleDown(current_index);
-      cout << "current_index1 " << current_index << endl;
+      // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i]->convertBackward(current_index);
-      cout << "current_index2 " << current_index << endl;
+      // cout << "current_index2 " << current_index << endl;
 
       current_index = rotors_[i]->shuffleUp(current_index);
-      cout << "current_index3 " << current_index << endl;
+      // cout << "current_index3 " << current_index << endl;
     }
   }
   current_index = plugboard_->convertForward(current_index);

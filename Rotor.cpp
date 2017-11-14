@@ -9,7 +9,7 @@ using namespace std;
 Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
   mapInput(path);
-  cout << "start_position " << start_position << endl;
+  // cout << "start_position " << start_position << endl;
   current_position_ = start_position;
 }
 
@@ -66,7 +66,7 @@ int Rotor::shuffleDown(int input_index){
 }
 
 int Rotor::getCurrentPosition(){
-  cout << "current position " << current_position_ << endl;
+  // cout << "current position " << current_position_ << endl;
   return current_position_;
 }
 
