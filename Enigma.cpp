@@ -57,15 +57,32 @@ Enigma::~Enigma(){
   delete[] rotors_;
 }
 
+// What happen if you have more than one dot in filename??
+// char* getExtension(const char* path){
+//   // Is it okay to say 3 here? what if .roto ?
+//
+//   int extension_counter = 0;
+//   for(int i = 0; path[i] != '\0'; i++){
+//     if(path[i] == '.'){
+//       for(int x = i + 1; path[x] != '\0'; i++){
+//         extension[extension_counter] = path[x];
+//         extension_counter++;
+//       }
+//     }
+//   }
+//   cout << "extension " << extension << endl;
+//   return extension;
+// }
+
 int Enigma::getRotorPosition(const char* path, int position){
   int num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  if(in_stream.fail() && in_stream >> num){
-    cerr << "error opening file for rotor position" << endl;
-    throw INVALID_ROTOR_MAPPING;
-  }
+  // if(in_stream.fail()){
+  //   cerr << "error opening file for rotor position" << endl;
+  //   throw INVALID_ROTOR_MAPPING;
+  // }
   in_stream >> num;
   while(!in_stream.eof() ){
     // Can I abstruct this away?
@@ -74,9 +91,10 @@ int Enigma::getRotorPosition(const char* path, int position){
       exit(INVALID_INDEX);
     }
     if(in_stream.fail()){
-      cerr << "Non-numeric character in rotor positions file rotor.pos";
+      cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
       exit(NON_NUMERIC_CHARACTER);
     }
+
     if(position == counter){
       return num;
     }
@@ -84,7 +102,8 @@ int Enigma::getRotorPosition(const char* path, int position){
   }
   // Does this always close input stream?
   in_stream.close();
-  return -1;
+  cerr << "No starting position for rotor 0 in rotor position file: rotor.pos" << endl;
+  exit(NO_ROTOR_STARTING_POSITION);
 }
 
 void Enigma::encryptMessage(const char* message, char* encrypted_message){

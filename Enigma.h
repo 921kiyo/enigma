@@ -17,6 +17,7 @@ public:
   ~Enigma();
   // at least 3 rotors
   // They could be private
+  // void getExtension(const char* path, char* extension);
   int getRotorPosition(const char* path, int position);
   void encryptMessage(const char* message, char* encrypted_message);
   void rotorProcess(int& current_index);

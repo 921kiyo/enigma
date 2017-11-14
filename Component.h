@@ -1,6 +1,7 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+
 class Component{
 protected:
   static const int ALPHABET_LENGTH_{26};
