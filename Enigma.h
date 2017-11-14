@@ -11,7 +11,8 @@ Rotor **rotors_;
 int num_of_rotors_;
 Plugboard *plugboard_;
 Reflector *reflector_;
-
+bool is_plugboard_initialized{false};
+bool is_reflector_initialized{false};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();

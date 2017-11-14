@@ -14,6 +14,7 @@ using namespace std;
 Enigma::Enigma(int argc, char** argv){
   try{
     plugboard_ = new Plugboard(argv[1]);
+    is_plugboard_initialized = true;
     cout << "newed plugboard" << endl;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...1 " << endl;
@@ -22,6 +23,7 @@ Enigma::Enigma(int argc, char** argv){
   try{
     reflector_ = new Reflector(argv[2]);
     cout << "newed reflector" << endl;
+    is_reflector_initialized = true;
   }catch(const std::bad_array_new_length &e){
     cout << "newing...2 " << endl;
     cout << e.what() << endl;
@@ -55,12 +57,20 @@ Enigma::Enigma(int argc, char** argv){
 }
 
 Enigma::~Enigma(){
-  delete plugboard_;
-  delete reflector_;
+  if(is_plugboard_initialized){
+      delete plugboard_;
+  }
+  if(is_plugboard_initialized){
+      delete reflector_;
+  }
+
   for(int i = 0; i < num_of_rotors_; i++){
     delete rotors_[i];
   }
-  delete[] rotors_;
+  if(num_of_rotors_ > 0){
+    delete[] rotors_;
+  }
+
 }
 
 // What happen if you have more than one dot in filename??
@@ -122,12 +132,12 @@ void Enigma::encryptMessage(const char* message, char* encrypted_message){
 
     rotorProcess(current_index);
 
-    cout << "ascii index " << current_index << endl;
+    // cout << "ascii index " << current_index << endl;
 
     encrypted_message[i] = current_index + 65;
   }
   encrypted_message[message_length] = '\0';
-  cout << "encrypted_message is " << encrypted_message << endl;
+  // cout << "encrypted_message is " << encrypted_message << endl;
 }
 
 // TODO change function name
@@ -136,10 +146,10 @@ void Enigma::rotorProcess(int& current_index){
 
   // TODO pass reference instead
 
-  cout << "current index before plugboard " << current_index << endl;
+  // cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard_->convertForward(current_index);
 
-  cout << "current index after plugboard " << current_index << endl;
+  // cout << "current index after plugboard " << current_index << endl;
   // First rotate the right most rotor by one
   if(num_of_rotors_ > 0){
     rotors_[num_of_rotors_-1]->rotateDown();
@@ -147,13 +157,13 @@ void Enigma::rotorProcess(int& current_index){
 
   if(num_of_rotors_ > 0){
     for(int i = num_of_rotors_ ; i > 0; i--){
-      cout << "rotors_[i-1] " << rotors_[i]->getCurrentPosition() << endl;
+      // cout << "rotors_[i-1] " << rotors_[i]->getCurrentPosition() << endl;
       current_index = rotors_[i-1]->shuffleDown(current_index);
-      cout << "current_index1 " << current_index << endl;
+      // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i-1]->convertForward(current_index);
-      cout << "current_index2 " << current_index << endl;
+      // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i-1]->shuffleUp(current_index);
-      cout << "current_index3 " << current_index << endl;
+      // cout << "current_index3 " << current_index << endl;
       cout << "current_index i " << i << " and index " << current_index << endl;
 
       // TODO need to fix!!

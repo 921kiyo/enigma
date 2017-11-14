@@ -6,7 +6,7 @@
 class Rotor: public Component{
 private:
   int contacts_[ALPHABET_LENGTH_];
-  int current_position_;
+  int current_position_{0};
   int num_of_notches_;
   int* notches_;
 public:
