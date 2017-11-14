@@ -8,6 +8,7 @@ public:
   Plugboard(const char* path);
   void checkParameters(const int counter);
   void returnConfigError();
+  virtual void returnNonNumericCharacterError();
 };
 
 #endif

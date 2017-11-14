@@ -17,6 +17,7 @@ public:
   virtual int convertForward(int input_index) = 0;
   // virtual void returnInvalidMappingError() = 0;
   // virtual void returnIncorrectParamsError() = 0;
+  virtual void returnNonNumericCharacterError() = 0;
   // virtual void returnInvalidIndexError() = 0;
 
   virtual ~Component();

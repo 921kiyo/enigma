@@ -22,12 +22,8 @@ int Component::checkInput(const char* path){
     if(!isNumberRangeCorrect(num)){
       throw INVALID_INDEX;
     }
-
     if(in_stream.fail()){
-      // How to generalize this message?
-      // Non-numeric character for mapping in rotor file rotor.rot
-      // Non-numeric character in reflector file reflector.rf
-      cout << "Non-numeric Output for test: Plugboard Error Conditions:" << endl;
+      returnNonNumericCharacterError();
       throw NON_NUMERIC_CHARACTER;
     }else{
       in_stream >> num;

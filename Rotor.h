@@ -21,6 +21,7 @@ public:
   int convertBackward(int input_index);
   int getCurrentPosition();
   bool isCurrentPositionInNotch();
+  virtual void returnNonNumericCharacterError();
 };
 
 #endif

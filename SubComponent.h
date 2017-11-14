@@ -18,6 +18,7 @@ public:
   int convertForward(int input);
   virtual void checkParameters(const int counter) = 0;
   virtual void returnConfigError() = 0;
+  virtual void returnNonNumericCharacterError() = 0;
 };
 
 #endif

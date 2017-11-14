@@ -92,3 +92,7 @@ int Rotor::convertBackward(int input_index){
   // Double check this!!
   return input_index;
 }
+
+void Rotor::returnNonNumericCharacterError(){
+  cout << "Non-numeric character for mapping in rotor file rotor.rot";
+}
