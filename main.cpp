@@ -19,13 +19,15 @@ int main(int argc, char** argv){
   // What is the maximum length of this?
   char message[200];
   char encrypted_message[200];
+
+  cin >> message;
   for(int i = 0; message[i] != '\0'; i++){
-    if(message[i] - 'A' < 0 || 25 > message[i] - 'A'){
+    if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
       cout << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!";
       return INVALID_INPUT_CHARACTER;
     }
   }
-  cin >> message;
+
   enigma.encryptMessage(message, encrypted_message);
   cout << encrypted_message;
 
