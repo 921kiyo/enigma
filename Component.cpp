@@ -14,17 +14,19 @@ int Component::checkInput(const char* path){
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
-    throw ERROR_OPENING_CONFIGURATION_FILE;
+    // throw ERROR_OPENING_CONFIGURATION_FILE;
+    exit(ERROR_OPENING_CONFIGURATION_FILE);
   }
   // while(!in_stream.eof() && in_stream >> num){
   in_stream >> num;
   while(!in_stream.eof()){
     if(!isNumberRangeCorrect(num)){
-      throw INVALID_INDEX;
+      exit(INVALID_INDEX);
+      // throw INVALID_INDEX;
     }
     if(in_stream.fail()){
       returnNonNumericCharacterError();
-      throw NON_NUMERIC_CHARACTER;
+      exit(NON_NUMERIC_CHARACTER);
     }else{
       in_stream >> num;
     }

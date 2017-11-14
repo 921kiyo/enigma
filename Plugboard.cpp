@@ -17,7 +17,7 @@ Plugboard::Plugboard(const char* path){
 
 void Plugboard::checkParameters(const int counter){
     if(counter%2!=0 || counter > ALPHABET_LENGTH_){
-      cerr << "Incorrect number of parameters in plugboard file plugboard.pb";
+      cerr << "Incorrect number of parameters in plugboard file plugboard.pb ";
       // throw INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
       exit(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
     }
@@ -29,5 +29,5 @@ void Plugboard::returnConfigError(){
 }
 
 void Plugboard::returnNonNumericCharacterError(){
-  cout << "Non-numeric Output for test: Plugboard Error Conditions:";
+  cout << "Non-numeric character in plugboard file plugboard.pb ";
 }
