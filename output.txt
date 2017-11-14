@@ -1,4 +1,45 @@
 newed plugboard
 newed reflector
 num_of_rotors_ -1
+current index before plugboard 7
+current index after plugboard 7
+reversing from here... 23
+ascii index 23
+current index before plugboard 4
+current index after plugboard 4
+reversing from here... 0
+ascii index 0
+current index before plugboard 11
+current index after plugboard 11
+reversing from here... 5
+ascii index 5
+current index before plugboard 11
+current index after plugboard 11
+reversing from here... 5
+ascii index 5
+current index before plugboard 14
+current index after plugboard 14
+reversing from here... 16
+ascii index 16
+current index before plugboard 22
+current index after plugboard 22
+reversing from here... 10
+ascii index 10
+current index before plugboard 14
+current index after plugboard 14
+reversing from here... 16
+ascii index 16
+current index before plugboard 17
+current index after plugboard 17
+reversing from here... 13
+ascii index 13
+current index before plugboard 11
+current index after plugboard 11
+reversing from here... 5
+ascii index 5
+current index before plugboard 3
+current index after plugboard 3
+reversing from here... 25
+ascii index 25
+encrypted_message is XAFFQKQNFZ
 XAFFQKQNFZ

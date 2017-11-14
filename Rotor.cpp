@@ -9,6 +9,7 @@ using namespace std;
 Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
   mapInput(path);
+  cout << "start_position " << start_position << endl;
   current_position_ = start_position;
 }
 
