@@ -28,6 +28,7 @@ Enigma::Enigma(int argc, char** argv){
   }
   try{
     num_of_rotors_ = argc-4;
+    cout << "num_of_rotors_ " << num_of_rotors_ << endl;
     if(num_of_rotors_ > 0){
       rotors_ = new Rotor*[num_of_rotors_];
       cout << "newed rotor array" << endl;
@@ -142,34 +143,38 @@ void Enigma::rotorProcess(int& current_index){
     rotors_[num_of_rotors_-1]->rotateDown();
   }
 
-  for(int i = num_of_rotors_ ; i > 0; i--){
-    // cout << "rotors_[i-1] " << rotors_[i]->getCurrentPosition() << endl;
-    current_index = rotors_[i-1]->shuffleDown(current_index);
-    // cout << "current_index1 " << current_index << endl;
-    current_index = rotors_[i-1]->convertForward(current_index);
-    // cout << "current_index2 " << current_index << endl;
-    current_index = rotors_[i-1]->shuffleUp(current_index);
-    // cout << "current_index3 " << current_index << endl;
-    // cout << "current_index i " << i << " and index " << current_index << endl;
+  if(num_of_rotors_ > 0){
+    for(int i = num_of_rotors_ ; i > 0; i--){
+      // cout << "rotors_[i-1] " << rotors_[i]->getCurrentPosition() << endl;
+      current_index = rotors_[i-1]->shuffleDown(current_index);
+      // cout << "current_index1 " << current_index << endl;
+      current_index = rotors_[i-1]->convertForward(current_index);
+      // cout << "current_index2 " << current_index << endl;
+      current_index = rotors_[i-1]->shuffleUp(current_index);
+      // cout << "current_index3 " << current_index << endl;
+      // cout << "current_index i " << i << " and index " << current_index << endl;
 
-    // TODO need to fix!!
-    if(rotors_[i-1]->isCurrentPositionInNotch()){
-      if(i-1 > 0){
-        rotors_[i-2]->rotateDown();
+      // TODO need to fix!!
+      if(rotors_[i-1]->isCurrentPositionInNotch()){
+        if(i-1 > 0){
+          rotors_[i-2]->rotateDown();
+        }
       }
-    }
+  }
   }
 
   current_index = reflector_->convertForward(current_index);
   // cout << "reversing from here... " << current_index << endl;
-  for(int i = 0; i < num_of_rotors_; i++){
-    current_index = rotors_[i]->shuffleDown(current_index);
-    // cout << "current_index1 " << current_index << endl;
-    current_index = rotors_[i]->convertBackward(current_index);
-    // cout << "current_index2 " << current_index << endl;
+  if(num_of_rotors_ > 0){
+    for(int i = 0; i < num_of_rotors_; i++){
+      current_index = rotors_[i]->shuffleDown(current_index);
+      // cout << "current_index1 " << current_index << endl;
+      current_index = rotors_[i]->convertBackward(current_index);
+      // cout << "current_index2 " << current_index << endl;
 
-    current_index = rotors_[i]->shuffleUp(current_index);
-    // cout << "current_index3 " << current_index << endl;
+      current_index = rotors_[i]->shuffleUp(current_index);
+      // cout << "current_index3 " << current_index << endl;
+    }
   }
   current_index = plugboard_->convertForward(current_index);
 }

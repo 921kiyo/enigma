@@ -1,0 +1,4 @@
+newed plugboard
+newed reflector
+num_of_rotors_ -1
+XAFFQKQNFZ
