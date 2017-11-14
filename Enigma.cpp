@@ -37,6 +37,7 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
+    // if starting_position is -1, do something!!
     try{
         rotors_[i] = new Rotor(argv[i+3], starting_position);
     }catch(const std::bad_array_new_length &e){
@@ -65,7 +66,17 @@ int Enigma::getRotorPosition(const char* path, int position){
     cout << "error opening file for rotor position" << endl;
     throw INVALID_ROTOR_MAPPING;
   }
-  while(!in_stream.eof() && in_stream >> num){
+  in_stream >> num;
+  while(!in_stream.eof() ){
+    // Can I abstruct this away?
+    if(num > 25 || num < 0){
+      // What is the message here?
+      exit(INVALID_INDEX);
+    }
+    if(in_stream.fail()){
+      cout << "Non-numeric character in rotor positions file rotor.pos";
+      exit(NON_NUMERIC_CHARACTER);
+    }
     if(position == counter){
       return num;
     }

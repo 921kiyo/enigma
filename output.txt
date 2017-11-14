@@ -1,1 +1,1 @@
-usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?
+Not all inputs mapped in rotor file: rotor.rot

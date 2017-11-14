@@ -21,12 +21,15 @@ void Rotor::mapInput(const char* path){
   int num_array[array_length];
   mapInputToArray(path, num_array);
 
-  // TODO Double check if this checking is enough
-  if(isDuplicateInt(num_array, 25)){
-    // cout << "invalid rotor mapping " << endl;
-    throw INVALID_ROTOR_MAPPING;
+  if(array_length < ALPHABET_LENGTH_){
+    cout << "Not all inputs mapped in rotor file: rotor.rot";
+    exit(INVALID_ROTOR_MAPPING);
   }
-
+  // TODO Double check if this checking is enough
+  if(isDuplicateInt(num_array, ALPHABET_LENGTH_)){
+    cout << "invalid rotor mapping " << endl;
+    exit(INVALID_ROTOR_MAPPING);
+  }
   // If not error, them map them to each attributes
   num_of_notches_ = array_length - ALPHABET_LENGTH_;
   // Why do I have to call mapInputToArray twice here?
@@ -42,12 +45,12 @@ void Rotor::mapInput(const char* path){
   }
 }
 
-// Do I ever need this?
 void Rotor::rotateDown(){
   current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
   // cout << "after rorate forward, start is " << current_position << endl;
 }
 
+// Do I ever need this?
 void Rotor::rotateUp(){
   current_position_ = (current_position_ - 1 + ALPHABET_LENGTH_)% ALPHABET_LENGTH_;
   // cout << "after rorate forward, current position is " << current_position_ << endl;
