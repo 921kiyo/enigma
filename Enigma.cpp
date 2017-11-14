@@ -127,8 +127,10 @@ void Enigma::encryptMessage(const char* message, char* encrypted_message){
     encrypted_message[i] = current_index + 65;
   }
   encrypted_message[message_length] = '\0';
+  cout << "encrypted_message is " << encrypted_message << endl;
 }
 
+// TODO change function name
 void Enigma::rotorProcess(int& current_index){
   // TODO Can I use recursion here??
 
