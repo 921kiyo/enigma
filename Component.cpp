@@ -25,6 +25,8 @@ int Component::checkInput(const char* path){
 
     if(in_stream.fail()){
       // How to generalize this message?
+      // Non-numeric character for mapping in rotor file rotor.rot
+      // Non-numeric character in reflector file reflector.rf
       cout << "Non-numeric Output for test: Plugboard Error Conditions:" << endl;
       throw NON_NUMERIC_CHARACTER;
     }else{
