@@ -20,7 +20,7 @@ void Reflector::checkParameters(const int counter){
       exit(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     if(counter != ALPHABET_LENGTH_){
-      cerr << "Insufficient number of mappings in reflector file: reflector.rf " << endl;
+      cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
       // throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
       exit(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
@@ -33,5 +33,5 @@ void Reflector::returnConfigError(){
 }
 
 void Reflector::returnNonNumericCharacterError(){
-  cerr << "Non-numeric character in reflector file reflector.rf "  << endl;
+  cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
 }
