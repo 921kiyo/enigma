@@ -15,12 +15,12 @@ Reflector::Reflector(const char* path){
 
 void Reflector::checkParameters(const int counter){
     if(counter%2!=0){
-      cout << "Incorrect (odd) number of parameters in reflector file reflector.rf ";
+      cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf ";
       // throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
       exit(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     if(counter != ALPHABET_LENGTH_){
-      cout << "Insufficient number of mappings in reflector file: reflector.rf ";
+      cerr << "Insufficient number of mappings in reflector file: reflector.rf ";
       // throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
       exit(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
@@ -29,9 +29,9 @@ void Reflector::checkParameters(const int counter){
 }
 
 void Reflector::returnConfigError(){
-    cout << INVALID_REFLECTOR_MAPPING << endl;
+  cerr << INVALID_REFLECTOR_MAPPING << endl;
 }
 
 void Reflector::returnNonNumericCharacterError(){
-  cout << "Non-numeric character in reflector file reflector.rf ";
+  cerr << "Non-numeric character in reflector file reflector.rf ";
 }

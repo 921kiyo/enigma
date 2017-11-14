@@ -63,7 +63,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail() && in_stream >> num){
-    cout << "error opening file for rotor position" << endl;
+    cerr << "error opening file for rotor position" << endl;
     throw INVALID_ROTOR_MAPPING;
   }
   in_stream >> num;
@@ -74,7 +74,7 @@ int Enigma::getRotorPosition(const char* path, int position){
       exit(INVALID_INDEX);
     }
     if(in_stream.fail()){
-      cout << "Non-numeric character in rotor positions file rotor.pos";
+      cerr << "Non-numeric character in rotor positions file rotor.pos";
       exit(NON_NUMERIC_CHARACTER);
     }
     if(position == counter){
@@ -127,6 +127,8 @@ void Enigma::rotorProcess(int& current_index){
     current_index = rotors_[i-1]->shuffleUp(current_index);
     // cout << "current_index3 " << current_index << endl;
     // cout << "current_index i " << i << " and index " << current_index << endl;
+
+    // TODO need to fix!!
     if(rotors_[i-1]->isCurrentPositionInNotch()){
       if(i-1 > 0){
         rotors_[i-2]->rotateDown();

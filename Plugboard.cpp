@@ -29,5 +29,5 @@ void Plugboard::returnConfigError(){
 }
 
 void Plugboard::returnNonNumericCharacterError(){
-  cout << "Non-numeric character in plugboard file plugboard.pb ";
+  cerr << "Non-numeric character in plugboard file plugboard.pb ";
 }

@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char** argv){
 
   if(argc < 3 || argc == 4){
-    cout << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
+    cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
   }
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv){
   cin >> message;
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
-      cout << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!";
+      cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!";
       return INVALID_INPUT_CHARACTER;
     }
   }

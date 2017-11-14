@@ -22,12 +22,12 @@ void Rotor::mapInput(const char* path){
   mapInputToArray(path, num_array);
 
   if(array_length < ALPHABET_LENGTH_){
-    cout << "Not all inputs mapped in rotor file: rotor.rot";
+    cerr << "Not all inputs mapped in rotor file: rotor.rot";
     exit(INVALID_ROTOR_MAPPING);
   }
   // TODO Double check if this checking is enough
   if(isDuplicateInt(num_array, ALPHABET_LENGTH_)){
-    cout << "invalid rotor mapping " << endl;
+    cerr << "invalid rotor mapping " << endl;
     exit(INVALID_ROTOR_MAPPING);
   }
   // If not error, them map them to each attributes
@@ -97,5 +97,5 @@ int Rotor::convertBackward(int input_index){
 }
 
 void Rotor::returnNonNumericCharacterError(){
-  cout << "Non-numeric character for mapping in rotor file rotor.rot";
+  cerr << "Non-numeric character for mapping in rotor file rotor.rot";
 }
