@@ -17,8 +17,14 @@ int main(int argc, char** argv){
     cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
   }
+  Enigma *enigma;
+  try{
+      enigma = new Enigma(argc, argv);
+  }
+  catch(int error){
+    return error;
+  }
 
-  Enigma enigma(argc, argv);
   // What is the maximum length of this?
   char message[200];
   // char encrypted_message[200];
@@ -32,10 +38,15 @@ int main(int argc, char** argv){
       cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
       return INVALID_INPUT_CHARACTER;
     }
-    enigma.encryptMessage(message[i]);
-    cout << message[i];
+    try{
+      enigma->encryptMessage(message[i]);
+      cout << message[i];
+    }catch(int error){
+      return error;
+    }
   }
 
+  delete enigma;
   // enigma.encryptMessage(message, encrypted_message);
   // cout << message;
 

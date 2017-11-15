@@ -17,13 +17,13 @@ int Component::checkInput(const char* path){
   in_stream.open(path);
   if(in_stream.fail()){
     // throw ERROR_OPENING_CONFIGURATION_FILE;
-    exit(ERROR_OPENING_CONFIGURATION_FILE);
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
   // while(!in_stream.eof() && in_stream >> num);
 
   while(in_stream >> num){
     if(!isNumberRangeCorrect(num)){
-      exit(INVALID_INDEX);
+      throw(INVALID_INDEX);
       // throw INVALID_INDEX;
     }
     // cout << num << endl;
@@ -32,7 +32,7 @@ int Component::checkInput(const char* path){
 
   if(in_stream.fail()&&!in_stream.eof()){
     returnNonNumericCharacterError();
-    exit(NON_NUMERIC_CHARACTER);
+    throw(NON_NUMERIC_CHARACTER);
   }
   // return NO_ERROR;
   return counter;
@@ -82,7 +82,7 @@ bool Component::isDuplicateInt(int* array, int range){
     previous_appeared_position = isAppearedBefore(array, array[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-      exit(INVALID_ROTOR_MAPPING);
+      throw(INVALID_ROTOR_MAPPING);
     }
   }
   return false;

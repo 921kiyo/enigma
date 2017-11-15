@@ -22,7 +22,7 @@ Enigma::Enigma(int argc, char** argv){
     num_of_rotors_ = argc-4;
     if(num_of_rotors_ < 0){
       cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
-      exit(NO_ROTOR_STARTING_POSITION);
+      throw(NO_ROTOR_STARTING_POSITION);
     }
     // cout << "num_of_rotors_ " << num_of_rotors_ << endl;
     if(num_of_rotors_ > 0){
@@ -71,7 +71,7 @@ int Enigma::getRotorPosition(const char* path, int position){
     // Can I abstruct this away?
     if(num > 25 || num < 0){
       // What is the message here?
-      exit(INVALID_INDEX);
+      throw(INVALID_INDEX);
     }
     if(position == counter){
       // cout << num << endl;
@@ -83,12 +83,12 @@ int Enigma::getRotorPosition(const char* path, int position){
 
   if(in_stream.fail() && !in_stream.eof()){
     cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
-    exit(NON_NUMERIC_CHARACTER);
+    throw(NON_NUMERIC_CHARACTER);
   }
   // Does this always close input stream?
   in_stream.close();
   // cerr << "No starting position for rotor 0 in rotor position file: rotor.pos" << endl;
-  // exit(NO_ROTOR_STARTING_POSITION);
+  // throw(NO_ROTOR_STARTING_POSITION);
 }
 
 void Enigma::encryptMessage(char& message){
