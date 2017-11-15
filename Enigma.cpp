@@ -43,7 +43,7 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
-    // cout << "starting position " << starting_position << endl;
+    cout << "starting position " << starting_position << endl;
     // cout << "newed starting position" << endl;
     // if starting_position is -1, do something!!
     try{
