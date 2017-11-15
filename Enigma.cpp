@@ -73,7 +73,7 @@ int Enigma::getRotorPosition(const char* path, int position){
     if(position == counter){
       return num;
     }
-    in_stream >> num;
+    cout << num << endl;
     counter++;
   }
 
