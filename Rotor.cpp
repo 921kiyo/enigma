@@ -67,8 +67,8 @@ int Rotor::shuffleDown(int input_index){
 }
 
 int Rotor::getPreviousPosition(){
-  // cout << "current position " << current_position_ << endl;
-  return current_position_;
+  // cout << "previous position " << previous_position_ << endl;
+  return previous_position_;
 }
 
 int Rotor::getCurrentPosition(){

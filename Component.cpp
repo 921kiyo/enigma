@@ -5,7 +5,7 @@
 
 using namespace std;
 Component::~Component(){
-  cout << "Base Destructor\t" << endl;
+  // cout << "Base Destructor\t" << endl;
 }
 int Component::checkInput(const char* path){
   // TODO Check the extension is pd
@@ -20,7 +20,7 @@ int Component::checkInput(const char* path){
     exit(ERROR_OPENING_CONFIGURATION_FILE);
   }
   // while(!in_stream.eof() && in_stream >> num);
-  cout << num << endl;
+  // cout << num << endl;
   while(in_stream >> num){
     if(!isNumberRangeCorrect(num)){
       exit(INVALID_INDEX);
