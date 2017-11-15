@@ -9,6 +9,8 @@ Component::~Component(){
 }
 int Component::checkInput(const char* path){
   // TODO Check the extension is pd
+  cout << "-------------------" << endl;
+  cout << path << endl;
   int num;
   int counter = 0;
   fstream in_stream;

@@ -70,25 +70,7 @@ Enigma::~Enigma(){
   if(num_of_rotors_ > 0){
     delete[] rotors_;
   }
-
 }
-
-// What happen if you have more than one dot in filename??
-// char* getExtension(const char* path){
-//   // Is it okay to say 3 here? what if .roto ?
-//
-//   int extension_counter = 0;
-//   for(int i = 0; path[i] != '\0'; i++){
-//     if(path[i] == '.'){
-//       for(int x = i + 1; path[x] != '\0'; i++){
-//         extension[extension_counter] = path[x];
-//         extension_counter++;
-//       }
-//     }
-//   }
-//   cout << "extension " << extension << endl;
-//   return extension;
-// }
 
 int Enigma::getRotorPosition(const char* path, int position){
   int num;
