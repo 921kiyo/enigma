@@ -18,8 +18,14 @@ Enigma::Enigma(int argc, char** argv){
     reflector_ = new Reflector(argv[2]);
     // cout << "newed reflector" << endl;
     is_reflector_initialized = true;
+    // cout << "argc " << argc << endl;
+    if(argc == 3){
+      num_of_rotors_ = 0;
+    }
+    else{
+      num_of_rotors_ = argc-4;
+    }
 
-    num_of_rotors_ = argc-4;
     if(num_of_rotors_ < 0){
       cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
       throw(NO_ROTOR_STARTING_POSITION);
@@ -82,13 +88,13 @@ int Enigma::getRotorPosition(const char* path, int position){
   }
 
   if(in_stream.fail() && !in_stream.eof()){
-    cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
+    cerr << "Non-numeric character in rotor positions file " << path << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
   // Does this always close input stream?
   in_stream.close();
-  // cerr << "No starting position for rotor 0 in rotor position file: rotor.pos" << endl;
-  // throw(NO_ROTOR_STARTING_POSITION);
+  cerr << "No starting position for rotor " << position <<" in rotor position file: rotor.pos" << endl;
+  throw(NO_ROTOR_STARTING_POSITION);
 }
 
 void Enigma::encryptMessage(char& message){
@@ -98,9 +104,9 @@ void Enigma::encryptMessage(char& message){
   int current_index = message - 'A';
 
   rotorProcess(current_index);
-  cout << "ascii index " << current_index << endl;
+  // cout << "ascii index " << current_index << endl;
   message = current_index + 'A';
-  cout << "encrypted_message is " << message << endl;
+  // cout << "encrypted_message is " << message << endl;
 }
 
 // TODO change function name
