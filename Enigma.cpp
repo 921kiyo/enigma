@@ -76,14 +76,15 @@ int Enigma::getRotorPosition(const char* path, int position){
     in_stream >> num;
     counter++;
   }
+
   if(in_stream.fail() && !in_stream.eof()){
     cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
     exit(NON_NUMERIC_CHARACTER);
   }
   // Does this always close input stream?
   in_stream.close();
-  cerr << "No starting position for rotor 0 in rotor position file: rotor.pos" << endl;
-  exit(NO_ROTOR_STARTING_POSITION);
+  // cerr << "No starting position for rotor 0 in rotor position file: rotor.pos" << endl;
+  // exit(NO_ROTOR_STARTING_POSITION);
 }
 
 void Enigma::encryptMessage(char& message){
