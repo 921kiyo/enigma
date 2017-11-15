@@ -35,7 +35,7 @@ int main(int argc, char** argv){
   }
 
   // enigma.encryptMessage(message, encrypted_message);
-  cout << message << endl;
+  cout << message;
 
   return NO_ERROR;
 }
