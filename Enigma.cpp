@@ -20,7 +20,11 @@ Enigma::Enigma(int argc, char** argv){
     is_reflector_initialized = true;
 
     num_of_rotors_ = argc-4;
-    // cout << "num_of_rotors_ " << num_of_rotors_ << endl;
+    if(num_of_rotors_ < 0){
+      cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
+      exit(NO_ROTOR_STARTING_POSITION);
+    }
+    cout << "num_of_rotors_ " << num_of_rotors_ << endl;
     if(num_of_rotors_ > 0){
       rotors_ = new Rotor*[num_of_rotors_];
       // cout << "newed rotor array" << endl;
@@ -29,8 +33,6 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
-    // cout << "starting position " << starting_position << endl;
-    // cout << "newed starting position" << endl;
     // if starting_position is -1, do something!!
 
     rotors_[i] = new Rotor(argv[i+3], starting_position);
@@ -59,7 +61,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  // cout << "path " << path << endl;
+  cout << "path " << path << endl;
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
@@ -96,11 +98,9 @@ void Enigma::encryptMessage(char& message){
   int current_index = message - 'A';
 
   rotorProcess(current_index);
-
-    // cout << "ascii index " << current_index << endl;
+  cout << "ascii index " << current_index << endl;
   message = current_index + 'A';
-
-  // cout << "encrypted_message is " << encrypted_message << endl;
+  cout << "encrypted_message is " << message << endl;
 }
 
 // TODO change function name

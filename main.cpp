@@ -22,10 +22,11 @@ int main(int argc, char** argv){
   // What is the maximum length of this?
   char message[200];
   // char encrypted_message[200];
-
+  cout << "before message" << endl;
   cin >> message;
   // cout << "message " << message << endl;
   for(int i = 0; message[i] != '\0'; i++){
+    // cout << "message " << message[i] << endl;
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
       // cout << message[i] - 'A' << endl;
       cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
