@@ -47,6 +47,7 @@ void Rotor::mapInput(const char* path){
 }
 
 void Rotor::rotateDown(){
+  previous_position_ = current_position_;
   current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
   // cout << "after rorate forward, start is " << current_position << endl;
 }
@@ -81,7 +82,6 @@ bool Rotor::isCurrentPositionInNotch(){
 }
 
 int Rotor::convertForward(int input_index){
-  // cout << "current_position " << current_position << endl;
   return contacts_[input_index];
 }
 
