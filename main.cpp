@@ -24,7 +24,7 @@ int main(int argc, char** argv){
   // char encrypted_message[200];
 
   cin >> message;
-  // cout << "message " << message << endl;
+  cout << "message " << message << endl;
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
       // cout << message[i] - 'A' << endl;
