@@ -7,8 +7,8 @@ class Rotor: public Component{
 private:
   int contacts_[ALPHABET_LENGTH_];
   // Default value okay??
-  int current_position_{0};
-  int previous_position_{0};
+  int current_position_{-1};
+  int previous_position_{-1};
   int num_of_notches_;
   int* notches_;
 public:
@@ -22,6 +22,7 @@ public:
   int convertForward(int input_index);
   int convertBackward(int input_index);
   int getCurrentPosition();
+  int getPreviousPosition();
   bool isCurrentPositionInNotch();
   virtual void returnNonNumericCharacterError();
 };

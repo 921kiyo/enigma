@@ -43,7 +43,7 @@ Enigma::Enigma(int argc, char** argv){
   int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     starting_position = getRotorPosition(argv[argc-1], i);
-    cout << "starting position " << starting_position << endl;
+    // cout << "starting position " << starting_position << endl;
     // cout << "newed starting position" << endl;
     // if starting_position is -1, do something!!
     try{
@@ -148,9 +148,9 @@ void Enigma::rotorProcess(int& current_index){
       // cout << "current_index3 " << current_index << endl;
       // cout << "current_index i " << i << " and index " << current_index << endl;
       // TODO need to fix!!
-      if(rotors_[i-1]->isCurrentPositionInNotch()){
-        cout << "rotors no " << i << endl;
-        cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
+      if(rotors_[i-1]->isCurrentPositionInNotch() && rotors_[i-1]->getPreviousPosition() != rotors_[i-1]->getCurrentPosition()){
+        // cout << "rotors no " << i << endl;
+        // cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
         if(i-1 > 0){
           rotors_[i-2]->rotateDown();
         }

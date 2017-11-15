@@ -1,11 +1,1 @@
-./enigma
-plugboards/I.pb
-reflectors/I.rf
-rotors/I.rot
-rotors/II.rot
-rotors/III.rot
-rotors/I.pos
-starting position 0
-starting position 0
-starting position 0
 KCUBRKZDKN
