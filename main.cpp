@@ -32,10 +32,11 @@ int main(int argc, char** argv){
       return INVALID_INPUT_CHARACTER;
     }
     enigma.encryptMessage(message[i]);
+    cout << message[i];
   }
 
   // enigma.encryptMessage(message, encrypted_message);
-  cout << message;
+  // cout << message;
 
   return NO_ERROR;
 }

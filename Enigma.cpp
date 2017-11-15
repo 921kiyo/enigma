@@ -129,7 +129,9 @@ void Enigma::rotorProcess(int& current_index){
       // cout << "current_index3 " << current_index << endl;
       // cout << "current_index i " << i << " and index " << current_index << endl;
       // TODO need to fix!!
-      if(rotors_[i-1]->isCurrentPositionInNotch() && rotors_[i-1]->getPreviousPosition() != rotors_[i-1]->getCurrentPosition()){
+      if(rotors_[i-1]->isCurrentPositionInNotch() && \
+         rotors_[i-1]->getPreviousPosition() != \
+         rotors_[i-1]->getCurrentPosition()){
         // cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
         if(i-1 > 0){
           rotors_[i-2]->rotateDown();
