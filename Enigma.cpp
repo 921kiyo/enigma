@@ -59,6 +59,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
+  cout << "path " << path << endl;
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
