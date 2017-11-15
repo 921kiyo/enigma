@@ -168,11 +168,12 @@ void Enigma::rotorProcess(int& current_index){
 
       // TODO need to fix!!
       if(rotors_[i-1]->isCurrentPositionInNotch()){
+        cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
         if(i-1 > 0){
           rotors_[i-2]->rotateDown();
         }
       }
-  }
+    }
   }
 
   current_index = reflector_->convertForward(current_index);
