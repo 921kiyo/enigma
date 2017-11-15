@@ -9,8 +9,8 @@ Component::~Component(){
 }
 int Component::checkInput(const char* path){
   // TODO Check the extension is pd
-  cout << "-------------------" << endl;
-  cout << path << endl;
+  // cout << "-------------------" << endl;
+  // cout << path << endl;
   int num;
   int counter = 0;
   fstream in_stream;
@@ -19,22 +19,20 @@ int Component::checkInput(const char* path){
     // throw ERROR_OPENING_CONFIGURATION_FILE;
     exit(ERROR_OPENING_CONFIGURATION_FILE);
   }
-  // while(!in_stream.eof() && in_stream >> num){
-  in_stream >> num;
+  // while(!in_stream.eof() && in_stream >> num);
   cout << num << endl;
-  while(!in_stream.eof()){
+  while(in_stream >> num){
     if(!isNumberRangeCorrect(num)){
       exit(INVALID_INDEX);
       // throw INVALID_INDEX;
     }
-    if(in_stream.fail()){
-      returnNonNumericCharacterError();
-      exit(NON_NUMERIC_CHARACTER);
-    }else{
-      in_stream >> num;
-      cout << num << endl;
-    }
+    // cout << num << endl;
     counter++;
+  }
+
+  if(in_stream.fail()&&!in_stream.eof()){
+    returnNonNumericCharacterError();
+    exit(NON_NUMERIC_CHARACTER);
   }
   // return NO_ERROR;
   return counter;

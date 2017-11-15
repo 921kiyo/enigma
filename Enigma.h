@@ -16,7 +16,6 @@ bool is_reflector_initialized{false};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();
-  // at least 3 rotors
   // They could be private
   int getRotorPosition(const char* path, int position);
   void encryptMessage(const char* message, char* encrypted_message);

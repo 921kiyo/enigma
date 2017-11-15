@@ -1,8 +1,9 @@
 -------------------
 plugboards/plugboard.pb
-4196736
+1205220600
 -------------------
 reflectors/reflector.rf
+0
 0
 4
 1
@@ -18,5 +19,14 @@ reflectors/reflector.rf
 7
 23
 8
-2
-2
+21
+10
+22
+13
+17
+14
+16
+15
+20
+18
+19
