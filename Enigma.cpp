@@ -24,7 +24,7 @@ Enigma::Enigma(int argc, char** argv){
       cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
       exit(NO_ROTOR_STARTING_POSITION);
     }
-    cout << "num_of_rotors_ " << num_of_rotors_ << endl;
+    // cout << "num_of_rotors_ " << num_of_rotors_ << endl;
     if(num_of_rotors_ > 0){
       rotors_ = new Rotor*[num_of_rotors_];
       // cout << "newed rotor array" << endl;
@@ -61,7 +61,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  cout << "path " << path << endl;
+  // cout << "path " << path << endl;
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;

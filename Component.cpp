@@ -77,20 +77,22 @@ bool Component::isNumberRangeCorrect(int num){
 
 // TODO Is this efficient?
 bool Component::isDuplicateInt(int* array, int range){
-
+  int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
-    if(isAppearedBefore(array, array[i], i)){
-      return true;
+    previous_appeared_position = isAppearedBefore(array, array[i], i);
+    if(previous_appeared_position != -1){
+      cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
+      exit(INVALID_ROTOR_MAPPING);
     }
   }
   return false;
 }
 
-bool Component::isAppearedBefore(int* array, int num, int position){
+int Component::isAppearedBefore(int* array, int num, int position){
   for(int x = 0; x < position; x++ ){
     if(array[x] == array[position]){
-      return true;
+      return x;
     }
   }
-  return false;
+  return -1;
 }

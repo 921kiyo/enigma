@@ -22,7 +22,7 @@ int main(int argc, char** argv){
   // What is the maximum length of this?
   char message[200];
   // char encrypted_message[200];
-  cout << "before message" << endl;
+  // cout << "before message" << endl;
   cin >> message;
   // cout << "message " << message << endl;
   for(int i = 0; message[i] != '\0'; i++){

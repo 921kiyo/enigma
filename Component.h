@@ -13,7 +13,7 @@ public:
   bool isNumberRangeCorrect(int num);
   bool isDuplicateInt(int* array, int range);
   // This does not need to be in public
-  bool isAppearedBefore(int* array, int num, int position);
+  int isAppearedBefore(int* array, int num, int position);
   virtual void mapInput(const char* path) = 0;
   virtual int convertForward(int input_index) = 0;
   // virtual void returnInvalidMappingError() = 0;
