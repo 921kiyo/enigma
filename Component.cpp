@@ -19,6 +19,7 @@ int Component::checkInput(const char* path){
   }
   // while(!in_stream.eof() && in_stream >> num){
   in_stream >> num;
+  cout << "num " << num << endl;
   while(!in_stream.eof()){
     if(!isNumberRangeCorrect(num)){
       exit(INVALID_INDEX);
@@ -29,6 +30,7 @@ int Component::checkInput(const char* path){
       exit(NON_NUMERIC_CHARACTER);
     }else{
       in_stream >> num;
+      cout << "num " << num << endl;
     }
     counter++;
   }
