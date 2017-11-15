@@ -21,7 +21,7 @@ int main(int argc, char** argv){
   Enigma enigma(argc, argv);
   // What is the maximum length of this?
   char message[200];
-  char encrypted_message[200];
+  // char encrypted_message[200];
 
   cin >> message;
   // cout << "message " << message << endl;
@@ -31,10 +31,11 @@ int main(int argc, char** argv){
       cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
       return INVALID_INPUT_CHARACTER;
     }
+    enigma.encryptMessage(message[i]);
   }
 
-  enigma.encryptMessage(message, encrypted_message);
-  cout << encrypted_message;
+  // enigma.encryptMessage(message, encrypted_message);
+  cout << message << endl;
 
   return NO_ERROR;
 }

@@ -18,7 +18,7 @@ public:
   ~Enigma();
   // They could be private
   int getRotorPosition(const char* path, int position);
-  void encryptMessage(const char* message, char* encrypted_message);
+  void encryptMessage(char& message);
   void rotorProcess(int& current_index);
 };
 
