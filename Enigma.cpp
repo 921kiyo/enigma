@@ -88,7 +88,9 @@ int Enigma::getRotorPosition(const char* path, int position){
     // cout << num << endl;
     counter++;
   }
-  if(in_stream.fail()){
+  if(in_stream.eof()){
+  }
+  else if(in_stream.fail()){
   // if(in_stream.fail() && !in_stream.eof()){
     cerr << "Non-numeric character in rotor positions file " << path << endl;
     throw(NON_NUMERIC_CHARACTER);
