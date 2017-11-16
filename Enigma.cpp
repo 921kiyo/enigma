@@ -63,7 +63,7 @@ Enigma::~Enigma(){
 }
 
 int Enigma::getRotorPosition(const char* path, int position){
-  int num;
+  char num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
@@ -71,7 +71,6 @@ int Enigma::getRotorPosition(const char* path, int position){
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
-  //
 
 
   while(in_stream >> num ){
