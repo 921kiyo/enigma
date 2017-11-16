@@ -5,28 +5,23 @@
 
 using namespace std;
 Component::~Component(){
-  // cout << "Base Destructor\t" << endl;
 }
 int Component::checkInput(const char* path){
-  // TODO Check the extension is pd
-  // cout << "-------------------" << endl;
-  // cout << path << endl;
   int num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
-    // throw ERROR_OPENING_CONFIGURATION_FILE;
+    cerr << "Error opening or reading the configulation file " << path << endl;
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
-  // while(!in_stream.eof() && in_stream >> num);
 
   while(in_stream >> num){
-    // if(!isNumberRangeCorrect(num)){
-    //   throw(INVALID_INDEX);
-    //   // throw INVALID_INDEX;
-    // }
-    // cout << num << endl;
+    if(!isNumberRangeCorrect(num)){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
+    }
+
     counter++;
   }
 

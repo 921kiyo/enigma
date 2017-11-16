@@ -1,2 +1,0 @@
-num_of_rotors_ 1
-num_of_rotors_ 0
