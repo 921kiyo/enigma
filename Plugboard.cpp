@@ -11,8 +11,8 @@ using namespace std;
 Plugboard::Plugboard(const char* path){
   int counter;
   counter = checkInput(path);
-  checkParameters(counter);
   mapInput(path);
+  checkParameters(counter);
 }
 
 void Plugboard::checkParameters(const int counter){

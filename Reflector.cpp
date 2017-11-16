@@ -9,8 +9,8 @@ using namespace std;
 Reflector::Reflector(const char* path){
   int counter;
   counter = checkInput(path);
-  checkParameters(counter);
   mapInput(path);
+  checkParameters(counter);
 }
 
 void Reflector::checkParameters(const int counter){
