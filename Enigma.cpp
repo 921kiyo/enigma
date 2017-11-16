@@ -63,7 +63,7 @@ Enigma::~Enigma(){
 }
 
 int Enigma::getRotorPosition(const char* path, int position){
-  char num;
+  int num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
@@ -76,10 +76,10 @@ int Enigma::getRotorPosition(const char* path, int position){
   while(in_stream >> num ){
     cout << num << endl;
     // Can I abstruct this away?
-    if(num > 25 || num < 0){
-      // What is the message here?
-      throw(INVALID_INDEX);
-    }
+    // if(num > 25 || num < 0){
+    //   // What is the message here?
+    //   throw(INVALID_INDEX);
+    // }
     if(position == counter){
       cout << "yes " << num << endl;
       return num;
