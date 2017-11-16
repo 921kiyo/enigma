@@ -35,11 +35,9 @@ void Rotor::mapInput(const char* path){
   num_of_notches_ = array_length - ALPHABET_LENGTH_;
   // Why do I have to call mapInputToArray twice here?
   mapInputToArray(path, contacts_);
-  try{
-    notches_ = new int[num_of_notches_];
-  }catch(const std::bad_array_new_length &e){
-    cout << e.what() << endl;
-  }
+
+  notches_ = new int[num_of_notches_];
+
 
   for(int i = 0; i< num_of_notches_; i++){
     notches_[i] = num_array[i+ALPHABET_LENGTH_];

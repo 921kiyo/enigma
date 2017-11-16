@@ -22,6 +22,7 @@ int main(int argc, char** argv){
       enigma = new Enigma(argc, argv);
   }
   catch(int error){
+    enigma->~Enigma();
     cout << "error " << error << endl;
     return error;
   }
@@ -43,6 +44,7 @@ int main(int argc, char** argv){
       enigma->encryptMessage(message[i]);
       cout << message[i];
     }catch(int error){
+      enigma->~Enigma();
       return error;
     }
   }

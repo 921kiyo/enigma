@@ -1,2 +1,15 @@
-path rotors/rotor.ps
-error 4
+path rotors/I.pos
+0
+yes 0
+path rotors/I.pos
+0
+otherwise 0
+0
+yes 0
+path rotors/I.pos
+0
+otherwise 0
+0
+otherwise 0
+0
+yes 0

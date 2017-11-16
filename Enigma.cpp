@@ -54,6 +54,8 @@ Enigma::~Enigma(){
       delete reflector_;
   }
 
+  // rotors_.~Rotor();
+
   for(int i = 0; i < num_of_rotors_; i++){
     delete rotors_[i];
   }
