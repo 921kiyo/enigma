@@ -22,13 +22,14 @@ int main(int argc, char** argv){
       enigma = new Enigma(argc, argv);
   }
   catch(int error){
+    cout << "error " << error << endl;
     return error;
   }
 
   // What is the maximum length of this?
   char message[200];
   // char encrypted_message[200];
-  // cout << "before message" << endl;
+
   cin >> message;
   // cout << "message " << message << endl;
   for(int i = 0; message[i] != '\0'; i++){

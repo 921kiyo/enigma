@@ -1,0 +1,2 @@
+path rotors/rotor.ps
+error 4
