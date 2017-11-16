@@ -23,6 +23,7 @@ public:
   ~Enigma();
   // They could be private
   void initialiseRotorPosition(const char* path);
+  void checkRotorAndRotorPosition();
   void encryptMessage(char& message);
   void rotorProcess(int& current_index);
 };

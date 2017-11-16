@@ -27,16 +27,14 @@ Enigma::Enigma(int argc, char** argv){
       num_of_rotors_ = argc-4;
     }
 
+    // Is this even correct??
     if(num_of_rotors_ < 0){
       cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
       throw(NO_ROTOR_STARTING_POSITION);
     }
-    // cout << "num_of_rotors_ " << num_of_rotors_ << endl;
-    // if(num_of_rotors_ > 0){
-    //   rotors_ = new Rotor*[num_of_rotors_];
-    //   // cout << "newed rotor array" << endl;
-    // }
+
   initialiseRotorPosition(argv[argc-1]);
+  checkRotorAndRotorPosition();
   // int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
     // starting_position = getRotorPosition(argv[argc-1], i);
@@ -68,6 +66,14 @@ Enigma::~Enigma(){
   // }
 }
 
+void Enigma::checkRotorAndRotorPosition(){
+  int rotor_position_length = rotor_positions_.size();
+  if(num_of_rotors_ > rotor_position_length){
+    cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
+    throw(NO_ROTOR_STARTING_POSITION);
+  }
+}
+
 void Enigma::initialiseRotorPosition(const char* path){
   int num;
   int counter = 0;
@@ -77,6 +83,8 @@ void Enigma::initialiseRotorPosition(const char* path){
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
+
+
   // char line[80];
   // in_stream.getline(line, 80);
   // cout << "line " << line << endl;
@@ -119,10 +127,6 @@ void Enigma::encryptMessage(char& message){
 
 // TODO change function name
 void Enigma::rotorProcess(int& current_index){
-  // TODO Can I use recursion here??
-
-  // TODO pass reference instead
-
   // cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard_->convertForward(current_index);
   // current_index = plugboard_.convertForward(current_index);
