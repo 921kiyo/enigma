@@ -24,7 +24,7 @@ int main(int argc, char** argv){
   }
   catch(int error){
     // delete enigma;
-    cout << "error " << error << endl;
+    // cout << "error " << error << endl;
     return error;
   }
 

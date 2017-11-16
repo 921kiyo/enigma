@@ -12,6 +12,7 @@ class Enigma{
 private:
 // Rotor **rotors_;
 vector<Rotor> rotors_;
+vector<int> rotor_positions_;
 int num_of_rotors_;
 Plugboard *plugboard_;
 Reflector *reflector_;
@@ -21,7 +22,7 @@ public:
   Enigma(int argc, char** argv);
   ~Enigma();
   // They could be private
-  int getRotorPosition(const char* path, int position);
+  int initialiseRotorPosition(const char* path);
   void encryptMessage(char& message);
   void rotorProcess(int& current_index);
 };

@@ -36,14 +36,14 @@ Enigma::Enigma(int argc, char** argv){
     //   rotors_ = new Rotor*[num_of_rotors_];
     //   // cout << "newed rotor array" << endl;
     // }
-
-  int starting_position;
+  initialiseRotorPosition(argv[argc-1]);
+  // int starting_position;
   for(int i = 0; i < num_of_rotors_; i++){
-    starting_position = getRotorPosition(argv[argc-1], i);
+    // starting_position = getRotorPosition(argv[argc-1], i);
     // if starting_position is -1, do something!!
 
     // rotors_[i] = new Rotor(argv[i+3], starting_position);
-    Rotor rotor(argv[i+3], starting_position);
+    Rotor rotor(argv[i+3], rotor_positions_[i]);
     rotors_.push_back(rotor);
     // cout << "newed rotor " << i << endl;
   }
@@ -68,31 +68,26 @@ Enigma::~Enigma(){
   // }
 }
 
-int Enigma::getRotorPosition(const char* path, int position){
+int Enigma::initialiseRotorPosition(const char* path){
   int num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  cout << "path " << path << endl;
+  // cout << "path " << path << endl;
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
-  char line[80];
-  in_stream.getline(line, 80);
-  cout << "line " << line << endl;
+  // char line[80];
+  // in_stream.getline(line, 80);
+  // cout << "line " << line << endl;
 
   while(in_stream >> num ){
-    cout << num << endl;
     // Can I abstruct this away?
     // if(num > 25 || num < 0){
     //   // What is the message here?
     //   throw(INVALID_INDEX);
     // }
-    if(position == counter){
-      cout << "yes " << num << endl;
-      return num;
-    }
-    cout << "otherwise " << num << endl;
+    rotor_positions_.push_back(num);
     counter++;
   }
   if(in_stream.fail()){
@@ -102,7 +97,8 @@ int Enigma::getRotorPosition(const char* path, int position){
   }
   // Does this always close input stream?
   in_stream.close();
-  cerr << "No starting position for rotor " << position << " in rotor position file: rotor.pos" << endl;
+  // TODO have to do something about it
+  // cerr << "No starting position for rotor " << counter << " in rotor position file: rotor.pos" << endl;
   throw(NO_ROTOR_STARTING_POSITION);
 }
 

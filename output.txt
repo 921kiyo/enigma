@@ -1,3 +1,0 @@
-path rotors/rotor.pos
-line 14
-error 4
