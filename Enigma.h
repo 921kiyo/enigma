@@ -4,10 +4,14 @@
 #include "Plugboard.h"
 #include "Rotor.h"
 #include "Reflector.h"
+#include <vector>
+
+using namespace std;
 
 class Enigma{
 private:
-Rotor **rotors_;
+// Rotor **rotors_;
+vector<Rotor> rotors_;
 int num_of_rotors_;
 Plugboard *plugboard_;
 Reflector *reflector_;

@@ -1,15 +1,3 @@
-path rotors/I.pos
-0
-yes 0
-path rotors/I.pos
-0
-otherwise 0
-0
-yes 0
-path rotors/I.pos
-0
-otherwise 0
-0
-otherwise 0
-0
-yes 0
+path rotors/rotor.pos
+line 14
+error 4

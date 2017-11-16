@@ -2,6 +2,9 @@
 #define ROTOR_H
 
 #include "Component.h"
+#include <vector>
+
+using namespace std;
 
 class Rotor: public Component{
 private:
@@ -10,7 +13,8 @@ private:
   int current_position_{-1};
   int previous_position_{-1};
   int num_of_notches_;
-  int* notches_;
+  // int* notches_;
+  vector<int> notches_;
 public:
   Rotor(const char* path_rot, int start_position);
   ~Rotor();

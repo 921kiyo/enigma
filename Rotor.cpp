@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ Rotor::Rotor(const char* path, int start_position){
 }
 
 Rotor::~Rotor(){
-  delete[] notches_;
+  // delete[] notches_;
 }
 
 void Rotor::mapInput(const char* path){
@@ -36,11 +37,12 @@ void Rotor::mapInput(const char* path){
   // Why do I have to call mapInputToArray twice here?
   mapInputToArray(path, contacts_);
 
-  notches_ = new int[num_of_notches_];
+  // notches_ = new int[num_of_notches_];
 
 
   for(int i = 0; i< num_of_notches_; i++){
-    notches_[i] = num_array[i+ALPHABET_LENGTH_];
+    // notches_[i] = num_array[i+ALPHABET_LENGTH_];
+    notches_.push_back(num_array[i+ALPHABET_LENGTH_]);
   }
 }
 
