@@ -67,7 +67,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  // cout << "path " << path << endl;
+  cout << "path " << path << endl;
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
@@ -82,22 +82,20 @@ int Enigma::getRotorPosition(const char* path, int position){
       throw(INVALID_INDEX);
     }
     if(position == counter){
-      // cout << num << endl;
+      cout << "yes " << num << endl;
       return num;
     }
-    // cout << num << endl;
+    cout << "otherwise " << num << endl;
     counter++;
   }
-  if(in_stream.eof()){
-  }
-  else if(in_stream.fail()){
+  if(in_stream.fail()){
   // if(in_stream.fail() && !in_stream.eof()){
     cerr << "Non-numeric character in rotor positions file " << path << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
   // Does this always close input stream?
   in_stream.close();
-  cerr << "No starting position for rotor " << position <<" in rotor position file: rotor.pos" << endl;
+  cerr << "No starting position for rotor " << position << " in rotor position file: rotor.pos" << endl;
   throw(NO_ROTOR_STARTING_POSITION);
 }
 
