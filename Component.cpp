@@ -22,10 +22,10 @@ int Component::checkInput(const char* path){
   // while(!in_stream.eof() && in_stream >> num);
 
   while(in_stream >> num){
-    if(!isNumberRangeCorrect(num)){
-      throw(INVALID_INDEX);
-      // throw INVALID_INDEX;
-    }
+    // if(!isNumberRangeCorrect(num)){
+    //   throw(INVALID_INDEX);
+    //   // throw INVALID_INDEX;
+    // }
     // cout << num << endl;
     counter++;
   }
