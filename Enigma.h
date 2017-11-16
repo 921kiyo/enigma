@@ -10,7 +10,6 @@ using namespace std;
 
 class Enigma{
 private:
-// Rotor **rotors_;
 vector<Rotor> rotors_;
 vector<int> rotor_positions_;
 int num_of_rotors_;
@@ -25,7 +24,6 @@ public:
   void initialiseRotorPosition(const char* path);
   void checkRotorAndRotorPosition();
   void encryptMessage(char& message);
-  void rotorProcess(int& current_index);
 };
 
 #endif

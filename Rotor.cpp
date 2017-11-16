@@ -10,12 +10,7 @@ using namespace std;
 Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
   mapInput(path);
-  // cout << "start_position " << start_position << endl;
   current_position_ = start_position;
-}
-
-Rotor::~Rotor(){
-  // delete[] notches_;
 }
 
 void Rotor::mapInput(const char* path){
@@ -37,11 +32,7 @@ void Rotor::mapInput(const char* path){
   // Why do I have to call mapInputToArray twice here?
   mapInputToArray(path, contacts_);
 
-  // notches_ = new int[num_of_notches_];
-
-
   for(int i = 0; i< num_of_notches_; i++){
-    // notches_[i] = num_array[i+ALPHABET_LENGTH_];
     notches_.push_back(num_array[i+ALPHABET_LENGTH_]);
   }
 }
@@ -49,13 +40,6 @@ void Rotor::mapInput(const char* path){
 void Rotor::rotateDown(){
   previous_position_ = current_position_;
   current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
-  // cout << "after rorate forward, start is " << current_position << endl;
-}
-
-// Do I ever need this?
-void Rotor::rotateUp(){
-  current_position_ = (current_position_ - 1 + ALPHABET_LENGTH_)% ALPHABET_LENGTH_;
-  // cout << "after rorate forward, current position is " << current_position_ << endl;
 }
 
 int Rotor::shuffleUp(int input_index){

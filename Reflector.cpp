@@ -15,13 +15,11 @@ Reflector::Reflector(const char* path){
 
 void Reflector::checkParameters(const int counter){
     if(counter%2!=0){
-      // throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     if(counter != ALPHABET_LENGTH_){
       cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
-      // throw INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     // What happens if more than 26 parameters

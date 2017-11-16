@@ -18,14 +18,19 @@ HEADER_FILES = $(wildcard *.h)
 # No command line arguments given
 # ARG = ./$(EXE)
 # Non-numeric character in plugboard file (file contains "abc")
-ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
+# ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
+
 # ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
+
+# Non-numeric character in plugboard file (file contains "14x")
+ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
+
 
 TEST = ./$(EXE) plugboards/test.pb reflectors/test.rf rotors/test.rot rotors/test.rot \
 rotors/test.rot rotors/test.pos < input.txt > output.txt
 
-run: $(EXE)
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
+# run: $(EXE)
+# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 # run: $(EXE)
 # 	$(ARG)
 
