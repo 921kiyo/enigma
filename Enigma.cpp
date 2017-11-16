@@ -20,7 +20,6 @@ Enigma::Enigma(int argc, char** argv){
     else{
       num_of_rotors_ = argc-4;
     }
-
     // Is this even correct??
     if(num_of_rotors_ < 0){
       cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";

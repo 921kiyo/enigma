@@ -1,9 +1,9 @@
 #include "Plugboard.h"
 #include "SubComponent.h"
+#include "fstream"
 #include "errors.h"
 
 #include <iostream>
-#include "fstream"
 
 using namespace std;
 
@@ -18,13 +18,11 @@ Plugboard::Plugboard(const char* path){
 void Plugboard::checkParameters(const int counter){
     if(counter%2!=0 || counter > ALPHABET_LENGTH_){
       cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
-      // throw INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS;
       throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
     }
 }
 
 void Plugboard::returnConfigError(){
-    // throw IMPOSSIBLE_PLUGBOARD_CONFIGURATION;
     throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
 }
 

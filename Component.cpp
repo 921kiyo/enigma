@@ -28,7 +28,6 @@ int Component::checkInput(const char* path){
     returnNonNumericCharacterError();
     throw(NON_NUMERIC_CHARACTER);
   }
-  // return NO_ERROR;
   return counter;
 }
 
