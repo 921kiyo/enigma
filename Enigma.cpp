@@ -68,9 +68,13 @@ Enigma::~Enigma(){
 
 void Enigma::checkRotorAndRotorPosition(){
   int rotor_position_length = rotor_positions_.size();
-  if(num_of_rotors_ > rotor_position_length){
-    cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
+  int diff = rotor_position_length - num_of_rotors_;
+  if(diff < 0){
+    cerr << "No starting position for rotor " << num_of_rotors_ - diff - 1<< "in rotor position file: rotor.pos" << endl;
     throw(NO_ROTOR_STARTING_POSITION);
+  }
+  if(diff > 0){
+    // This should not happen, I guess.
   }
 }
 
