@@ -74,7 +74,7 @@ int Enigma::getRotorPosition(const char* path, int position){
 
 
   while(in_stream >> num ){
-    // cout << num << endl;
+    cout << num << endl;
     // Can I abstruct this away?
     if(num > 25 || num < 0){
       // What is the message here?
