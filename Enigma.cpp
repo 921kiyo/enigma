@@ -89,7 +89,7 @@ int Enigma::getRotorPosition(const char* path, int position){
   }
   if(in_stream.fail()){
   // if(in_stream.fail() && !in_stream.eof()){
-    cerr << "Non-numeric character in rotor positions file " << path << endl;
+    cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
   // Does this always close input stream?
