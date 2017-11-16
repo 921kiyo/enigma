@@ -22,7 +22,7 @@ public:
   Enigma(int argc, char** argv);
   ~Enigma();
   // They could be private
-  int initialiseRotorPosition(const char* path);
+  void initialiseRotorPosition(const char* path);
   void encryptMessage(char& message);
   void rotorProcess(int& current_index);
 };

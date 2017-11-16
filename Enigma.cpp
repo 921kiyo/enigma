@@ -68,7 +68,7 @@ Enigma::~Enigma(){
   // }
 }
 
-int Enigma::initialiseRotorPosition(const char* path){
+void Enigma::initialiseRotorPosition(const char* path){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -89,6 +89,9 @@ int Enigma::initialiseRotorPosition(const char* path){
     // }
     rotor_positions_.push_back(num);
     counter++;
+  }
+  if(in_stream.eof()){
+    return;
   }
   if(in_stream.fail()){
   // if(in_stream.fail() && !in_stream.eof()){
