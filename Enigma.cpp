@@ -71,7 +71,8 @@ int Enigma::getRotorPosition(const char* path, int position){
   // if(in_stream.fail()){
   //   cerr << "error opening file for rotor position" << endl;
   //   throw INVALID_ROTOR_MAPPING;
-  // }
+  //
+
 
   while(in_stream >> num ){
     // cout << num << endl;
@@ -87,8 +88,8 @@ int Enigma::getRotorPosition(const char* path, int position){
     // cout << num << endl;
     counter++;
   }
-
-  if(in_stream.fail() && !in_stream.eof()){
+  if(in_stream.fail()){
+  // if(in_stream.fail() && !in_stream.eof()){
     cerr << "Non-numeric character in rotor positions file " << path << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
