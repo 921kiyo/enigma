@@ -13,14 +13,21 @@ HEADER_FILES = $(wildcard *.h)
 # ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
 # rotors/III.rot rotors/I.pos < input.txt > output.txt
 
-ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
-rotors/III.rot rotors/I.pos < input.txt > output.txt
+# ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor2.rot rotors/rotor.pos < input.txt > output.txt
+
+# No command line arguments given
+# ARG = ./$(EXE)
+# Non-numeric character in plugboard file (file contains "abc")
+ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
+# ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
 
 TEST = ./$(EXE) plugboards/test.pb reflectors/test.rf rotors/test.rot rotors/test.rot \
 rotors/test.rot rotors/test.pos < input.txt > output.txt
 
+run: $(EXE)
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 # run: $(EXE)
-# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
+# 	$(ARG)
 
 $(EXE): $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) $(SRC_FILES) -o $(EXE)

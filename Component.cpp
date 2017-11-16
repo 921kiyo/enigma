@@ -21,7 +21,6 @@ int Component::checkInput(const char* path){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
     }
-
     counter++;
   }
 
