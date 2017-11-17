@@ -18,9 +18,6 @@ SubComponent *reflector_{nullptr};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();
-  // They could be private
-  void initialiseRotorPosition(const char* path);
-  void checkRotorAndRotorPosition();
   void encryptMessage(char& message);
   // TODO Change the order of methods
   void checkPlugboardConfig(const char* path);

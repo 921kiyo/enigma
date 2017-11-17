@@ -1,10 +1,2 @@
-./enigma
-plugboards/I.pb
-reflectors/I.rf
-rotors/I.rot
-rotors/II.rot
-rotors/III.rot
-rotors/I.pos
 config checked 
-num_of_rotors_ 3
-KAUAR
+KAMBR

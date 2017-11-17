@@ -27,21 +27,11 @@ Enigma::Enigma(int argc, char** argv){
   else{
     num_of_rotors_ = argc-4;
   }
-  // Is this even correct??
-  cout << "num_of_rotors_ " << num_of_rotors_ << endl;
-  if(num_of_rotors_ < 0){
-    cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
-    throw(NO_ROTOR_STARTING_POSITION);
-  }
-
   plugboard_ = new SubComponent(argv[1]);
   reflector_ = new SubComponent(argv[2]);
 
-  initialiseRotorPosition(argv[argc-1]);
-  checkRotorAndRotorPosition();
   for(int i = 0; i < num_of_rotors_; i++){
     // if starting_position is -1, do something!!
-
     Rotor rotor(argv[i+3], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }
@@ -201,15 +191,15 @@ void Enigma::checkRotorPositionConfig(const char* path){
     throw(NON_NUMERIC_CHARACTER);
   }
 
-  // int diff = rotor_position_length - num_of_rotors_;
-  //
-  // if(diff < 0){
-  //   cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: rotor.pos" << endl;
-  //   throw(NO_ROTOR_STARTING_POSITION);
-  // }
-  // if(diff > 0){
-  //   // This should not happen, I guess.
-  // }
+  int diff = counter - num_of_rotors_;
+
+  if(diff < 0){
+    cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: rotor.pos" << endl;
+    throw(NO_ROTOR_STARTING_POSITION);
+  }
+  if(diff > 0){
+    // This should not happen, I guess.
+  }
 }
 
 // Do I need this??
@@ -248,8 +238,9 @@ void Enigma::checkDuplicateInt(vector<int> contacts, int range){
   for(int i = range-1; i>= 0; i--){
     previous_appeared_position = isAppearedBefore(contacts, contacts[i], i);
     if(previous_appeared_position != -1){
-      cerr << "Invalid mapping of input " << i << " to output " << contacts[i] << " (output " << contacts[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-      // throwInvalidMappingError();
+      cerr << "Invalid mapping of input " << i << " to output " << contacts[i] \
+      << " (output " << contacts[i] << " is already mapped to from input " \
+      << previous_appeared_position << ")" << endl;
     }
   }
 }
@@ -261,53 +252,6 @@ int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){
     }
   }
   return -1;
-}
-
-// -------------------------------------------------------
-
-void Enigma::checkRotorAndRotorPosition(){
-  int rotor_position_length = rotor_positions_.size();
-  int diff = rotor_position_length - num_of_rotors_;
-
-  if(diff < 0){
-    cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: rotor.pos" << endl;
-    throw(NO_ROTOR_STARTING_POSITION);
-  }
-  if(diff > 0){
-    // This should not happen, I guess.
-  }
-}
-
-void Enigma::initialiseRotorPosition(const char* path){
-  int num;
-  int counter = 0;
-  fstream in_stream;
-  in_stream.open(path);
-  if(in_stream.fail()){
-    cerr << "Error opening or reading the configulation file " << path << endl;
-    throw(ERROR_OPENING_CONFIGURATION_FILE);
-  }
-
-  while(in_stream >> num ){
-    // Can I abstruct this away?
-    if(num > 25 || num < 0){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-      throw(INVALID_INDEX);
-    }
-    rotor_positions_.push_back(num);
-    counter++;
-  }
-  // Not elegant
-  if(in_stream.eof()){
-    in_stream.close();
-    return;
-  }
-  if(in_stream.fail()){
-  // File name should be more flexible
-    cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
-    in_stream.close();
-    throw(NON_NUMERIC_CHARACTER);
-  }
 }
 
 void Enigma::encryptMessage(char& message){
