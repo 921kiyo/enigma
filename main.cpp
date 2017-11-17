@@ -42,10 +42,10 @@ int main(int argc, char** argv){
       return INVALID_INPUT_CHARACTER;
     }
     try{
-      enigma->encryptMessage(message[i]);
+    //   enigma->encryptMessage(message[i]);
       cout << message[i];
     }catch(int error){
-      delete enigma;
+    //   delete enigma;
       return error;
     }
   }

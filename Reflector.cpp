@@ -19,7 +19,7 @@ void Reflector::checkParameters(const int counter){
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     if(counter != ALPHABET_LENGTH_){
-      cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+      cerr << "Insufficient number of mappings in reflector file: reflector.rf" << counter << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
     // What happens if more than 26 parameters

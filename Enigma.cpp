@@ -6,41 +6,48 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <vector>
 
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
   // Doing all input error checks here
+  vector<int> contacts;
 
+  for(int i = 0; i < argc; i++){
+    cout << argv[i] << endl;
+  }
   // Check Plugboard
-  // checkPlugboardConfig(argv[0]);
-  // setPlugboardConfig();
-  // Put it to vector
-
-  // Check Reflector
-
-  // for(int i = 0; i < argc; i++){
-  //     checkInput(argv[i]);
-  //     // checkParameters(const int counter)
-  // }
-  // Check Rotors
-  // Check Rotor Position
-
+  checkPlugboardConfig(argv[1]);
+  // setPlugboardConfig(contacts);
+  // contacts.clear();
+  checkReflectorConfig(argv[2]);
+  // setReflectorConfig(contacts);
+  // contacts.clear();
+  for(int i = 3; i < argc-1; i++){
+    checkRotorConfig(argv[i]);
+    // setRotorConfig(contacts);
+    // contacts.clear();
+  }
+  checkRotorPositionConfig(argv[argc-1]);
+  // setRotorConfig(contacts);
+  // contacts.clear();
+  cout << "config checked " << endl;
 
   // Once all config files are fine, create each component here
-    plugboard_ = new Plugboard(argv[1]);
-    reflector_ = new Reflector(argv[2]);
-    if(argc == 3){
-      num_of_rotors_ = 0;
-    }
-    else{
-      num_of_rotors_ = argc-4;
-    }
-    // Is this even correct??
-    if(num_of_rotors_ < 0){
-      cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
-      throw(NO_ROTOR_STARTING_POSITION);
-    }
+  plugboard_ = new Plugboard(argv[1]);
+  reflector_ = new Reflector(argv[2]);
+  if(argc == 3){
+    num_of_rotors_ = 0;
+  }
+  else{
+    num_of_rotors_ = argc-4;
+  }
+  // Is this even correct??
+  if(num_of_rotors_ < 0){
+    cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
+    throw(NO_ROTOR_STARTING_POSITION);
+  }
 
   initialiseRotorPosition(argv[argc-1]);
   checkRotorAndRotorPosition();
