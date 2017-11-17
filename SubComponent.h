@@ -14,7 +14,6 @@ public:
   // Could be protected
   void setConfig(const char* path);
   int map(int input);
-  virtual void throwInvalidMappingError() = 0;
 };
 
 #endif

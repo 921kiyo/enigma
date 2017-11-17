@@ -6,8 +6,6 @@
 class Reflector: public SubComponent{
 public:
   Reflector(const char* path);
-  // Add virtual keyword
-  virtual void throwInvalidMappingError();
 };
 
 #endif

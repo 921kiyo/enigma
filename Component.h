@@ -15,7 +15,6 @@ public:
   int isAppearedBefore(int* array, int num, int position);
   virtual void setConfig(const char* path) = 0;
   virtual int map(int input_index) = 0;
-  virtual void throwInvalidMappingError() = 0;
 
   // ???
   virtual ~Component();

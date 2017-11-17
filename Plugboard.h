@@ -6,7 +6,6 @@
 class Plugboard: public SubComponent{
 public:
   Plugboard(const char* path);
-  virtual void throwInvalidMappingError();
 };
 
 #endif

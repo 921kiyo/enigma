@@ -10,7 +10,3 @@ using namespace std;
 Plugboard::Plugboard(const char* path){
   setConfig(path);
 }
-
-void Plugboard::throwInvalidMappingError(){
-  throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
-}

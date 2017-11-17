@@ -9,8 +9,3 @@ using namespace std;
 Reflector::Reflector(const char* path){
   setConfig(path);
 }
-
-
-void Reflector::throwInvalidMappingError(){
-  throw(INVALID_REFLECTOR_MAPPING);
-}

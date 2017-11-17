@@ -84,7 +84,3 @@ int Rotor::mapBackward(int input_index){
   // Double check this!!
   return input_index;
 }
-
-void Rotor::throwInvalidMappingError(){
-  throw(INVALID_ROTOR_MAPPING);
-}

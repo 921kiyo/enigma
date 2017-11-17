@@ -45,7 +45,6 @@ void Component::checkDuplicateInt(int* array, int range){
     previous_appeared_position = isAppearedBefore(array, array[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-      throwInvalidMappingError();
     }
   }
 }

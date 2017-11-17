@@ -24,9 +24,7 @@ public:
   int mapBackward(int input_index);
   int getCurrentPosition();
   int getPreviousPosition();
-  bool isCurrentPositionInNotch();
-  
-  virtual void throwInvalidMappingError();
+  bool isCurrentPositionInNotch();  
 };
 
 #endif
