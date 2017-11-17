@@ -46,110 +46,111 @@ Enigma::~Enigma(){
     }
 }
 
-// int Component::checkInput(const char* path){
-//   int num;
-//   int counter = 0;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   if(in_stream.fail()){
-//     cerr << "Error opening or reading the configulation file " << path << endl;
-//     in_stream.close();
-//     throw(ERROR_OPENING_CONFIGURATION_FILE);
-//   }
-//
-//   while(in_stream >> num){
-//     if(!isNumberRangeCorrect(num)){
-//       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-//       throw(INVALID_INDEX);
-//     }
-//     counter++;
-//   }
-//
-//   if(in_stream.fail()&&!in_stream.eof()){
-//     throwNonNumericCharacterError();
-//     throw(NON_NUMERIC_CHARACTER);
-//   }
-//   return counter;
-// }
+// -------------------------------------------------------
 
-// void Reflector::checkParameters(const int counter){
-//     if(counter%2!=0){
-//       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
-//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-//     }
-//     if(counter != ALPHABET_LENGTH_){
-//       cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
-//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-//     }
-//     // What happens if more than 26 parameters
-//
-// }
-//
-// void Reflector::throwConfigError(){
-//   cerr << INVALID_REFLECTOR_MAPPING << endl;
-// }
-//
-// void Reflector::throwNonNumericCharacterError(){
-//   cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
-// }
-//
-// void Reflector::throwInvalidMappingError(){
-//   throw(INVALID_REFLECTOR_MAPPING);
-// }
+int Enigma::checkInput(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+  if(in_stream.fail()){
+    cerr << "Error opening or reading the configulation file " << path << endl;
+    in_stream.close();
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
+  }
+
+  while(in_stream >> num){
+    if(!isNumberRangeCorrect(num)){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
+    }
+    counter++;
+  }
+
+  if(in_stream.fail()&&!in_stream.eof()){
+    throwNonNumericCharacterError();
+    throw(NON_NUMERIC_CHARACTER);
+  }
+  return counter;
+}
+
+void Enigma::checkParameters(const int counter){
+    if(counter%2!=0){
+      cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
+      throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+    }
+    if(counter != ALPHABET_LENGTH_){
+      cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+      throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+    }
+    // What happens if more than 26 parameters
+}
+
+void Enigma::throwConfigError(){
+  cerr << INVALID_REFLECTOR_MAPPING << endl;
+}
+
+void Enigma::throwNonNumericCharacterError(){
+  cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
+}
+
+void Enigma::throwInvalidMappingError(){
+  throw(INVALID_REFLECTOR_MAPPING);
+}
 
 
-// // Do I need this??
-// int Component::getArrayLength(const char* path){
-//   int counter = 0;
-//   int num;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   while(!in_stream.eof() && in_stream >> num){
-//     counter++;
-//   }
-//   in_stream.close();
-//   return counter;
-// }
+// Do I need this??
+int Enigma::getArrayLength(const char* path){
+  int counter = 0;
+  int num;
+  fstream in_stream;
+  in_stream.open(path);
+  while(!in_stream.eof() && in_stream >> num){
+    counter++;
+  }
+  in_stream.close();
+  return counter;
+}
 
 // This could be optimized!!
-// void Component::mapInputToArray(const char* path, int* array){
-//   int i=0;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   int num;
-//   while(!in_stream.eof() && in_stream >> num){
-//     array[i] = num;
-//     i++;
-//   }
-//   in_stream.close();
-// }
-//
-// bool Component::isNumberRangeCorrect(int num){
-//   return (num < ALPHABET_LENGTH_ && num >= 0);
-// }
-//
-// // TODO Is this efficient?
-// void Component::checkDuplicateInt(int* array, int range){
-//   int previous_appeared_position;
-//   for(int i = range-1; i>= 0; i--){
-//     previous_appeared_position = isAppearedBefore(array, array[i], i);
-//     if(previous_appeared_position != -1){
-//       cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-//       throwInvalidMappingError();
-//     }
-//   }
-// }
-//
-// int Component::isAppearedBefore(int* array, int num, int position){
-//   for(int x = 0; x < position; x++ ){
-//     if(array[x] == array[position]){
-//       return x;
-//     }
-//   }
-//   return -1;
-// }
+void Enigma::mapInputToArray(const char* path, int* array){
+  int i=0;
+  fstream in_stream;
+  in_stream.open(path);
+  int num;
+  while(!in_stream.eof() && in_stream >> num){
+    array[i] = num;
+    i++;
+  }
+  in_stream.close();
+}
 
+bool Enigma::isNumberRangeCorrect(int num){
+  return (num < ALPHABET_LENGTH_ && num >= 0);
+}
 
+// TODO Is this efficient?
+void Enigma::checkDuplicateInt(int* array, int range){
+  int previous_appeared_position;
+  for(int i = range-1; i>= 0; i--){
+    previous_appeared_position = isAppearedBefore(array, array[i], i);
+    if(previous_appeared_position != -1){
+      cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
+      throwInvalidMappingError();
+    }
+  }
+}
+
+int Enigma::isAppearedBefore(int* array, int num, int position){
+  for(int x = 0; x < position; x++ ){
+    if(array[x] == array[position]){
+      return x;
+    }
+  }
+  return -1;
+}
+
+// -------------------------------------------------------
 
 void Enigma::checkRotorAndRotorPosition(){
   int rotor_position_length = rotor_positions_.size();
