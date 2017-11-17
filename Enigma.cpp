@@ -10,10 +10,11 @@
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
+  // Doing all input error checks here
+
+  // Once config is fine, create each component here
     plugboard_ = new Plugboard(argv[1]);
-    is_plugboard_initialized = true;
     reflector_ = new Reflector(argv[2]);
-    is_reflector_initialized = true;
     if(argc == 3){
       num_of_rotors_ = 0;
     }
@@ -37,11 +38,10 @@ Enigma::Enigma(int argc, char** argv){
 }
 
 Enigma::~Enigma(){
-  cerr << "aaaaaaaaaaaaaaaaaaaa";
-    if(is_plugboard_initialized){
+    if(plugboard_){
         delete plugboard_;
     }
-    if(is_reflector_initialized){
+    if(reflector_){
         delete reflector_;
     }
 }
