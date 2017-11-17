@@ -4,8 +4,8 @@
 #include <fstream>
 
 using namespace std;
-Component::~Component(){
-}
+
+Component::~Component(){}
 int Component::checkInput(const char* path){
   int num;
   int counter = 0;
@@ -13,6 +13,7 @@ int Component::checkInput(const char* path){
   in_stream.open(path);
   if(in_stream.fail()){
     cerr << "Error opening or reading the configulation file " << path << endl;
+    in_stream.close();
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
 
@@ -41,7 +42,6 @@ int Component::getArrayLength(const char* path){
     counter++;
   }
   in_stream.close();
-
   return counter;
 }
 
@@ -59,10 +59,7 @@ void Component::mapInputToArray(const char* path, int* array){
 }
 
 bool Component::isNumberRangeCorrect(int num){
-  if(num > 25 || num < 0){
-    return false;
-  }
-  return true;
+  return (num < ALPHABET_LENGTH_ && num >= 0);
 }
 
 // TODO Is this efficient?

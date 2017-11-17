@@ -37,12 +37,13 @@ Enigma::Enigma(int argc, char** argv){
 }
 
 Enigma::~Enigma(){
-  if(is_plugboard_initialized){
-      delete plugboard_;
-  }
-  if(is_plugboard_initialized){
-      delete reflector_;
-  }
+  cerr << "aaaaaaaaaaaaaaaaaaaa";
+    if(is_plugboard_initialized){
+        delete plugboard_;
+    }
+    if(is_reflector_initialized){
+        delete reflector_;
+    }
 }
 
 void Enigma::checkRotorAndRotorPosition(){

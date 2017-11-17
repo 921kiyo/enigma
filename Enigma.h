@@ -13,8 +13,8 @@ private:
 vector<Rotor> rotors_;
 vector<int> rotor_positions_;
 int num_of_rotors_;
-Plugboard *plugboard_;
-Reflector *reflector_;
+Plugboard *plugboard_{nullptr};
+Reflector *reflector_{nullptr};
 bool is_plugboard_initialized{false};
 bool is_reflector_initialized{false};
 public:

@@ -17,13 +17,13 @@ int main(int argc, char** argv){
     cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
   }
-  Enigma *enigma;
+  Enigma *enigma = nullptr;
   try{
       enigma = new Enigma(argc, argv);
       // Enigma enigma(argc, argv);
   }
   catch(int error){
-    // TODO Fix this!! 
+    // TODO Fix this!!
     // enigma->~Enigma();
     // delete enigma;
     return error;
