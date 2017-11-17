@@ -27,19 +27,12 @@ public:
   void checkReflectorConfig(const char* path);
   void checkRotorConfig(const char* path);
   void checkRotorPositionConfig(const char* path);
-
-
-  // int checkInput(const char* path);
-  // void checkParameters(const int counter);
-  // void throwConfigError();
-  // void throwNonNumericCharacterError();
-  // void throwInvalidMappingError();
   // Do I need this??
   int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
   bool isNumberRangeCorrect(int num);
-  void checkDuplicateInt(int* array, int range);
-  int isAppearedBefore(int* array, int num, int position);
+  void checkDuplicateInt(vector<int> contacts, int range);
+  int isAppearedBefore(vector<int> contacts, int num, int position);
 };
 
 #endif

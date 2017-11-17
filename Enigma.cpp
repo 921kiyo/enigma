@@ -11,31 +11,16 @@ using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
   // Doing all input error checks here
-  vector<int> contacts;
-
-  for(int i = 0; i < argc; i++){
-    cout << argv[i] << endl;
-  }
-  // Check Plugboard
   checkPlugboardConfig(argv[1]);
-  // setPlugboardConfig(contacts);
-  // contacts.clear();
   checkReflectorConfig(argv[2]);
-  // setReflectorConfig(contacts);
-  // contacts.clear();
   for(int i = 3; i < argc-1; i++){
     checkRotorConfig(argv[i]);
-    // setRotorConfig(contacts);
-    // contacts.clear();
   }
   checkRotorPositionConfig(argv[argc-1]);
-  // setRotorConfig(contacts);
-  // contacts.clear();
+
   cout << "config checked " << endl;
 
   // Once all config files are fine, create each component here
-  plugboard_ = new SubComponent(argv[1]);
-  reflector_ = new SubComponent(argv[2]);
   if(argc == 3){
     num_of_rotors_ = 0;
   }
@@ -48,6 +33,9 @@ Enigma::Enigma(int argc, char** argv){
     cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
     throw(NO_ROTOR_STARTING_POSITION);
   }
+
+  plugboard_ = new SubComponent(argv[1]);
+  reflector_ = new SubComponent(argv[2]);
 
   initialiseRotorPosition(argv[argc-1]);
   checkRotorAndRotorPosition();
@@ -84,6 +72,7 @@ void Enigma::checkPlugboardConfig(const char* path){
   while(in_stream >> num){
     if(!isNumberRangeCorrect(num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      in_stream.close();
       throw(INVALID_INDEX);
     }
     counter++;
@@ -91,12 +80,15 @@ void Enigma::checkPlugboardConfig(const char* path){
 
   if(in_stream.fail()&&!in_stream.eof()){
     cerr << "Non-numeric character in plugboard file plugboard.pb" << endl;
+    in_stream.close();
     throw(NON_NUMERIC_CHARACTER);
   }
   if(counter%2!=0 || counter > ALPHABET_LENGTH_){
     cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
+    in_stream.close();
     throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
   }
+  in_stream.close();
 }
 
 void Enigma::checkReflectorConfig(const char* path){
@@ -107,12 +99,14 @@ void Enigma::checkReflectorConfig(const char* path){
   if(in_stream.fail()){
     cerr << "Error opening or reading the configulation file " << path << endl;
     in_stream.close();
+    in_stream.close();
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
 
   while(in_stream >> num){
     if(!isNumberRangeCorrect(num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      in_stream.close();
       throw(INVALID_INDEX);
     }
     counter++;
@@ -120,14 +114,17 @@ void Enigma::checkReflectorConfig(const char* path){
 
   if(in_stream.fail()&&!in_stream.eof()){
     cerr << "Non-numeric character in reflector file reflector.rf" << endl;
+    in_stream.close();
     throw(NON_NUMERIC_CHARACTER);
   }
   if(counter%2!=0){
       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
+      in_stream.close();
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
   if(counter != ALPHABET_LENGTH_){
     cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+    in_stream.close();
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
   }
 }
@@ -135,6 +132,7 @@ void Enigma::checkReflectorConfig(const char* path){
 void Enigma::checkRotorConfig(const char* path){
   int num;
   int counter = 0;
+  vector<int> contacts;
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
@@ -148,6 +146,7 @@ void Enigma::checkRotorConfig(const char* path){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
     }
+    contacts.push_back(num);
     counter++;
   }
 
@@ -155,6 +154,19 @@ void Enigma::checkRotorConfig(const char* path){
     cerr <<   "Non-numeric character for mapping in rotor file rotor.rot" << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
+
+  if(counter < ALPHABET_LENGTH_){
+    cerr << "Not all inputs mapped in rotor file: rotor.rot" << endl;
+    exit(INVALID_ROTOR_MAPPING);
+  }
+
+  // TODO Double check if this checking is enough
+  // if(checkDuplicateInt(contacts, ALPHABET_LENGTH_)){
+  //   cerr << "invalid rotor mapping" << endl;
+  //   exit(INVALID_ROTOR_MAPPING);
+  // }
+  checkDuplicateInt(contacts, ALPHABET_LENGTH_);
+
 
 }
 
@@ -200,60 +212,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
   // }
 }
 
-
-
-
-// int Enigma::checkInput(const char* path){
-//   int num;
-//   int counter = 0;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   if(in_stream.fail()){
-//     cerr << "Error opening or reading the configulation file " << path << endl;
-//     in_stream.close();
-//     throw(ERROR_OPENING_CONFIGURATION_FILE);
-//   }
-//
-//   while(in_stream >> num){
-//     if(!isNumberRangeCorrect(num)){
-//       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-//       throw(INVALID_INDEX);
-//     }
-//     counter++;
-//   }
-//
-//   if(in_stream.fail()&&!in_stream.eof()){
-//     throwNonNumericCharacterError();
-//     throw(NON_NUMERIC_CHARACTER);
-//   }
-//   return counter;
-// }
-//
-// void Enigma::checkParameters(const int counter){
-//     if(counter%2!=0){
-//       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
-//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-//     }
-//     if(counter != ALPHABET_LENGTH_){
-//       cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
-//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-//     }
-//     // What happens if more than 26 parameters
-// }
-//
-// void Enigma::throwConfigError(){
-//   cerr << INVALID_REFLECTOR_MAPPING << endl;
-// }
-//
-// void Enigma::throwNonNumericCharacterError(){
-//   cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
-// }
-//
-// void Enigma::throwInvalidMappingError(){
-//   throw(INVALID_REFLECTOR_MAPPING);
-// }
-
-
 // Do I need this??
 int Enigma::getArrayLength(const char* path){
   int counter = 0;
@@ -285,20 +243,20 @@ bool Enigma::isNumberRangeCorrect(int num){
 }
 
 // TODO Is this efficient?
-void Enigma::checkDuplicateInt(int* array, int range){
+void Enigma::checkDuplicateInt(vector<int> contacts, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
-    previous_appeared_position = isAppearedBefore(array, array[i], i);
+    previous_appeared_position = isAppearedBefore(contacts, contacts[i], i);
     if(previous_appeared_position != -1){
-      cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
+      cerr << "Invalid mapping of input " << i << " to output " << contacts[i] << " (output " << contacts[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
       // throwInvalidMappingError();
     }
   }
 }
 
-int Enigma::isAppearedBefore(int* array, int num, int position){
+int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){
   for(int x = 0; x < position; x++ ){
-    if(array[x] == array[position]){
+    if(contacts[x] == contacts[position]){
       return x;
     }
   }

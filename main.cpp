@@ -9,10 +9,6 @@
 using namespace std;
 
 int main(int argc, char** argv){
-  // for(int i = 0; i < argc; i++){
-  //     cout << argv[i] << endl;
-  // }
-
   if(argc < 3 || argc == 4){
     cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
@@ -27,13 +23,17 @@ int main(int argc, char** argv){
     // TODO Fix this!!
     // enigma->~Enigma();
     // delete enigma;
+    // cout << "error" << error << endl;
     return error;
   }
 
   // What is the maximum length of this?
   char message[200];
-
+  // This is not working for two words
+  cin >> ws;
   cin >> message;
+
+  // cout << message << endl;
   // cout << "message " << message << endl;
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
@@ -42,7 +42,7 @@ int main(int argc, char** argv){
       return INVALID_INPUT_CHARACTER;
     }
     try{
-    //   enigma->encryptMessage(message[i]);
+      enigma->encryptMessage(message[i]);
       cout << message[i];
     }catch(int error){
     //   delete enigma;
