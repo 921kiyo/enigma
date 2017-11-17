@@ -26,10 +26,14 @@ void Reflector::checkParameters(const int counter){
 
 }
 
-void Reflector::returnConfigError(){
+void Reflector::throwConfigError(){
   cerr << INVALID_REFLECTOR_MAPPING << endl;
 }
 
-void Reflector::returnNonNumericCharacterError(){
+void Reflector::throwNonNumericCharacterError(){
   cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
+}
+
+void Reflector::throwInvalidMappingError(){
+  throw(INVALID_REFLECTOR_MAPPING);
 }

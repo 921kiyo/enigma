@@ -7,8 +7,9 @@ class Plugboard: public SubComponent{
 public:
   Plugboard(const char* path);
   void checkParameters(const int counter);
-  void returnConfigError();
-  virtual void returnNonNumericCharacterError();
+  void throwConfigError();
+  virtual void throwNonNumericCharacterError();
+  virtual void throwInvalidMappingError();
 };
 
 #endif

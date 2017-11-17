@@ -24,10 +24,8 @@ void SubComponent::setConfig(const char* path){
   int num_array[array_length];
   mapInputToArray(path, num_array);
 
-  if(isDuplicateInt(num_array, array_length)){
-    //  How do you return this?
-    returnConfigError();
-  }
+  checkDuplicateInt(num_array, array_length);
+
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
       input_pair1_[i/2] = num_array[i];

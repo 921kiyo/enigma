@@ -7,7 +7,6 @@
 
 using namespace std;
 
-// Constructor
 Plugboard::Plugboard(const char* path){
   int counter;
   counter = checkInput(path);
@@ -22,10 +21,15 @@ void Plugboard::checkParameters(const int counter){
     }
 }
 
-void Plugboard::returnConfigError(){
-    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
+void Plugboard::throwConfigError(){
+    // cerr <<
+
 }
 
-void Plugboard::returnNonNumericCharacterError(){
+void Plugboard::throwNonNumericCharacterError(){
   cerr << "Non-numeric character in plugboard file plugboard.pb"  << endl;
+}
+
+void Plugboard::throwInvalidMappingError(){
+  throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
 }

@@ -25,7 +25,7 @@ int Component::checkInput(const char* path){
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
-    returnNonNumericCharacterError();
+    throwNonNumericCharacterError();
     throw(NON_NUMERIC_CHARACTER);
   }
   return counter;
@@ -65,16 +65,15 @@ bool Component::isNumberRangeCorrect(int num){
 }
 
 // TODO Is this efficient?
-bool Component::isDuplicateInt(int* array, int range){
+void Component::checkDuplicateInt(int* array, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
     previous_appeared_position = isAppearedBefore(array, array[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-      throw(INVALID_ROTOR_MAPPING);
+      throwInvalidMappingError();
     }
   }
-  return false;
 }
 
 int Component::isAppearedBefore(int* array, int num, int position){

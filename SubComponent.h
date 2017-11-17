@@ -15,8 +15,9 @@ public:
   void setConfig(const char* path);
   int map(int input);
   virtual void checkParameters(const int counter) = 0;
-  virtual void returnConfigError() = 0;
-  virtual void returnNonNumericCharacterError() = 0;
+  virtual void throwConfigError() = 0;
+  virtual void throwNonNumericCharacterError() = 0;
+  virtual void throwInvalidMappingError() = 0;
 };
 
 #endif
