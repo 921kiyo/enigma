@@ -11,12 +11,23 @@ using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
   // Doing all input error checks here
-  for(int i = 0; i < argc; i++){
-      checkInput(argv[i]);
-      // checkParameters(const int counter)
-  }
 
-  // Once config is fine, create each component here
+  // Check Plugboard
+  // checkPlugboardConfig(argv[0]);
+  // setPlugboardConfig();
+  // Put it to vector
+
+  // Check Reflector
+
+  // for(int i = 0; i < argc; i++){
+  //     checkInput(argv[i]);
+  //     // checkParameters(const int counter)
+  // }
+  // Check Rotors
+  // Check Rotor Position
+
+
+  // Once all config files are fine, create each component here
     plugboard_ = new Plugboard(argv[1]);
     reflector_ = new Reflector(argv[2]);
     if(argc == 3){
@@ -52,7 +63,7 @@ Enigma::~Enigma(){
 
 // -------------------------------------------------------
 
-int Enigma::checkInput(const char* path){
+void Enigma::checkPlugboardConfig(const char* path){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -72,35 +83,167 @@ int Enigma::checkInput(const char* path){
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
-    throwNonNumericCharacterError();
+    cerr << "Non-numeric character in plugboard file plugboard.pb" << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
-  return counter;
+  if(counter%2!=0 || counter > ALPHABET_LENGTH_){
+    cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
+    throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
+  }
 }
 
-void Enigma::checkParameters(const int counter){
-    if(counter%2!=0){
+void Enigma::checkReflectorConfig(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+  if(in_stream.fail()){
+    cerr << "Error opening or reading the configulation file " << path << endl;
+    in_stream.close();
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
+  }
+
+  while(in_stream >> num){
+    if(!isNumberRangeCorrect(num)){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
+    }
+    counter++;
+  }
+
+  if(in_stream.fail()&&!in_stream.eof()){
+    cerr << "Non-numeric character in reflector file reflector.rf" << endl;
+    throw(NON_NUMERIC_CHARACTER);
+  }
+  if(counter%2!=0){
       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
-    if(counter != ALPHABET_LENGTH_){
-      cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
-      throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+  if(counter != ALPHABET_LENGTH_){
+    cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+    throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+  }
+}
+
+void Enigma::checkRotorConfig(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+  if(in_stream.fail()){
+    cerr << "Error opening or reading the configulation file " << path << endl;
+    in_stream.close();
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
+  }
+
+  while(in_stream >> num){
+    if(!isNumberRangeCorrect(num)){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
     }
-    // What happens if more than 26 parameters
+    counter++;
+  }
+
+  if(in_stream.fail()&&!in_stream.eof()){
+    cerr << "Non-numeric character in plugboard file plugboard.pb" << endl;
+    throw(NON_NUMERIC_CHARACTER);
+  }
 }
 
-void Enigma::throwConfigError(){
-  cerr << INVALID_REFLECTOR_MAPPING << endl;
+void Enigma::checkRotorPositionConfig(const char* path){
+  int num;
+  int counter = 0;
+  fstream in_stream;
+  in_stream.open(path);
+  if(in_stream.fail()){
+    cerr << "Error opening or reading the configulation file " << path << endl;
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
+  }
+
+  while(in_stream >> num ){
+    // Can I abstruct this away?
+    if(num > 25 || num < 0){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
+    }
+    rotor_positions_.push_back(num);
+    counter++;
+  }
+  // Not elegant
+  if(in_stream.eof()){
+    in_stream.close();
+    return;
+  }
+  if(in_stream.fail()){
+  // File name should be more flexible
+    cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
+    in_stream.close();
+    throw(NON_NUMERIC_CHARACTER);
+  }
+
+  // int diff = rotor_position_length - num_of_rotors_;
+  //
+  // if(diff < 0){
+  //   cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: rotor.pos" << endl;
+  //   throw(NO_ROTOR_STARTING_POSITION);
+  // }
+  // if(diff > 0){
+  //   // This should not happen, I guess.
+  // }
 }
 
-void Enigma::throwNonNumericCharacterError(){
-  cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
-}
 
-void Enigma::throwInvalidMappingError(){
-  throw(INVALID_REFLECTOR_MAPPING);
-}
+
+
+// int Enigma::checkInput(const char* path){
+//   int num;
+//   int counter = 0;
+//   fstream in_stream;
+//   in_stream.open(path);
+//   if(in_stream.fail()){
+//     cerr << "Error opening or reading the configulation file " << path << endl;
+//     in_stream.close();
+//     throw(ERROR_OPENING_CONFIGURATION_FILE);
+//   }
+//
+//   while(in_stream >> num){
+//     if(!isNumberRangeCorrect(num)){
+//       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+//       throw(INVALID_INDEX);
+//     }
+//     counter++;
+//   }
+//
+//   if(in_stream.fail()&&!in_stream.eof()){
+//     throwNonNumericCharacterError();
+//     throw(NON_NUMERIC_CHARACTER);
+//   }
+//   return counter;
+// }
+//
+// void Enigma::checkParameters(const int counter){
+//     if(counter%2!=0){
+//       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
+//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+//     }
+//     if(counter != ALPHABET_LENGTH_){
+//       cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+//       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+//     }
+//     // What happens if more than 26 parameters
+// }
+//
+// void Enigma::throwConfigError(){
+//   cerr << INVALID_REFLECTOR_MAPPING << endl;
+// }
+//
+// void Enigma::throwNonNumericCharacterError(){
+//   cerr << "Non-numeric character in reflector file reflector.rf"  << endl;
+// }
+//
+// void Enigma::throwInvalidMappingError(){
+//   throw(INVALID_REFLECTOR_MAPPING);
+// }
 
 
 // Do I need this??
@@ -140,7 +283,7 @@ void Enigma::checkDuplicateInt(int* array, int range){
     previous_appeared_position = isAppearedBefore(array, array[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << array[i] << " (output " << array[i] << " is already mapped to from input " << previous_appeared_position << ")" << endl;
-      throwInvalidMappingError();
+      // throwInvalidMappingError();
     }
   }
 }

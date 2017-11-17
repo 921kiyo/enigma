@@ -24,11 +24,17 @@ public:
   void checkRotorAndRotorPosition();
   void encryptMessage(char& message);
   // TODO Change the order of methods
-  int checkInput(const char* path);
-  void checkParameters(const int counter);
-  void throwConfigError();
-  void throwNonNumericCharacterError();
-  void throwInvalidMappingError();
+  void checkPlugboardConfig(const char* path);
+  void checkReflectorConfig(const char* path);
+  void checkRotorConfig(const char* path);
+  void checkRotorPositionConfig(const char* path);
+
+
+  // int checkInput(const char* path);
+  // void checkParameters(const int counter);
+  // void throwConfigError();
+  // void throwNonNumericCharacterError();
+  // void throwInvalidMappingError();
   // Do I need this??
   int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
