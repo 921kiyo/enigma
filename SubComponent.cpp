@@ -20,12 +20,9 @@ int SubComponent::map(int input){
 
 void SubComponent::setConfig(const char* path){
   // Do I need to get array length here??
-  int array_length = getArrayLength(path);
+  int array_length = ALPHABET_LENGTH_;
   int num_array[array_length];
   mapInputToArray(path, num_array);
-
-  checkDuplicateInt(num_array, array_length);
-
   for(int i = 0; i< array_length; i++){
     if(i%2 == 0){
       input_pair1_[i/2] = num_array[i];

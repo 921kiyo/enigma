@@ -14,7 +14,7 @@ Rotor::Rotor(const char* path, int start_position){
 }
 
 void Rotor::setConfig(const char* path){
-  int array_length = getArrayLength(path);
+  int array_length = ALPHABET_LENGTH_;
   int num_array[array_length];
   mapInputToArray(path, num_array);
 
@@ -22,9 +22,6 @@ void Rotor::setConfig(const char* path){
     cerr << "Not all inputs mapped in rotor file: rotor.rot" << endl;
     throw(INVALID_ROTOR_MAPPING);
   }
-  // TODO Double check if this checking is enough
-  checkDuplicateInt(num_array, ALPHABET_LENGTH_);
-
   // If not error, them map them to each attributes
   num_of_notches_ = array_length - ALPHABET_LENGTH_;
   // Why do I have to call mapInputToArray twice here?
