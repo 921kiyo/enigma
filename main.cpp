@@ -30,7 +30,6 @@ int main(int argc, char** argv){
   // What is the maximum length of this?
   char message[200];
   // This is not working for two words
-  cin >> ws;
   cin >> message;
 
   // cout << message << endl;
