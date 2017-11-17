@@ -11,6 +11,10 @@ using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
   // Doing all input error checks here
+  for(int i = 0; i < argc; i++){
+      checkInput(argv[i]);
+      // checkParameters(const int counter)
+  }
 
   // Once config is fine, create each component here
     plugboard_ = new Plugboard(argv[1]);

@@ -7,8 +7,8 @@
 using namespace std;
 
 Reflector::Reflector(const char* path){
-  int counter;
-  counter = checkInput(path);
+  int counter = 0;
+  // counter = checkInput(path);
   setConfig(path);
   checkParameters(counter);
 }

@@ -19,6 +19,7 @@ int main(int argc, char** argv){
   }
   Enigma *enigma = nullptr;
   try{
+    // Change this
       enigma = new Enigma(argc, argv);
       // Enigma enigma(argc, argv);
   }

@@ -8,8 +8,8 @@
 using namespace std;
 
 Plugboard::Plugboard(const char* path){
-  int counter;
-  counter = checkInput(path);
+  int counter = 0;
+  // counter = checkInput(path);
   setConfig(path);
   checkParameters(counter);
 }

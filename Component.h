@@ -7,7 +7,7 @@ protected:
   static const int ALPHABET_LENGTH_{26};
 public:
   //
-  int checkInput(const char* path);
+  // int checkInput(const char* path);
   int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
   // Check if the array only contains numbers between 0 and 25

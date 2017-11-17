@@ -6,31 +6,31 @@
 using namespace std;
 
 Component::~Component(){}
-int Component::checkInput(const char* path){
-  int num;
-  int counter = 0;
-  fstream in_stream;
-  in_stream.open(path);
-  if(in_stream.fail()){
-    cerr << "Error opening or reading the configulation file " << path << endl;
-    in_stream.close();
-    throw(ERROR_OPENING_CONFIGURATION_FILE);
-  }
-
-  while(in_stream >> num){
-    if(!isNumberRangeCorrect(num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-      throw(INVALID_INDEX);
-    }
-    counter++;
-  }
-
-  if(in_stream.fail()&&!in_stream.eof()){
-    throwNonNumericCharacterError();
-    throw(NON_NUMERIC_CHARACTER);
-  }
-  return counter;
-}
+// int Component::checkInput(const char* path){
+//   int num;
+//   int counter = 0;
+//   fstream in_stream;
+//   in_stream.open(path);
+//   if(in_stream.fail()){
+//     cerr << "Error opening or reading the configulation file " << path << endl;
+//     in_stream.close();
+//     throw(ERROR_OPENING_CONFIGURATION_FILE);
+//   }
+//
+//   while(in_stream >> num){
+//     if(!isNumberRangeCorrect(num)){
+//       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+//       throw(INVALID_INDEX);
+//     }
+//     counter++;
+//   }
+//
+//   if(in_stream.fail()&&!in_stream.eof()){
+//     throwNonNumericCharacterError();
+//     throw(NON_NUMERIC_CHARACTER);
+//   }
+//   return counter;
+// }
 
 // Do I need this??
 int Component::getArrayLength(const char* path){
