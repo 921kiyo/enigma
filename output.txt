@@ -1,5 +1,10 @@
 ./enigma
-plugboards/plugboard.pb
-reflectors/II.rf
-rotors/rotor.rot
-rotors/rotor.pos
+plugboards/I.pb
+reflectors/I.rf
+rotors/I.rot
+rotors/II.rot
+rotors/III.rot
+rotors/I.pos
+config checked 
+num_of_rotors_ 3
+DONECORNAREULTRICIESRHONCUSNUNC

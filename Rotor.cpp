@@ -85,10 +85,6 @@ int Rotor::mapBackward(int input_index){
   return input_index;
 }
 
-void Rotor::throwNonNumericCharacterError(){
-  cerr << "Non-numeric character for mapping in rotor file rotor.rot"  << endl;
-}
-
 void Rotor::throwInvalidMappingError(){
   throw(INVALID_ROTOR_MAPPING);
 }

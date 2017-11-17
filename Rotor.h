@@ -25,7 +25,7 @@ public:
   int getCurrentPosition();
   int getPreviousPosition();
   bool isCurrentPositionInNotch();
-  virtual void throwNonNumericCharacterError();
+  
   virtual void throwInvalidMappingError();
 };
 

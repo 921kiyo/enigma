@@ -44,6 +44,7 @@ Enigma::Enigma(int argc, char** argv){
     num_of_rotors_ = argc-4;
   }
   // Is this even correct??
+  cout << "num_of_rotors_ " << num_of_rotors_ << endl;
   if(num_of_rotors_ < 0){
     cerr << "No starting position for rotor 0 in rotor position file: rotor.pos";
     throw(NO_ROTOR_STARTING_POSITION);
@@ -152,9 +153,10 @@ void Enigma::checkRotorConfig(const char* path){
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
-    cerr << "Non-numeric character in plugboard file plugboard.pb" << endl;
+    cerr <<   "Non-numeric character for mapping in rotor file rotor.rot" << endl;
     throw(NON_NUMERIC_CHARACTER);
   }
+
 }
 
 void Enigma::checkRotorPositionConfig(const char* path){

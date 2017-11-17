@@ -16,9 +16,6 @@ public:
   virtual void setConfig(const char* path) = 0;
   virtual int map(int input_index) = 0;
   virtual void throwInvalidMappingError() = 0;
-  // virtual void throwIncorrectParamsError() = 0;
-  virtual void throwNonNumericCharacterError() = 0;
-  // virtual void throwInvalidIndexError() = 0;
 
   // ???
   virtual ~Component();
