@@ -10,15 +10,12 @@
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
-  // Doing all input error checks here
   checkPlugboardConfig(argv[1]);
   checkReflectorConfig(argv[2]);
   for(int i = 3; i < argc-1; i++){
     checkRotorConfig(argv[i]);
   }
   checkRotorPositionConfig(argv[argc-1]);
-
-  // cout << "config checked " << endl;
 
   // Once all config files are fine, create each component here
   if(argc == 3){
@@ -46,8 +43,6 @@ Enigma::~Enigma(){
     }
 }
 
-// -------------------------------------------------------
-
 void Enigma::checkPlugboardConfig(const char* path){
   int num;
   int counter = 0;
@@ -66,6 +61,7 @@ void Enigma::checkPlugboardConfig(const char* path){
       throw(INVALID_INDEX);
     }
     counter++;
+    rotor_positions_.push_back(num);
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
