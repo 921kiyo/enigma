@@ -1,7 +1,6 @@
 #include "Enigma.h"
 #include "Rotor.h"
-#include "Plugboard.h"
-#include "Reflector.h"
+#include "SubComponent.h"
 #include "errors.h"
 #include <iostream>
 #include <fstream>
@@ -35,8 +34,8 @@ Enigma::Enigma(int argc, char** argv){
   cout << "config checked " << endl;
 
   // Once all config files are fine, create each component here
-  plugboard_ = new Plugboard(argv[1]);
-  reflector_ = new Reflector(argv[2]);
+  plugboard_ = new SubComponent(argv[1]);
+  reflector_ = new SubComponent(argv[2]);
   if(argc == 3){
     num_of_rotors_ = 0;
   }

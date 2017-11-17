@@ -1,9 +1,8 @@
 #ifndef ENIGMA_H
 #define ENIGMA_H
 
-#include "Plugboard.h"
+#include "SubComponent.h"
 #include "Rotor.h"
-#include "Reflector.h"
 #include <vector>
 
 using namespace std;
@@ -14,8 +13,8 @@ const int ALPHABET_LENGTH_{26};
 vector<Rotor> rotors_;
 vector<int> rotor_positions_;
 int num_of_rotors_;
-Plugboard *plugboard_{nullptr};
-Reflector *reflector_{nullptr};
+SubComponent *plugboard_{nullptr};
+SubComponent *reflector_{nullptr};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();

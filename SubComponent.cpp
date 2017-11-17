@@ -6,16 +6,8 @@
 
 using namespace std;
 
-int SubComponent::map(int input){
-  for(int i = 0; i< PAIR_SIZE_; i++){
-    if(input == input_pair1_[i]){
-      return input_pair2_[i];
-    }
-    if(input == input_pair2_[i]){
-      return input_pair1_[i];
-    }
-  }
-  return input;
+SubComponent::SubComponent(const char* path){
+  setConfig(path);
 }
 
 void SubComponent::setConfig(const char* path){
@@ -31,4 +23,16 @@ void SubComponent::setConfig(const char* path){
       input_pair2_[i/2] = num_array[i];
     }
   }
+}
+
+int SubComponent::map(int input){
+  for(int i = 0; i< PAIR_SIZE_; i++){
+    if(input == input_pair1_[i]){
+      return input_pair2_[i];
+    }
+    if(input == input_pair2_[i]){
+      return input_pair1_[i];
+    }
+  }
+  return input;
 }

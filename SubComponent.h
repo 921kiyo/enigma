@@ -4,14 +4,14 @@
 #include "Component.h"
 
 class SubComponent: public Component{
-protected:
+private:
   // C++ 11 default value initialization
   static const int PAIR_SIZE_{13};
   // Plugboard not necessarily SIZE 13???
   int input_pair1_[PAIR_SIZE_] = {0};
   int input_pair2_[PAIR_SIZE_] = {0};
 public:
-  // Could be protected
+  SubComponent(const char* path);
   void setConfig(const char* path);
   int map(int input);
 };
