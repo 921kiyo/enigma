@@ -31,6 +31,7 @@ int Component::checkInput(const char* path){
   return counter;
 }
 
+// Do I need this??
 int Component::getArrayLength(const char* path){
   int counter = 0;
   int num;

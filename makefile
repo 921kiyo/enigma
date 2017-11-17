@@ -23,7 +23,12 @@ HEADER_FILES = $(wildcard *.h)
 # ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
 
 # Non-numeric character in plugboard file (file contains "14x")
+
+# No starting position
 ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
+
+
+# ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
 
 TEST = ./$(EXE) plugboards/test.pb reflectors/test.rf rotors/test.rot rotors/test.rot \
 rotors/test.rot rotors/test.pos < input.txt > output.txt

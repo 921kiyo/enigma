@@ -23,6 +23,8 @@ int main(int argc, char** argv){
       // Enigma enigma(argc, argv);
   }
   catch(int error){
+    // TODO Fix this!! 
+    // enigma->~Enigma();
     // delete enigma;
     return error;
   }

@@ -63,32 +63,31 @@ void Enigma::initialiseRotorPosition(const char* path){
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
-  // if(in_stream.fail()){
-  //   cerr << "error opening file for rotor position" << endl;
-  //   throw INVALID_ROTOR_MAPPING;
+  if(in_stream.fail()){
+    cerr << "Error opening or reading the configulation file " << path << endl;
+    throw(ERROR_OPENING_CONFIGURATION_FILE);
+  }
 
   while(in_stream >> num ){
     // Can I abstruct this away?
-    // if(num > 25 || num < 0){
-    //   // What is the message here?
-    //   throw(INVALID_INDEX);
-    // }
+    if(num > 25 || num < 0){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      throw(INVALID_INDEX);
+    }
     rotor_positions_.push_back(num);
     counter++;
   }
+  // Not elegant
   if(in_stream.eof()){
+    in_stream.close();
     return;
   }
   if(in_stream.fail()){
-  // if(in_stream.fail() && !in_stream.eof()){
+  // File name should be more flexible
     cerr << "Non-numeric character in rotor positions file rotor.pos" << endl;
+    in_stream.close();
     throw(NON_NUMERIC_CHARACTER);
   }
-  // Does this always close input stream?
-  in_stream.close();
-  // TODO have to do something about it
-  // cerr << "No starting position for rotor " << counter << " in rotor position file: rotor.pos" << endl;
-  throw(NO_ROTOR_STARTING_POSITION);
 }
 
 void Enigma::encryptMessage(char& message){
