@@ -18,7 +18,7 @@ Enigma::Enigma(int argc, char** argv){
   }
   checkRotorPositionConfig(argv[argc-1]);
 
-  cout << "config checked " << endl;
+  // cout << "config checked " << endl;
 
   // Once all config files are fine, create each component here
   if(argc == 3){
