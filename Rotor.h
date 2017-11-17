@@ -17,11 +17,11 @@ private:
 public:
   Rotor(const char* path_rot, int start_position);
   void mapInput(const char* path);
-  void rotateDown();
-  int shuffleUp(int input_index);
-  int shuffleDown(int input_index);
-  int convertForward(int input_index);
-  int convertBackward(int input_index);
+  void rotate();
+  int shiftUp(int input_index);
+  int shiftDown(int input_index);
+  int map(int input_index);
+  int mapBackward(int input_index);
   int getCurrentPosition();
   int getPreviousPosition();
   bool isCurrentPositionInNotch();

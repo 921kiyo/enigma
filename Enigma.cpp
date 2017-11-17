@@ -94,19 +94,19 @@ void Enigma::initialiseRotorPosition(const char* path){
 void Enigma::encryptMessage(char& message){
   int current_index = message - 'A';
   // cout << "current index before plugboard " << current_index << endl;
-  current_index = plugboard_->convertForward(current_index);
+  current_index = plugboard_->map(current_index);
 
   if(num_of_rotors_ > 0){
-    rotors_[num_of_rotors_-1].rotateDown();
+    rotors_[num_of_rotors_-1].rotate();
   }
 
   if(num_of_rotors_ > 0){
     for(int i = num_of_rotors_ ; i > 0; i--){
-      current_index = rotors_[i-1].shuffleDown(current_index);
+      current_index = rotors_[i-1].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
-      current_index = rotors_[i-1].convertForward(current_index);
+      current_index = rotors_[i-1].map(current_index);
       // cout << "current_index2 " << current_index << endl;
-      current_index = rotors_[i-1].shuffleUp(current_index);
+      current_index = rotors_[i-1].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;
       // TODO need to fix!!
       if(rotors_[i-1].isCurrentPositionInNotch() && \
@@ -114,24 +114,24 @@ void Enigma::encryptMessage(char& message){
          rotors_[i-1].getCurrentPosition()){
         // cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
         if(i-1 > 0){
-          rotors_[i-2].rotateDown();
+          rotors_[i-2].rotate();
         }
       }
     }
   }
 
-  current_index = reflector_->convertForward(current_index);
+  current_index = reflector_->map(current_index);
   // cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
-      current_index = rotors_[i].shuffleDown(current_index);
+      current_index = rotors_[i].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
-      current_index = rotors_[i].convertBackward(current_index);
+      current_index = rotors_[i].mapBackward(current_index);
       // cout << "current_index2 " << current_index << endl;
-      current_index = rotors_[i].shuffleUp(current_index);
+      current_index = rotors_[i].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;
     }
   }
-  current_index = plugboard_->convertForward(current_index);
+  current_index = plugboard_->map(current_index);
   message = current_index + 'A';
 }

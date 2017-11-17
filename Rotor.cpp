@@ -37,16 +37,16 @@ void Rotor::mapInput(const char* path){
   }
 }
 
-void Rotor::rotateDown(){
+void Rotor::rotate(){
   previous_position_ = current_position_;
   current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
 }
 
-int Rotor::shuffleUp(int input_index){
+int Rotor::shiftUp(int input_index){
   return (input_index - getCurrentPosition() + ALPHABET_LENGTH_) % ALPHABET_LENGTH_;
 }
 
-int Rotor::shuffleDown(int input_index){
+int Rotor::shiftDown(int input_index){
   return (input_index + getCurrentPosition()) % ALPHABET_LENGTH_;
 }
 
@@ -70,11 +70,11 @@ bool Rotor::isCurrentPositionInNotch(){
   return false;
 }
 
-int Rotor::convertForward(int input_index){
+int Rotor::map(int input_index){
   return contacts_[input_index];
 }
 
-int Rotor::convertBackward(int input_index){
+int Rotor::mapBackward(int input_index){
   // cout << "starting position in backward " << input_index << endl;
   for(int i = 0; i < ALPHABET_LENGTH_; i++){
       // cout << "contacts " << contacts_[i] << endl;

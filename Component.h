@@ -15,7 +15,7 @@ public:
   // This does not need to be in public
   int isAppearedBefore(int* array, int num, int position);
   virtual void mapInput(const char* path) = 0;
-  virtual int convertForward(int input_index) = 0;
+  virtual int map(int input_index) = 0;
   // virtual void returnInvalidMappingError() = 0;
   // virtual void returnIncorrectParamsError() = 0;
   virtual void returnNonNumericCharacterError() = 0;

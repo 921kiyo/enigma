@@ -46,13 +46,9 @@ int Component::getArrayLength(const char* path){
 
 // This could be optimized!!
 void Component::mapInputToArray(const char* path, int* array){
-  // TODO Delete this
   int i=0;
-
   fstream in_stream;
-
   in_stream.open(path);
-
   int num;
   while(!in_stream.eof() && in_stream >> num){
     array[i] = num;

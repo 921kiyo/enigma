@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int SubComponent::convertForward(int input){
+int SubComponent::map(int input){
   for(int i = 0; i< PAIR_SIZE_; i++){
     if(input == input_pair1_[i]){
       return input_pair2_[i];
