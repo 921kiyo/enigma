@@ -9,7 +9,7 @@ using namespace std;
 Reflector::Reflector(const char* path){
   int counter;
   counter = checkInput(path);
-  mapInput(path);
+  setConfig(path);
   checkParameters(counter);
 }
 

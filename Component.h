@@ -1,7 +1,6 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-
 class Component{
 protected:
   static const int ALPHABET_LENGTH_{26};
@@ -14,7 +13,7 @@ public:
   bool isDuplicateInt(int* array, int range);
   // This does not need to be in public
   int isAppearedBefore(int* array, int num, int position);
-  virtual void mapInput(const char* path) = 0;
+  virtual void setConfig(const char* path) = 0;
   virtual int map(int input_index) = 0;
   // virtual void returnInvalidMappingError() = 0;
   // virtual void returnIncorrectParamsError() = 0;

@@ -18,7 +18,7 @@ int SubComponent::map(int input){
   return input;
 }
 
-void SubComponent::mapInput(const char* path){
+void SubComponent::setConfig(const char* path){
   // Do I need to get array length here??
   int array_length = getArrayLength(path);
   int num_array[array_length];

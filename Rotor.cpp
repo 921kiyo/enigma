@@ -9,11 +9,11 @@ using namespace std;
 
 Rotor::Rotor(const char* path, int start_position){
   checkInput(path);
-  mapInput(path);
+  setConfig(path);
   current_position_ = start_position;
 }
 
-void Rotor::mapInput(const char* path){
+void Rotor::setConfig(const char* path){
   int array_length = getArrayLength(path);
   int num_array[array_length];
   mapInputToArray(path, num_array);
