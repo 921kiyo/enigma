@@ -15,8 +15,8 @@ private:
   int num_of_notches_;
   vector<int> notches_;
 public:
-  Rotor(const char* path_rot, int start_position);
-  void setConfig(const char* path);
+  Rotor(vector<int> contacts, int start_position);
+  void setConfig(vector<int> contacts);
   void rotate();
   int shiftUp(int input_index);
   int shiftDown(int input_index);
@@ -24,7 +24,7 @@ public:
   int mapBackward(int input_index);
   int getCurrentPosition();
   int getPreviousPosition();
-  bool isCurrentPositionInNotch();  
+  bool isCurrentPositionInNotch();
 };
 
 #endif

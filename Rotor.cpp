@@ -3,31 +3,33 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <vector>
 
 using namespace std;
 
-Rotor::Rotor(const char* path, int start_position){
-  setConfig(path);
+Rotor::Rotor(vector<int> rotor_contacts, int start_position){
+  setConfig(rotor_contacts);
   current_position_ = start_position;
 }
 
-void Rotor::setConfig(const char* path){
-  int array_length = ALPHABET_LENGTH_;
-  int num_array[array_length];
-  mapInputToArray(path, num_array);
+void Rotor::setConfig(vector<int> rotor_contacts){
+  // int array_length = ALPHABET_LENGTH_;
+  // int num_array[array_length];
 
-  if(array_length < ALPHABET_LENGTH_){
+  // mapInputToArray(path, num_array);
+
+  // TODO do this in Enigma class
+  if(rotor_contacts.size() < ALPHABET_LENGTH_){
     cerr << "Not all inputs mapped in rotor file: rotor.rot" << endl;
     throw(INVALID_ROTOR_MAPPING);
   }
   // If not error, them map them to each attributes
-  num_of_notches_ = array_length - ALPHABET_LENGTH_;
+  num_of_notches_ = rotor_contacts.size() - ALPHABET_LENGTH_;
   // Why do I have to call mapInputToArray twice here?
-  mapInputToArray(path, contacts_);
+  // mapInputToArray(path, contacts_);
 
   for(int i = 0; i< num_of_notches_; i++){
-    notches_.push_back(num_array[i+ALPHABET_LENGTH_]);
+    notches_.push_back(rotor_contacts[i+ALPHABET_LENGTH_]);
   }
 }
 

@@ -10,10 +10,16 @@
 using namespace std;
 
 Enigma::Enigma(int argc, char** argv){
-  checkPlugboardConfig(argv[1]);
-  checkReflectorConfig(argv[2]);
+  vector<int> plugboard_contacts;
+  checkPlugboardConfig(argv[1],plugboard_contacts);
+  vector<int> reflector_contacts;
+  checkReflectorConfig(argv[2], reflector_contacts);
+  vector<vector<int>> rotor_contacts_array;
+  vector<int> rotor_contacts;
   for(int i = 3; i < argc-1; i++){
-    checkRotorConfig(argv[i]);
+    checkRotorConfig(argv[i], rotor_contacts);
+    rotor_contacts_array.push_back(rotor_contacts);
+    rotor_contacts.clear();
   }
   checkRotorPositionConfig(argv[argc-1]);
 
@@ -24,12 +30,12 @@ Enigma::Enigma(int argc, char** argv){
   else{
     num_of_rotors_ = argc-4;
   }
-  plugboard_ = new SubComponent(argv[1]);
-  reflector_ = new SubComponent(argv[2]);
+  plugboard_ = new SubComponent(plugboard_contacts);
+  reflector_ = new SubComponent(reflector_contacts);
 
   for(int i = 0; i < num_of_rotors_; i++){
     // if starting_position is -1, do something!!
-    Rotor rotor(argv[i+3], rotor_positions_[i]);
+    Rotor rotor(rotor_contacts_array[i], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }
 }
@@ -43,7 +49,7 @@ Enigma::~Enigma(){
     }
 }
 
-void Enigma::checkPlugboardConfig(const char* path){
+void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -77,7 +83,7 @@ void Enigma::checkPlugboardConfig(const char* path){
   in_stream.close();
 }
 
-void Enigma::checkReflectorConfig(const char* path){
+void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
   int num;
   int counter = 0;
   fstream in_stream;
@@ -115,10 +121,9 @@ void Enigma::checkReflectorConfig(const char* path){
   }
 }
 
-void Enigma::checkRotorConfig(const char* path){
+void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
   int num;
   int counter = 0;
-  vector<int> contacts;
   fstream in_stream;
   in_stream.open(path);
   if(in_stream.fail()){
@@ -199,30 +204,30 @@ void Enigma::checkRotorPositionConfig(const char* path){
 }
 
 // Do I need this??
-int Enigma::getArrayLength(const char* path){
-  int counter = 0;
-  int num;
-  fstream in_stream;
-  in_stream.open(path);
-  while(!in_stream.eof() && in_stream >> num){
-    counter++;
-  }
-  in_stream.close();
-  return counter;
-}
+// int Enigma::getArrayLength(const char* path){
+//   int counter = 0;
+//   int num;
+//   fstream in_stream;
+//   in_stream.open(path);
+//   while(!in_stream.eof() && in_stream >> num){
+//     counter++;
+//   }
+//   in_stream.close();
+//   return counter;
+// }
 
 // This could be optimized!!
-void Enigma::mapInputToArray(const char* path, int* array){
-  int i=0;
-  fstream in_stream;
-  in_stream.open(path);
-  int num;
-  while(!in_stream.eof() && in_stream >> num){
-    array[i] = num;
-    i++;
-  }
-  in_stream.close();
-}
+// void Enigma::mapInputToArray(const char* path, int* array){
+//   int i=0;
+//   fstream in_stream;
+//   in_stream.open(path);
+//   int num;
+//   while(!in_stream.eof() && in_stream >> num){
+//     array[i] = num;
+//     i++;
+//   }
+//   in_stream.close();
+// }
 
 bool Enigma::isNumberRangeCorrect(int num){
   return (num < ALPHABET_LENGTH_ && num >= 0);
@@ -250,8 +255,8 @@ int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){
   return -1;
 }
 
-void Enigma::encryptMessage(char& message){
-  int current_index = message - 'A';
+void Enigma::encryptMessage(char& letter){
+  int current_index = letter - 'A';
   // cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard_->map(current_index);
 
@@ -280,7 +285,7 @@ void Enigma::encryptMessage(char& message){
   }
 
   current_index = reflector_->map(current_index);
-  // cout << "reversing from here... " << current_index << endl;
+  cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
       current_index = rotors_[i].shiftDown(current_index);
@@ -292,5 +297,5 @@ void Enigma::encryptMessage(char& message){
     }
   }
   current_index = plugboard_->map(current_index);
-  message = current_index + 'A';
+  letter = current_index + 'A';
 }

@@ -2,6 +2,9 @@
 #define SUBCOMPONENT_H
 
 #include "Component.h"
+#include <vector>
+
+using namespace std;
 
 class SubComponent: public Component{
 private:
@@ -9,11 +12,11 @@ private:
   static const int PAIR_SIZE_{13};
   // Plugboard not necessarily SIZE 13???
   // This could be vector
-  int input_pair1_[PAIR_SIZE_] = {0};
-  int input_pair2_[PAIR_SIZE_] = {0};
+  vector<int> input_pair1_;
+  vector<int> input_pair2_;
 public:
-  SubComponent(const char* path);
-  void setConfig(const char* path);
+  SubComponent(const vector<int> contacts);
+  void setConfig(const vector<int> contacts);
   int map(int input);
 };
 

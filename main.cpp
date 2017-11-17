@@ -40,6 +40,7 @@ int main(int argc, char** argv){
       delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
+    
     try{
       enigma->encryptMessage(message[i]);
       cout << message[i];

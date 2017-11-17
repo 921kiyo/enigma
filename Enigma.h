@@ -18,14 +18,14 @@ SubComponent *reflector_{nullptr};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();
-  void encryptMessage(char& message);
+  void encryptMessage(char& letter);
   // TODO Change the order of methods
-  void checkPlugboardConfig(const char* path);
-  void checkReflectorConfig(const char* path);
-  void checkRotorConfig(const char* path);
+  void checkPlugboardConfig(const char* path, vector<int>& contacts);
+  void checkReflectorConfig(const char* path, vector<int>& contacts);
+  void checkRotorConfig(const char* path, vector<int>& contacts);
   void checkRotorPositionConfig(const char* path);
   // Do I need this??
-  int getArrayLength(const char* path);
+  // int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
   bool isNumberRangeCorrect(int num);
   void checkDuplicateInt(vector<int> contacts, int range);
