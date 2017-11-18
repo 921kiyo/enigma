@@ -4,6 +4,7 @@
 #include "alphabet.h"
 
 #include <iostream>
+#include <cstring>
 #include <string>
 
 using namespace std;
@@ -29,10 +30,18 @@ int main(int argc, char** argv){
     return error;
   }
 
-  // What is the maximum length of this?
-  char message[200];
-  // This is not working for two words
-  cin >> message;
+  // Get all characters from the input file and remove all spaces
+  string temp;
+  string string_message = "";
+  cin >> ws;
+  while(getline(cin, temp)){
+    string_message += temp;
+  }
+  char message[string_message.size()+1];
+  strcpy(message, string_message.c_str());
+
+  // Check each letter is an uppercase alphabet
+  // and encrypt message letter by letter
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || ALPHABET_LENGTH -1 < message[i] - 'A'){
       cerr << message[i] << " is not a valid input character \
@@ -40,7 +49,6 @@ int main(int argc, char** argv){
       delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
-    // TODO Make sure this doesn't fail
     enigma->encryptMessage(message[i]);
     cout << message[i];
   }
