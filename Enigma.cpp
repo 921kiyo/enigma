@@ -260,11 +260,11 @@ void Enigma::encryptMessage(char& letter){
   if(num_of_rotors_ > 0){
     for(int i = num_of_rotors_ ; i > 0; i--){
       // TODO Needs explanation here
-      // current_index = rotors_[i-1].shiftDown(current_index);
+      current_index = rotors_[i-1].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i-1].mapForward(current_index);
       // cout << "current_index2 " << current_index << endl;
-      // current_index = rotors_[i-1].shiftUp(current_index);
+      current_index = rotors_[i-1].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;
       // TODO need to fix!!
       if(rotors_[i-1].isCurrentPositionInNotch() && \
@@ -282,11 +282,11 @@ void Enigma::encryptMessage(char& letter){
   // cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
-      // current_index = rotors_[i].shiftDown(current_index);
+      current_index = rotors_[i].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i].mapBackward(current_index);
       // cout << "current_index2 " << current_index << endl;
-      // current_index = rotors_[i].shiftUp(current_index);
+      current_index = rotors_[i].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;
     }
   }
