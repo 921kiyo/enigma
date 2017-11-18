@@ -16,16 +16,24 @@ int num_of_rotors_;
 Component *plugboard_{nullptr};
 Component *reflector_{nullptr};
 public:
+  // Within this constructor, check all input files are valid by calling
+  // each "checkXXXConfig" method.
+  // Initialise all the components after all the check is done, so that, if
+  // exception is thrown while checking config, it throws an error before
+  // a new heap is created in order to avoid unpredictable memory leak.
   Enigma(int argc, char** argv);
+  // Free up plugboard and reflector heap
   ~Enigma();
 
-  /* 4 checking methods could be abstracted into 1. However, since each config
-  error message has different error code, I made 4 separate methods for each */
+  // These 4 methods check each input file by extracting input and check if
+  // each input is valid. At the same time they also assign each valid integer
+  // to corresponding vectors.
   void checkPlugboardConfig(const char* path, vector<int>& contacts);
   void checkReflectorConfig(const char* path, vector<int>& contacts);
   void checkRotorConfig(const char* path, vector<int>& contacts);
   void checkRotorPositionConfig(const char* path);
 
+  // Check if num is within 0-25
   bool isNumberRangeCorrect(int num);
 
   // Check if mapping is valid

@@ -194,7 +194,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
     }
     in_stream >> num;
     if(in_stream.fail()){
-    // File name should be more flexible
       cerr << "Non-numeric character in rotor positions file " << path  << endl;
       in_stream.close();
       throw(NON_NUMERIC_CHARACTER);
@@ -223,7 +222,6 @@ bool Enigma::isNumberRangeCorrect(int num){
   return (num < ALPHABET_LENGTH_ && num >= 0);
 }
 
-// check invalid mapping (e.g duplicate)
 bool Enigma::checkMapping(vector<int> contacts, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
