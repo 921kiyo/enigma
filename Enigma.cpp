@@ -171,7 +171,7 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
     exit(INVALID_ROTOR_MAPPING);
   }
 
-  if(isDuplicateInt(contacts, ALPHABET_LENGTH_)){
+  if(checkMapping(contacts, ALPHABET_LENGTH_)){
     // TODO Message here!!
     exit(INVALID_ROTOR_MAPPING);
   }
@@ -224,10 +224,10 @@ bool Enigma::isNumberRangeCorrect(int num){
 }
 
 // check invalid mapping (e.g duplicate)
-bool Enigma::isDuplicateInt(vector<int> contacts, int range){
+bool Enigma::checkMapping(vector<int> contacts, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
-    previous_appeared_position = isAppearedBefore(contacts, contacts[i], i);
+    previous_appeared_position = checkAppearedBefore(contacts, contacts[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << contacts[i] \
       << " (output " << contacts[i] << " is already mapped to from input " \
@@ -238,8 +238,7 @@ bool Enigma::isDuplicateInt(vector<int> contacts, int range){
   return false;
 }
 
-// method name should be changed
-int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){
+int Enigma::checkAppearedBefore(vector<int> contacts, int num, int position){
   for(int x = 0; x < position; x++ ){
     if(contacts[x] == contacts[position]){
       return x;
@@ -266,7 +265,6 @@ void Enigma::encryptMessage(char& letter){
       // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i-1].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;
-      // TODO need to fix!!
       if(rotors_[i-1].isCurrentPositionInNotch() && \
          rotors_[i-1].getPreviousPosition() != \
          rotors_[i-1].getCurrentPosition()){

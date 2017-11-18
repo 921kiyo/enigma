@@ -18,18 +18,27 @@ Component *reflector_{nullptr};
 public:
   Enigma(int argc, char** argv);
   ~Enigma();
-  void encryptMessage(char& letter);
-  // TODO Change the order of methods
+
   /* 4 checking methods could be abstracted into 1. However, since each config
   error message has different error code, I made 4 separate methods for each */
   void checkPlugboardConfig(const char* path, vector<int>& contacts);
   void checkReflectorConfig(const char* path, vector<int>& contacts);
   void checkRotorConfig(const char* path, vector<int>& contacts);
   void checkRotorPositionConfig(const char* path);
-  void mapInputToArray(const char* path, int* array);
+
   bool isNumberRangeCorrect(int num);
-  bool isDuplicateInt(vector<int> contacts, int range);
-  int isAppearedBefore(vector<int> contacts, int num, int position);
+
+  // Check if mapping is valid
+  // (e.g duplicate contacts, a contact connected to itself etc.)
+  bool checkMapping(vector<int> contacts, int range);
+
+  // Check if num is already appeared in contacts.
+  // If yes, return the index of the previous contact. Otherwise return -1
+  int checkAppearedBefore(vector<int> contacts, int num, int position);
+
+  // This method does whole encryption process
+  // and convert letter into encrypted one.
+  void encryptMessage(char& letter);
 };
 
 #endif
