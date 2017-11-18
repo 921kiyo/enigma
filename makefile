@@ -2,7 +2,6 @@ EXE = enigma
 CC = g++
 CFLAGS = -Wall -g -std=c++11
 
-
 SRC_FILES = $(wildcard *.cpp)
 HEADER_FILES = $(wildcard *.h)
 OBJ_FILES = $(wildcard *.o)
@@ -18,15 +17,16 @@ GCH_FILES = $(wildcard *.gch)
 # Non-numeric character in plugboard file (file contains "abc")
 # ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
 
-# ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
+ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
 
 # Non-numeric character in plugboard file (file contains "14x")
 
 # No starting position
 # ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
 
-# run: $(EXE)
-# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
+# Uncomment this line for checking memory leak
+run: $(EXE)
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 
 # run: $(EXE)
 # 	$(ARG)
