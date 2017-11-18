@@ -25,11 +25,13 @@ public:
   Rotor(const char* path, int start_position);
   // Updates current_position_ and previous_position_
   void rotate();
-
+  // TODO Needs explanation here
   int shiftUp(int input_index);
   int shiftDown(int input_index);
+  // Return contact by index
   int mapForward(int input_index);
-  int mapBackward(int input_index);
+  // Return index by contact
+  int mapBackward(int contact);
   int getCurrentPosition();
   int getPreviousPosition();
   bool isCurrentPositionInNotch();
