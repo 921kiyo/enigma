@@ -1,10 +1,8 @@
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <fstream>
-
 #include "errors.h"
 #include "Enigma.h"
+
+#include <iostream>
+#include <string>
 
 using namespace std;
 
