@@ -5,7 +5,8 @@ CFLAGS = -Wall -g -std=c++11
 
 SRC_FILES = $(wildcard *.cpp)
 HEADER_FILES = $(wildcard *.h)
-
+OBJ_FILES = $(wildcard *.o)
+GCH_FILES = $(wildcard *.gch)
 # ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
 # rotors/III.rot rotors/I.pos < input.txt > output.txt
 

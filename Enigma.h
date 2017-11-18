@@ -20,6 +20,8 @@ public:
   ~Enigma();
   void encryptMessage(char& letter);
   // TODO Change the order of methods
+  /* 4 checking methods could be abstracted into 1. However, since each config
+  error message has different error code, I made 4 separate methods for each */
   void checkPlugboardConfig(const char* path, vector<int>& contacts);
   void checkReflectorConfig(const char* path, vector<int>& contacts);
   void checkRotorConfig(const char* path, vector<int>& contacts);
