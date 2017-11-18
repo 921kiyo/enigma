@@ -1,14 +1,18 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef SUBCOMPONENT_H
+#define SUBCOMPONENT_H
+
+#include <vector>
 
 class Component{
-protected:
-  // C++ 11 Default value initialisation
+private:
+  // C++ 11 default value initialization
   static const int ALPHABET_LENGTH_{26};
+  static const int PAIR_SIZE_{13};
+  std::vector<int> input_pair1_;
+  std::vector<int> input_pair2_;
 public:
-  virtual int map(int input_index) = 0;
-  // ???
-  virtual ~Component();
+  Component(const char* path);
+  int map(int input);
 };
 
 #endif

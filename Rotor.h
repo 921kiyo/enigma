@@ -1,13 +1,13 @@
 #ifndef ROTOR_H
 #define ROTOR_H
 
-#include "Component.h"
 #include <vector>
 
 using namespace std;
 
-class Rotor: public Component{
+class Rotor{
 private:
+  static const int ALPHABET_LENGTH_{26};
   int contacts_[ALPHABET_LENGTH_];
   // Default value okay??
   int current_position_{-1};
@@ -19,6 +19,7 @@ public:
   void rotate();
   int shiftUp(int input_index);
   int shiftDown(int input_index);
+  // TODO Change to mapforward
   int map(int input_index);
   int mapBackward(int input_index);
   int getCurrentPosition();

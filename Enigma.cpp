@@ -1,6 +1,6 @@
 #include "Enigma.h"
 #include "Rotor.h"
-#include "SubComponent.h"
+#include "Component.h"
 #include "errors.h"
 #include <iostream>
 #include <fstream>
@@ -29,9 +29,9 @@ Enigma::Enigma(int argc, char** argv){
   }
   checkRotorPositionConfig(argv[argc-1]);
   // Once all config files are fine, create each component here
-  
-  plugboard_ = new SubComponent(argv[1]);
-  reflector_ = new SubComponent(argv[2]);
+
+  plugboard_ = new Component(argv[1]);
+  reflector_ = new Component(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){
     // if starting_position is -1, do something!!
     Rotor rotor(argv[3+i], rotor_positions_[i]);
