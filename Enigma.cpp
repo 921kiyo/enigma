@@ -199,32 +199,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
   }
 }
 
-// Do I need this??
-// int Enigma::getArrayLength(const char* path){
-//   int counter = 0;
-//   int num;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   while(!in_stream.eof() && in_stream >> num){
-//     counter++;
-//   }
-//   in_stream.close();
-//   return counter;
-// }
-
-// This could be optimized!!
-// void Enigma::mapInputToArray(const char* path, int* array){
-//   int i=0;
-//   fstream in_stream;
-//   in_stream.open(path);
-//   int num;
-//   while(!in_stream.eof() && in_stream >> num){
-//     array[i] = num;
-//     i++;
-//   }
-//   in_stream.close();
-// }
-
 bool Enigma::isNumberRangeCorrect(int num){
   return (num < ALPHABET_LENGTH_ && num >= 0);
 }

@@ -16,7 +16,6 @@ private:
   vector<int> notches_;
 public:
   Rotor(const char* path, int start_position);
-  // virtual void setConfig(vector<int> contacts);
   void rotate();
   int shiftUp(int input_index);
   int shiftDown(int input_index);

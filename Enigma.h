@@ -24,8 +24,6 @@ public:
   void checkReflectorConfig(const char* path, vector<int>& contacts);
   void checkRotorConfig(const char* path, vector<int>& contacts);
   void checkRotorPositionConfig(const char* path);
-  // Do I need this??
-  // int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
   bool isNumberRangeCorrect(int num);
   bool isDuplicateInt(vector<int> contacts, int range);

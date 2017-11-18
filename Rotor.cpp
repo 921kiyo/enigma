@@ -8,7 +8,6 @@
 using namespace std;
 
 Rotor::Rotor(const char* path, int start_position){
-  // setConfig(path);
   fstream in_stream;
   in_stream.open(path);
   int num;
@@ -25,28 +24,6 @@ Rotor::Rotor(const char* path, int start_position){
   num_of_notches_ = notches_.size();
   current_position_ = start_position;
 }
-
-// void Rotor::setConfig(vector<int> path){
-  // int array_length = ALPHABET_LENGTH_;
-  // int num_array[array_length];
-
-  // mapInputToArray(path, num_array);
-
-  // TODO do this in Enigma class
-  // if(rotor_contacts.size() < ALPHABET_LENGTH_){
-  //   cerr << "Not all inputs mapped in rotor file: rotor.rot" << endl;
-  //   throw(INVALID_ROTOR_MAPPING);
-  // }
-  //
-  // // If not error, them map them to each attributes
-  // num_of_notches_ = rotor_contacts.size() - ALPHABET_LENGTH_;
-  // // Why do I have to call mapInputToArray twice here?
-  // // mapInputToArray(path, contacts_);
-  //
-  // for(int i = 0; i< num_of_notches_; i++){
-  //   notches_.push_back(rotor_contacts[i+ALPHABET_LENGTH_]);
-  // }
-// }
 
 void Rotor::rotate(){
   previous_position_ = current_position_;
