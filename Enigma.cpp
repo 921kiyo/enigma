@@ -126,19 +126,19 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
   }
   in_stream.close();
 
-  if(checkMapping(contacts, counter)){
-    throw(INVALID_REFLECTOR_MAPPING);
-  }
-
   if(counter%2!=0){
       cerr << "Incorrect (odd) number of parameters in reflector file " \
       << path << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-    }
+  }
   if(counter != ALPHABET_LENGTH_){
     cerr << "Insufficient number of mappings in reflector file: " \
     << path << endl;
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+  }
+
+  if(checkMapping(contacts, counter)){
+    throw(INVALID_REFLECTOR_MAPPING);
   }
 }
 
