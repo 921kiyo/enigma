@@ -15,8 +15,7 @@ int main(int argc, char** argv){
   // Note that the value of argc is more than the actual number of command line
   // parameters given
   if(argc < 3 || argc == 4){
-    cerr << "usage: enigma plugboard-file reflector-file \
-    (<rotor-file>* rotor-positions)?" << endl;
+    cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
   }
   Enigma *enigma = nullptr;
@@ -44,8 +43,7 @@ int main(int argc, char** argv){
   // and encrypt message letter by letter
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || ALPHABET_LENGTH -1 < message[i] - 'A'){
-      cerr << message[i] << " is not a valid input character \
-      (input characters must be upper case letters A-Z)!" << endl;
+      cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
       delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
