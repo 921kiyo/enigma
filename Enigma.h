@@ -9,7 +9,7 @@ using namespace std;
 
 class Enigma{
 private:
-const int ALPHABET_LENGTH_{26};
+static const int ALPHABET_LENGTH_{26};
 vector<Rotor> rotors_;
 vector<int> rotor_positions_;
 int num_of_rotors_;
