@@ -1,1 +1,1 @@
-UNEATARSAFACARSPCUQNSETACE
+num_of_rotors_ 1
