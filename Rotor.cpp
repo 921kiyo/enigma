@@ -63,12 +63,12 @@ int Rotor::mapForward(int input_index){
 }
 
 int Rotor::mapBackward(int input_index){
-  int current_index;
-  // int current_index = shiftDown(input_index);
+  // int current_index;
+  int current_index = shiftDown(input_index);
   // cout << "starting position in backward " << input_index << endl;
   for(int i = 0; i < ALPHABET_LENGTH_; i++){
       // cout << "contacts " << contacts_[i] << endl;
-      if(input_index == contacts_[i]){
+      if(current_index == contacts_[i]){
         // cout << "contacts backward[input_index] " << i << endl;
           current_index = i;
       }
