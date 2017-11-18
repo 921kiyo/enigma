@@ -83,12 +83,12 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   }
   in_stream.close();
 
-  if(checkMapping(contacts, counter)){
-    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
-  }
   if(counter%2!=0 || counter > ALPHABET_LENGTH_){
     cerr << "Incorrect number of parameters in plugboard file " << path << endl;
     throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
+  }
+  if(checkMapping(contacts, counter)){
+    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
   }
 }
 
@@ -131,11 +131,13 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
   }
 
   if(counter%2!=0){
-      cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
+      cerr << "Incorrect (odd) number of parameters in reflector file " \
+      << path << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
     }
   if(counter != ALPHABET_LENGTH_){
-    cerr << "Insufficient number of mappings in reflector file: reflector.rf" << endl;
+    cerr << "Insufficient number of mappings in reflector file: " \
+    << path << endl;
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
   }
 }
@@ -160,7 +162,7 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
     in_stream >> num;
 
     if(in_stream.fail()){
-      cerr << "Non-numeric character for mapping in rotor file rotor.rot" << endl;
+      cerr << "Non-numeric character for mapping in rotor file " << path << endl;
       in_stream.close();
       throw(NON_NUMERIC_CHARACTER);
     }
