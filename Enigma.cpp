@@ -164,13 +164,13 @@ void Enigma::checkRotorPositionConfig(const char* path){
     cerr << "Error opening or reading the configulation file " << path << endl;
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
-  cout << "hayasf " << endl;
   while(!in_stream.eof()){
     in_stream >> ws;
     int eof = in_stream.peek();
     if(eof == EOF){
       break;
     }
+    in_stream >> num;
 
     if(in_stream.fail()){
     // File name should be more flexible
