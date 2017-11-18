@@ -152,12 +152,9 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
     exit(INVALID_ROTOR_MAPPING);
   }
 
-  // TODO Double check if this checking is enough
-  // if(checkDuplicateInt(contacts, ALPHABET_LENGTH_)){
-  //   cerr << "invalid rotor mapping" << endl;
-  //   exit(INVALID_ROTOR_MAPPING);
-  // }
-  checkDuplicateInt(contacts, ALPHABET_LENGTH_);
+  if(isDuplicateInt(contacts, ALPHABET_LENGTH_)){
+    exit(INVALID_ROTOR_MAPPING);
+  }
 }
 
 void Enigma::checkRotorPositionConfig(const char* path){
@@ -194,7 +191,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
   int diff = counter - num_of_rotors_;
 
   if(diff < 0){
-    cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: rotor.pos" << endl;
+    cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: " << path << endl;
     throw(NO_ROTOR_STARTING_POSITION);
   }
   if(diff > 0){
@@ -233,7 +230,7 @@ bool Enigma::isNumberRangeCorrect(int num){
 }
 
 // TODO Is this efficient?
-void Enigma::checkDuplicateInt(vector<int> contacts, int range){
+bool Enigma::isDuplicateInt(vector<int> contacts, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
     previous_appeared_position = isAppearedBefore(contacts, contacts[i], i);
@@ -241,8 +238,10 @@ void Enigma::checkDuplicateInt(vector<int> contacts, int range){
       cerr << "Invalid mapping of input " << i << " to output " << contacts[i] \
       << " (output " << contacts[i] << " is already mapped to from input " \
       << previous_appeared_position << ")" << endl;
+      return true;
     }
   }
+  return false;
 }
 
 int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){

@@ -28,7 +28,7 @@ public:
   // int getArrayLength(const char* path);
   void mapInputToArray(const char* path, int* array);
   bool isNumberRangeCorrect(int num);
-  void checkDuplicateInt(vector<int> contacts, int range);
+  bool isDuplicateInt(vector<int> contacts, int range);
   int isAppearedBefore(vector<int> contacts, int num, int position);
 };
 
