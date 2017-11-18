@@ -82,8 +82,12 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     contacts.push_back(num);
   }
   in_stream.close();
+
+  if(checkMapping(contacts, counter)){
+    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
+  }
   if(counter%2!=0 || counter > ALPHABET_LENGTH_){
-    cerr << "Incorrect number of parameters in plugboard file plugboard.pb" << endl;
+    cerr << "Incorrect number of parameters in plugboard file " << path << endl;
     throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
   }
 }
@@ -121,6 +125,10 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
     contacts.push_back(num);
   }
   in_stream.close();
+
+  if(checkMapping(contacts, counter)){
+    throw(INVALID_REFLECTOR_MAPPING);
+  }
 
   if(counter%2!=0){
       cerr << "Incorrect (odd) number of parameters in reflector file reflector.rf" << endl;
@@ -167,13 +175,12 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
   in_stream.close();
 
   if(counter < ALPHABET_LENGTH_){
-    cerr << "Not all inputs mapped in rotor file: rotor.rot" << endl;
-    exit(INVALID_ROTOR_MAPPING);
+    cerr << "Not all inputs mapped in rotor file: " << path << endl;
+    throw(INVALID_ROTOR_MAPPING);
   }
 
   if(checkMapping(contacts, ALPHABET_LENGTH_)){
-    // TODO Message here!!
-    exit(INVALID_ROTOR_MAPPING);
+    throw(INVALID_ROTOR_MAPPING);
   }
 }
 
