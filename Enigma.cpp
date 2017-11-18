@@ -224,7 +224,7 @@ bool Enigma::isNumberRangeCorrect(int num){
   return (num < ALPHABET_LENGTH_ && num >= 0);
 }
 
-// TODO Is this efficient?
+// check invalid mapping (e.g duplicate)
 bool Enigma::isDuplicateInt(vector<int> contacts, int range){
   int previous_appeared_position;
   for(int i = range-1; i>= 0; i--){
@@ -239,6 +239,7 @@ bool Enigma::isDuplicateInt(vector<int> contacts, int range){
   return false;
 }
 
+// method name should be changed
 int Enigma::isAppearedBefore(vector<int> contacts, int num, int position){
   for(int x = 0; x < position; x++ ){
     if(contacts[x] == contacts[position]){
@@ -259,6 +260,7 @@ void Enigma::encryptMessage(char& letter){
 
   if(num_of_rotors_ > 0){
     for(int i = num_of_rotors_ ; i > 0; i--){
+      // TODO Needs explanation here
       current_index = rotors_[i-1].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i-1].mapForward(current_index);
