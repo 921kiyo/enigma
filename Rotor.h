@@ -20,7 +20,7 @@ public:
   int shiftUp(int input_index);
   int shiftDown(int input_index);
   // TODO Change to mapforward
-  int map(int input_index);
+  int mapForward(int input_index);
   int mapBackward(int input_index);
   int getCurrentPosition();
   int getPreviousPosition();

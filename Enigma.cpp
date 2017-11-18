@@ -258,7 +258,7 @@ void Enigma::encryptMessage(char& letter){
     for(int i = num_of_rotors_ ; i > 0; i--){
       current_index = rotors_[i-1].shiftDown(current_index);
       // cout << "current_index1 " << current_index << endl;
-      current_index = rotors_[i-1].map(current_index);
+      current_index = rotors_[i-1].mapForward(current_index);
       // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i-1].shiftUp(current_index);
       // cout << "current_index3 " << current_index << endl;

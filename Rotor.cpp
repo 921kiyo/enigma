@@ -58,7 +58,7 @@ bool Rotor::isCurrentPositionInNotch(){
   return false;
 }
 
-int Rotor::map(int input_index){
+int Rotor::mapForward(int input_index){
   return contacts_[input_index];
 }
 
