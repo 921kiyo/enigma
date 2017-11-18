@@ -21,7 +21,6 @@ Enigma::Enigma(int argc, char** argv){
     rotor_contacts_array.push_back(rotor_contacts);
     rotor_contacts.clear();
   }
-  // Once all config files are fine, create each component here
   if(argc == 3){
     num_of_rotors_ = 0;
   }
@@ -29,6 +28,8 @@ Enigma::Enigma(int argc, char** argv){
     num_of_rotors_ = argc-4;
   }
   checkRotorPositionConfig(argv[argc-1]);
+  // Once all config files are fine, create each component here
+  
   plugboard_ = new SubComponent(argv[1]);
   reflector_ = new SubComponent(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){
@@ -171,7 +172,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
       break;
     }
     in_stream >> num;
-
     if(in_stream.fail()){
     // File name should be more flexible
       cerr << "Non-numeric character in rotor positions file " << path  << endl;
@@ -180,7 +180,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
     }
 
     // Can I abstruct this away?
-    if(num > 25 || num < 0){
+    if(!isNumberRangeCorrect(num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
     }
