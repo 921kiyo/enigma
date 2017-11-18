@@ -5,8 +5,6 @@
 
 class Component{
 private:
-  // C++ 11 default value initialization
-  static const int ALPHABET_LENGTH_{26};
   // Store pair letters index in each vector, so it is easy to
   // map because pair letters are stored at the same index.
   std::vector<int> input_pair1_;

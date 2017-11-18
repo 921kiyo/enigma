@@ -2,6 +2,7 @@
 #include "Rotor.h"
 #include "Component.h"
 #include "errors.h"
+#include "alphabet.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -83,7 +84,7 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   }
   in_stream.close();
 
-  if(counter%2!=0 || counter > ALPHABET_LENGTH_){
+  if(counter%2!=0 || counter > ALPHABET_LENGTH){
     cerr << "Incorrect number of parameters in plugboard file " << path << endl;
     throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
   }
@@ -131,7 +132,7 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       << path << endl;
       throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
   }
-  if(counter != ALPHABET_LENGTH_){
+  if(counter != ALPHABET_LENGTH){
     cerr << "Insufficient number of mappings in reflector file: " \
     << path << endl;
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
@@ -176,12 +177,12 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
   }
   in_stream.close();
 
-  if(counter < ALPHABET_LENGTH_){
+  if(counter < ALPHABET_LENGTH){
     cerr << "Not all inputs mapped in rotor file: " << path << endl;
     throw(INVALID_ROTOR_MAPPING);
   }
 
-  if(checkMapping(contacts, ALPHABET_LENGTH_)){
+  if(checkMapping(contacts, ALPHABET_LENGTH)){
     throw(INVALID_ROTOR_MAPPING);
   }
 }
@@ -228,7 +229,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
 }
 
 bool Enigma::isNumberRangeCorrect(int num){
-  return (num < ALPHABET_LENGTH_ && num >= 0);
+  return (num < ALPHABET_LENGTH && num >= 0);
 }
 
 bool Enigma::checkMapping(vector<int> contacts, int range){

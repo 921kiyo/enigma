@@ -1,21 +1,20 @@
 #ifndef ROTOR_H
 #define ROTOR_H
 
+#include "alphabet.h"
 #include <vector>
 
 using namespace std;
 
 class Rotor{
 private:
-  // C++ 11 default value initialization
-  static const int ALPHABET_LENGTH_{26};
   // This attribute keeps track of A's letter position
   int current_position_;
   // This attribute is used to compare with current_position to see
   // whether the next rotor should rotate, when a notche is triggered.
   int previous_position_;
   // Store first 26 letter index
-  int contacts_[ALPHABET_LENGTH_];
+  int contacts_[ALPHABET_LENGTH];
   int num_of_notches_;
   vector<int> notches_;
 public:

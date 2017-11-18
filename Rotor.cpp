@@ -1,4 +1,5 @@
 #include "Rotor.h"
+#include "alphabet.h"
 
 #include <iostream>
 #include <fstream>
@@ -11,7 +12,7 @@ Rotor::Rotor(const char* path, int start_position){
   int num;
   int counter = 0;
   while(in_stream >> num){
-    if(counter < ALPHABET_LENGTH_){
+    if(counter < ALPHABET_LENGTH){
       contacts_[counter] = num;
     }
     else{
@@ -25,15 +26,15 @@ Rotor::Rotor(const char* path, int start_position){
 
 void Rotor::rotate(){
   previous_position_ = current_position_;
-  current_position_ = (current_position_ + 1) % ALPHABET_LENGTH_;
+  current_position_ = (current_position_ + 1) % ALPHABET_LENGTH;
 }
 
 int Rotor::shiftUp(int input_index){
-  return (input_index - getCurrentPosition() + ALPHABET_LENGTH_) % ALPHABET_LENGTH_;
+  return (input_index - getCurrentPosition() + ALPHABET_LENGTH) % ALPHABET_LENGTH;
 }
 
 int Rotor::shiftDown(int input_index){
-  return (input_index + getCurrentPosition()) % ALPHABET_LENGTH_;
+  return (input_index + getCurrentPosition()) % ALPHABET_LENGTH;
 }
 
 int Rotor::getPreviousPosition(){
@@ -62,7 +63,7 @@ int Rotor::mapForward(int input_index){
 
 int Rotor::mapBackward(int contact){
   // cout << "starting position in backward " << input_index << endl;
-  for(int i = 0; i < ALPHABET_LENGTH_; i++){
+  for(int i = 0; i < ALPHABET_LENGTH; i++){
       // cout << "contacts " << contacts_[i] << endl;
       if(contact == contacts_[i]){
         // cout << "contacts backward[input_index] " << i << endl;
