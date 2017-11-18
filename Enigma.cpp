@@ -29,7 +29,10 @@ Enigma::Enigma(int argc, char** argv){
   }
   checkRotorPositionConfig(argv[argc-1]);
 
-  // Once all config files are fine, create each component here
+  // After checking all config files, instantiate each component so that
+  // There is no concern for memory leak, even if constructor fails in the middle
+  // of construction.
+
   plugboard_ = new Component(argv[1]);
   reflector_ = new Component(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){

@@ -15,15 +15,10 @@ int main(int argc, char** argv){
   }
   Enigma *enigma = nullptr;
   try{
-    // Change this
-      enigma = new Enigma(argc, argv);
-      // Enigma enigma(argc, argv);
+    enigma = new Enigma(argc, argv);
   }
   catch(int error){
-    // TODO Fix this!!
-    // enigma->~Enigma();
-    // delete enigma;
-    // cout << "error" << error << endl;
+    delete enigma;
     return error;
   }
 
@@ -35,17 +30,13 @@ int main(int argc, char** argv){
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
       cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
+      enigma->~Enigma();
       delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
-
-    try{
-      enigma->encryptMessage(message[i]);
-      cout << message[i];
-    }catch(int error){
-    //   delete enigma;
-      return error;
-    }
+    // TODO Make sure this doesn't fail
+    enigma->encryptMessage(message[i]);
+    cout << message[i];
   }
   delete enigma;
   return NO_ERROR;
