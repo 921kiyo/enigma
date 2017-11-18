@@ -30,7 +30,6 @@ int main(int argc, char** argv){
   for(int i = 0; message[i] != '\0'; i++){
     if(message[i] - 'A' < 0 || 25 < message[i] - 'A'){
       cerr << message[i] << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
-      enigma->~Enigma();
       delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
