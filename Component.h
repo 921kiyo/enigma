@@ -10,7 +10,7 @@ protected:
   static const int ALPHABET_LENGTH_{26};
 public:
   void mapInputToArray(const char* path, int* array);
-  virtual void setConfig(vector<int> contacts) = 0;
+  // virtual void setConfig(vector<int> contacts) = 0;
   virtual int map(int input_index) = 0;
 
   // ???

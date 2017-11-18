@@ -30,12 +30,12 @@ Enigma::Enigma(int argc, char** argv){
   else{
     num_of_rotors_ = argc-4;
   }
-  plugboard_ = new SubComponent(plugboard_contacts);
-  reflector_ = new SubComponent(reflector_contacts);
 
+  plugboard_ = new SubComponent(argv[1]);
+  reflector_ = new SubComponent(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){
     // if starting_position is -1, do something!!
-    Rotor rotor(rotor_contacts_array[i], rotor_positions_[i]);
+    Rotor rotor(argv[3+i], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }
 }
@@ -67,7 +67,7 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     counter++;
-    rotor_positions_.push_back(num);
+    contacts.push_back(num);
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
@@ -102,6 +102,7 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     counter++;
+    contacts.push_back(num);
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
@@ -137,8 +138,8 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
     }
-    contacts.push_back(num);
     counter++;
+    contacts.push_back(num);
   }
 
   if(in_stream.fail()&&!in_stream.eof()){
@@ -157,8 +158,6 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
   //   exit(INVALID_ROTOR_MAPPING);
   // }
   checkDuplicateInt(contacts, ALPHABET_LENGTH_);
-
-
 }
 
 void Enigma::checkRotorPositionConfig(const char* path){
@@ -177,8 +176,8 @@ void Enigma::checkRotorPositionConfig(const char* path){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
     }
-    rotor_positions_.push_back(num);
     counter++;
+    rotor_positions_.push_back(num);
   }
   // Not elegant
   if(in_stream.eof()){
@@ -285,7 +284,7 @@ void Enigma::encryptMessage(char& letter){
   }
 
   current_index = reflector_->map(current_index);
-  cout << "reversing from here... " << current_index << endl;
+  // cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
       current_index = rotors_[i].shiftDown(current_index);
