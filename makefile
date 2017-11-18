@@ -5,7 +5,6 @@ CFLAGS = -Wall -g -std=c++11
 SRC_FILES = $(wildcard *.cpp)
 HEADER_FILES = $(wildcard *.h)
 OBJ_FILES = $(wildcard *.o)
-GCH_FILES = $(wildcard *.gch)
 
 # ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf rotors/I.rot rotors/II.rot \
 # rotors/III.rot rotors/I.pos < input.txt > output.txt
@@ -25,8 +24,8 @@ ARG = ./$(EXE) plugboards/I.pb reflectors/I.rf < input.txt > output.txt
 # ARG = ./$(EXE) plugboards/plugboard.pb reflectors/reflector.rf rotors/rotor.rot rotors/rotor.pos < input.txt > output.txt
 
 # Uncomment this line for checking memory leak
-run: $(EXE)
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
+# run: $(EXE)
+# 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all $(ARG)
 
 # run: $(EXE)
 # 	$(ARG)
@@ -35,6 +34,6 @@ $(EXE): $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) $(SRC_FILES) -o $(EXE)
 
 clean:
-	rm -f $(EXE)
+	rm -f $(EXE) $(OBJ_FILES)
 
 .PHONY: clean
