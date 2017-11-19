@@ -1,8 +1,8 @@
 #include "Enigma.h"
-#include "Rotor.h"
 #include "Component.h"
-#include "errors.h"
+#include "Rotor.h"
 #include "alphabet.h"
+#include "errors.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -36,7 +36,7 @@ Enigma::Enigma(int argc, char** argv){
   plugboard_ = new Component(argv[1]);
   reflector_ = new Component(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){
-    // if starting_position is -1, do something!!
+    // TODO if starting_position is -1, do something!!
     Rotor rotor(argv[3+i], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }

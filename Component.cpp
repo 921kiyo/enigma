@@ -1,5 +1,4 @@
 #include "Component.h"
-
 #include <iostream>
 #include <fstream>
 

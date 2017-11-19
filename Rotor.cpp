@@ -1,6 +1,5 @@
 #include "Rotor.h"
 #include "alphabet.h"
-
 #include <iostream>
 #include <fstream>
 

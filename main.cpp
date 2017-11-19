@@ -1,8 +1,7 @@
 
 #include "Enigma.h"
-#include "errors.h"
 #include "alphabet.h"
-
+#include "errors.h"
 #include <iostream>
 #include <cstring>
 #include <string>
