@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Rotor.h"
+#include <fstream>
 #include <vector>
 
 using namespace std;
@@ -27,6 +28,7 @@ public:
   // Free up plugboard and reflector heap in the destructor
   ~Enigma();
 
+  bool plugboardInputCheck(const char* path, fstream& in_stream, int& index_num);
   // These 4 methods check each input file by extracting input and check if
   // each input is valid. At the same time they also assign each valid integer
   // to corresponding vectors.

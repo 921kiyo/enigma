@@ -51,6 +51,26 @@ Enigma::~Enigma(){
     }
 }
 
+bool Enigma::plugboardInputCheck(const char* path, fstream& in_stream, int& index_num){
+  in_stream >> ws;
+  int end_of_file = in_stream.peek();
+  if(end_of_file == EOF){
+    return false;
+  }
+  in_stream >> index_num;
+  if(in_stream.fail()){
+    cerr << "Non-numeric character in plugboard file " << path << endl;
+    in_stream.close();
+    throw(NON_NUMERIC_CHARACTER);
+  }
+  if(!isNumberRangeCorrect(index_num)){
+    cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+    in_stream.close();
+    throw(INVALID_INDEX);
+  }
+  return true;
+}
+
 void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   int even_index_num, odd_index_num;
   int counter = 0;
@@ -63,43 +83,50 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   }
 
   while(!in_stream.eof()){
-    in_stream >> ws;
-    int end_of_file = in_stream.peek();
-    if(end_of_file == EOF){
+    if(!plugboardInputCheck(path, in_stream, even_index_num)){
       break;
     }
-    in_stream >> even_index_num;
-    if(in_stream.fail()){
-      cerr << "Non-numeric character in plugboard file " << path << endl;
-      in_stream.close();
-      throw(NON_NUMERIC_CHARACTER);
-    }
-    if(!isNumberRangeCorrect(even_index_num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-      in_stream.close();
-      throw(INVALID_INDEX);
-    }
-    // ----------------------------------- //
-    in_stream >> ws;
-    end_of_file = in_stream.peek();
-    if(end_of_file == EOF){
-      cerr << "Incorrect number of parameters in plugboard file " << path << endl;
-      throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
+    // cout << "even_index_num " << even_index_num << endl;
+    if(!plugboardInputCheck(path, in_stream, odd_index_num)){
       break;
-    }
-    in_stream >> odd_index_num;
-    if(in_stream.fail()){
-      cerr << "Non-numeric character in plugboard file " << path << endl;
-      in_stream.close();
-      throw(NON_NUMERIC_CHARACTER);
-    }
-    if(!isNumberRangeCorrect(odd_index_num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
-      in_stream.close();
-      throw(INVALID_INDEX);
     }
 
-    // ----------------------------------- //
+    // cout << "odd_index_num " << odd_index_num << endl;
+    // in_stream >> ws;
+    // int end_of_file = in_stream.peek();
+    // if(end_of_file == EOF){
+    //   break;
+    // }
+    // in_stream >> even_index_num;
+    // if(in_stream.fail()){
+    //   cerr << "Non-numeric character in plugboard file " << path << endl;
+    //   in_stream.close();
+    //   throw(NON_NUMERIC_CHARACTER);
+    // }
+    // if(!isNumberRangeCorrect(even_index_num)){
+    //   cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+    //   in_stream.close();
+    //   throw(INVALID_INDEX);
+    // }
+
+    // in_stream >> ws;
+    // end_of_file = in_stream.peek();
+    // if(end_of_file == EOF){
+    //   cerr << "Incorrect number of parameters in plugboard file " << path << endl;
+    //   throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
+    //   break;
+    // }
+    // in_stream >> odd_index_num;
+    // if(in_stream.fail()){
+    //   cerr << "Non-numeric character in plugboard file " << path << endl;
+    //   in_stream.close();
+    //   throw(NON_NUMERIC_CHARACTER);
+    // }
+    // if(!isNumberRangeCorrect(odd_index_num)){
+    //   cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+    //   in_stream.close();
+    //   throw(INVALID_INDEX);
+    // }
 
     contacts.push_back(even_index_num);
     if(checkAppearedBefore2(contacts, even_index_num, counter) != -1){
@@ -160,7 +187,7 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
     << path << endl;
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
   }
-
+  // This should be within the loop
   if(checkMapping(contacts, counter)){
     throw(INVALID_REFLECTOR_MAPPING);
   }
