@@ -84,13 +84,15 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   }
   in_stream.close();
 
+  if(checkMapping(contacts, counter)){
+    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
+  }
+
   if(counter%2!=0 || counter > ALPHABET_LENGTH){
     cerr << "Incorrect number of parameters in plugboard file " << path << endl;
     throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
   }
-  if(checkMapping(contacts, counter)){
-    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
-  }
+
 }
 
 void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
@@ -223,6 +225,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
     cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: " << path << endl;
     throw(NO_ROTOR_STARTING_POSITION);
   }
+  // TODO Double check this
   if(diff > 0){
     // This should not happen, I guess.
   }
