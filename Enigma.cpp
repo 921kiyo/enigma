@@ -79,14 +79,13 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
       in_stream.close();
       throw(INVALID_INDEX);
     }
+    if(checkMapping(contacts, counter)){
+      throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
+    }
     counter++;
     contacts.push_back(num);
   }
   in_stream.close();
-
-  if(checkMapping(contacts, counter)){
-    throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
-  }
 
   if(counter%2!=0 || counter > ALPHABET_LENGTH){
     cerr << "Incorrect number of parameters in plugboard file " << path << endl;
@@ -237,7 +236,7 @@ bool Enigma::isNumberRangeCorrect(int num){
 
 bool Enigma::checkMapping(vector<int> contacts, int range){
   int previous_appeared_position;
-  for(int i = range-1; i>= 0; i--){
+  for(int i = range; i>= 0; i--){
     previous_appeared_position = checkAppearedBefore(contacts, contacts[i], i);
     if(previous_appeared_position != -1){
       cerr << "Invalid mapping of input " << i << " to output " << contacts[i] \
