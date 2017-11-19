@@ -20,8 +20,15 @@ Rotor::Rotor(const char* path, int start_position){
     }
     counter++;
   }
-  num_of_notches_ = notches_.size();
   current_position_ = start_position;
+}
+
+int Rotor::getPreviousPosition(){
+  return previous_position_;
+}
+
+int Rotor::getCurrentPosition(){
+  return current_position_;
 }
 
 void Rotor::rotate(){
@@ -30,31 +37,12 @@ void Rotor::rotate(){
 }
 
 int Rotor::shiftUp(int input_index){
-  return (input_index - getCurrentPosition() + ALPHABET_LENGTH) % ALPHABET_LENGTH;
+  return (input_index - getCurrentPosition() + ALPHABET_LENGTH) \
+  % ALPHABET_LENGTH;
 }
 
 int Rotor::shiftDown(int input_index){
   return (input_index + getCurrentPosition()) % ALPHABET_LENGTH;
-}
-
-int Rotor::getPreviousPosition(){
-  // cout << "previous position " << previous_position_ << endl;
-  return previous_position_;
-}
-
-int Rotor::getCurrentPosition(){
-  // cout << "current position " << current_position_ << endl;
-  return current_position_;
-}
-
-bool Rotor::isCurrentPositionInNotch(){
-  for(int i= 0; i< num_of_notches_; i++){
-    if(current_position_ == notches_[i]){
-      // cout << "yes notch at " << current_position_ << endl;
-      return true;
-    }
-  }
-  return false;
 }
 
 int Rotor::mapForward(int input_index){
@@ -62,13 +50,20 @@ int Rotor::mapForward(int input_index){
 }
 
 int Rotor::mapBackward(int contact){
-  // cout << "starting position in backward " << input_index << endl;
   for(int i = 0; i < ALPHABET_LENGTH; i++){
-      // cout << "contacts " << contacts_[i] << endl;
       if(contact == contacts_[i]){
-        // cout << "contacts backward[input_index] " << i << endl;
           return i;
       }
   }
   return contact;
+}
+
+bool Rotor::isCurrentPositionInNotch(){
+  int num_of_notches = notches_.size();
+  for(int i= 0; i< num_of_notches; i++){
+    if(current_position_ == notches_[i]){
+      return true;
+    }
+  }
+  return false;
 }

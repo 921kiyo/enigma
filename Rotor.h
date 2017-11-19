@@ -15,24 +15,28 @@ private:
   int previous_position_;
   // Store first 26 letter index
   int contacts_[ALPHABET_LENGTH];
-  int num_of_notches_;
+  // Store after 26th letter index as no
   vector<int> notches_;
+
 public:
   // Within this constructor, it gets all inputs from the file and assign them
   // to contacts_ and notches_. It also gets num_of_notches_
   // and set the starting position to current_position_.
   Rotor(const char* path, int start_position);
+  // Getter
+  int getCurrentPosition();
+  // Getter
+  int getPreviousPosition();
   // Updates current_position_ and previous_position_
   void rotate();
   // TODO Needs explanation here
   int shiftUp(int input_index);
   int shiftDown(int input_index);
-  // Return contact by index
+  // Returns contact by index
   int mapForward(int input_index);
-  // Return index by contact
+  // Returns index by contact
   int mapBackward(int contact);
-  int getCurrentPosition();
-  int getPreviousPosition();
+  // Returns true is current_position_ is at a notch
   bool isCurrentPositionInNotch();
 };
 
