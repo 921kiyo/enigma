@@ -86,13 +86,10 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     if(!plugboardInputCheck(path, in_stream, even_index_num)){
       break;
     }
-    // cout << "even_index_num " << even_index_num << endl;
     if(!plugboardInputCheck(path, in_stream, odd_index_num)){
       cerr << "Incorrect number of parameters in plugboard file " << path << endl;
       throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
     }
-    // cout << "odd_index_num " << odd_index_num << endl;
-
     contacts.push_back(even_index_num);
     if(checkAppearedBefore2(contacts, even_index_num, counter) != -1){
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
@@ -133,12 +130,17 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       throw(NON_NUMERIC_CHARACTER);
     }
     if(!isNumberRangeCorrect(num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      cerr << "The file " << path << \
+      " contains a number that is not between 0 and 25" << endl;
       in_stream.close();
       throw(INVALID_INDEX);
     }
-    counter++;
     contacts.push_back(num);
+    if(checkAppearedBefore2(contacts, num, counter) != -1){
+      throw(INVALID_REFLECTOR_MAPPING);
+    }
+    counter++;
+
   }
   in_stream.close();
 
@@ -151,10 +153,6 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
     cerr << "Insufficient number of mappings in reflector file: " \
     << path << endl;
     throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-  }
-  // TODO This should be within the loop
-  if(checkMapping(contacts, counter)){
-    throw(INVALID_REFLECTOR_MAPPING);
   }
 }
 
@@ -187,17 +185,17 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
       in_stream.close();
       throw(INVALID_INDEX);
     }
-    counter++;
     contacts.push_back(num);
+    if(checkAppearedBefore2(contacts, num, counter) != -1){
+      throw(INVALID_ROTOR_MAPPING);
+    }
+    counter++;
+
   }
   in_stream.close();
 
   if(counter < ALPHABET_LENGTH){
     cerr << "Not all inputs mapped in rotor file: " << path << endl;
-    throw(INVALID_ROTOR_MAPPING);
-  }
-
-  if(checkMapping(contacts, ALPHABET_LENGTH)){
     throw(INVALID_ROTOR_MAPPING);
   }
 }
