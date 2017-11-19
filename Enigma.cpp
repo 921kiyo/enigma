@@ -88,16 +88,21 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     }
     if(!plugboardInputCheck(path, in_stream, odd_index_num)){
       cerr << "Incorrect number of parameters in plugboard file " << path << endl;
+      in_stream.close();
       throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
     }
     contacts.push_back(even_index_num);
-    if(checkAppearedBefore2(contacts, even_index_num, counter) != -1){
+    if(checkAppearedBefore(contacts, even_index_num, counter) != -1){
+      cout << "plugboard1 " << endl;
+      in_stream.close();
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
     counter++;
 
     contacts.push_back(odd_index_num);
-    if(checkAppearedBefore2(contacts, odd_index_num, counter) != -1){
+    if(checkAppearedBefore(contacts, odd_index_num, counter) != -1){
+      in_stream.close();
+      cout << "plugboard2 " << endl;
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
     counter++;
@@ -112,7 +117,6 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
   in_stream.open(path);
   if(in_stream.fail()){
     cerr << "Error opening or reading the configulation file " << path << endl;
-    in_stream.close();
     in_stream.close();
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
@@ -136,7 +140,9 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
-    if(checkAppearedBefore2(contacts, num, counter) != -1){
+    if(checkAppearedBefore(contacts, num, counter) != -1){
+      cout << "reflector" << endl;
+      in_stream.close();
       throw(INVALID_REFLECTOR_MAPPING);
     }
     counter++;
@@ -186,11 +192,15 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
-    if((checkAppearedBefore2(contacts, num, counter) != -1) && counter < ALPHABET_LENGTH){
+    // cout << "counter " << counter << endl;
+    // cout << ALPHABET_LENGTH << endl;
+
+    if(counter < ALPHABET_LENGTH-1 && checkAppearedBefore(contacts, num, counter) != -1){
+      in_stream.close();
       throw(INVALID_ROTOR_MAPPING);
     }
-    counter++;
 
+    counter++;
   }
   in_stream.close();
 
@@ -207,6 +217,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
   in_stream.open(path);
   if(in_stream.fail()){
     cerr << "Error opening or reading the configulation file " << path << endl;
+    in_stream.close();
     throw(ERROR_OPENING_CONFIGURATION_FILE);
   }
   while(!in_stream.eof()){
@@ -224,6 +235,7 @@ void Enigma::checkRotorPositionConfig(const char* path){
 
     if(!isNumberRangeCorrect(num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      in_stream.close();
       throw(INVALID_INDEX);
     }
     counter++;
@@ -233,42 +245,21 @@ void Enigma::checkRotorPositionConfig(const char* path){
   int diff = counter - num_of_rotors_;
   if(diff < 0){
     cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: " << path << endl;
+    in_stream.close();
     throw(NO_ROTOR_STARTING_POSITION);
   }
   // TODO Double check this
   if(diff > 0){
     // This should not happen, I guess.
   }
+  in_stream.close();
 }
 
 bool Enigma::isNumberRangeCorrect(int num){
   return (num < ALPHABET_LENGTH && num >= 0);
 }
 
-bool Enigma::checkMapping(vector<int> contacts, int range){
-  int previous_appeared_position;
-  for(int i = range-1; i>= 0; i--){
-    previous_appeared_position = checkAppearedBefore(contacts, contacts[i], i);
-    if(previous_appeared_position != -1){
-      cerr << "Invalid mapping of input " << i << " to output " << contacts[i] \
-      << " (output " << contacts[i] << " is already mapped to from input " \
-      << previous_appeared_position << ")" << endl;
-      return true;
-    }
-  }
-  return false;
-}
-
 int Enigma::checkAppearedBefore(vector<int> contacts, int num, int position){
-  for(int x = 0; x < position; x++ ){
-    if(contacts[x] == contacts[position]){
-      return x;
-    }
-  }
-  return -1;
-}
-
-int Enigma::checkAppearedBefore2(vector<int> contacts, int num, int position){
   for(int i = 0; i < position; i++ ){
     if(contacts[i] == num){
       cerr << "Invalid mapping of input " << position << " to output " << num \

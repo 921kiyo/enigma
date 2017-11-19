@@ -42,12 +42,12 @@ public:
 
   // Check if mapping is valid
   // (e.g duplicate contacts, a contact connected to itself etc.)
-  bool checkMapping(vector<int> contacts, int range);
+  // bool checkMapping(vector<int> contacts, int range);
 
   // Check if num is already appeared in contacts.
   // If yes, return the index of the previous contact. Otherwise return -1
   int checkAppearedBefore(vector<int> contacts, int num, int position);
-  int checkAppearedBefore2(vector<int> contacts, int num, int position);
+  // int checkAppearedBefore2(vector<int> contacts, int num, int position);
 
   // This method does whole encryption process
   // and convert letter into encrypted one.
