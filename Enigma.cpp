@@ -30,8 +30,8 @@ Enigma::Enigma(int argc, char** argv){
   checkRotorPositionConfig(argv[argc-1]);
 
   // After checking all config files, instantiate each component so that
-  // There is no concern for memory leak, even if constructor fails in the middle
-  // of construction.
+  // There is no concern for memory leak, even if constructor fails
+  // in the middle of construction.
 
   plugboard_ = new Component(argv[1]);
   reflector_ = new Component(argv[2]);
@@ -51,7 +51,8 @@ Enigma::~Enigma(){
     }
 }
 
-bool Enigma::plugboardInputCheck(const char* path, fstream& in_stream, int& index_num){
+bool Enigma::plugboardInputCheck(const char* path, fstream& in_stream, \
+  int& index_num){
   in_stream >> ws;
   int end_of_file = in_stream.peek();
   if(end_of_file == EOF){
@@ -64,7 +65,8 @@ bool Enigma::plugboardInputCheck(const char* path, fstream& in_stream, int& inde
     throw(NON_NUMERIC_CHARACTER);
   }
   if(!isNumberRangeCorrect(index_num)){
-    cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+    cerr << "The file " << path << \
+    " contains a number that is not between 0 and 25" << endl;
     in_stream.close();
     throw(INVALID_INDEX);
   }
@@ -87,7 +89,8 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
       break;
     }
     if(!plugboardInputCheck(path, in_stream, odd_index_num)){
-      cerr << "Incorrect number of parameters in plugboard file " << path << endl;
+      cerr << "Incorrect number of parameters in plugboard file " \
+      << path << endl;
       in_stream.close();
       throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
     }
@@ -140,7 +143,8 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
-    if(counter < ALPHABET_LENGTH && checkAppearedBefore(contacts, num, counter) != -1){
+    if(counter < ALPHABET_LENGTH && \
+      checkAppearedBefore(contacts, num, counter) != -1){
       in_stream.close();
       throw(INVALID_REFLECTOR_MAPPING);
     }
@@ -181,18 +185,21 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
     in_stream >> num;
 
     if(in_stream.fail()){
-      cerr << "Non-numeric character for mapping in rotor file " << path << endl;
+      cerr << "Non-numeric character for mapping in rotor file " \
+      << path << endl;
       in_stream.close();
       throw(NON_NUMERIC_CHARACTER);
     }
     if(!isNumberRangeCorrect(num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      cerr << "The file " << path \
+      << " contains a number that is not between 0 and 25" << endl;
       in_stream.close();
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
 
-    if(counter < ALPHABET_LENGTH-1 && checkAppearedBefore(contacts, num, counter) != -1){
+    if(counter < ALPHABET_LENGTH-1 && \
+      checkAppearedBefore(contacts, num, counter) != -1){
       in_stream.close();
       throw(INVALID_ROTOR_MAPPING);
     }
@@ -230,7 +237,8 @@ void Enigma::checkRotorPositionConfig(const char* path){
     }
 
     if(!isNumberRangeCorrect(num)){
-      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      cerr << "The file " << path \
+      << " contains a number that is not between 0 and 25" << endl;
       in_stream.close();
       throw(INVALID_INDEX);
     }
@@ -240,7 +248,8 @@ void Enigma::checkRotorPositionConfig(const char* path){
 
   int diff = counter - num_of_rotors_;
   if(diff < 0){
-    cerr << "No starting position for rotor " << num_of_rotors_ + diff<< " in rotor position file: " << path << endl;
+    cerr << "No starting position for rotor " << num_of_rotors_ + diff \
+    << " in rotor position file: " << path << endl;
     in_stream.close();
     throw(NO_ROTOR_STARTING_POSITION);
   }
@@ -288,7 +297,6 @@ void Enigma::encryptMessage(char& letter){
       if(rotors_[i-1].isCurrentPositionInNotch() && \
          rotors_[i-1].getPreviousPosition() != \
          rotors_[i-1].getCurrentPosition()){
-        // cout << "yes, notch at " << rotors_[i-1]->getCurrentPosition() << endl;
         if(i-1 > 0){
           rotors_[i-2].rotate();
         }
