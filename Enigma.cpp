@@ -186,7 +186,7 @@ void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
-    if(checkAppearedBefore2(contacts, num, counter) != -1){
+    if((checkAppearedBefore2(contacts, num, counter) != -1) && counter < ALPHABET_LENGTH){
       throw(INVALID_ROTOR_MAPPING);
     }
     counter++;
@@ -222,7 +222,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
       throw(NON_NUMERIC_CHARACTER);
     }
 
-    // Can I abstruct this away?
     if(!isNumberRangeCorrect(num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       throw(INVALID_INDEX);
