@@ -36,6 +36,8 @@ void Rotor::rotate(){
   current_position_ = (current_position_ + 1) % ALPHABET_LENGTH;
 }
 
+// Use moduler of ALPHABET_LENGTH (26) to make sure the output is always
+// between 0 and 25
 int Rotor::shiftUp(int input_index){
   return (input_index - getCurrentPosition() + ALPHABET_LENGTH) \
   % ALPHABET_LENGTH;
