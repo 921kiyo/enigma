@@ -16,13 +16,15 @@ int num_of_rotors_;
 Component *plugboard_{nullptr};
 Component *reflector_{nullptr};
 public:
+
   // Within this constructor, check all input files are valid by calling
   // each "checkXXXConfig" method.
   // Initialise all the components after all the check is done, so that, if
   // exception is thrown while checking config, it throws an error before
   // a new heap is created in order to avoid unpredictable memory leak.
   Enigma(int argc, char** argv);
-  // Free up plugboard and reflector heap
+
+  // Free up plugboard and reflector heap in the destructor
   ~Enigma();
 
   // These 4 methods check each input file by extracting input and check if

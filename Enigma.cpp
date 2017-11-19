@@ -52,7 +52,7 @@ Enigma::~Enigma(){
 }
 
 void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
-  int num, num2;
+  int even_index_num, odd_index_num;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
@@ -68,13 +68,13 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     if(end_of_file == EOF){
       break;
     }
-    in_stream >> num;
+    in_stream >> even_index_num;
     if(in_stream.fail()){
       cerr << "Non-numeric character in plugboard file " << path << endl;
       in_stream.close();
       throw(NON_NUMERIC_CHARACTER);
     }
-    if(!isNumberRangeCorrect(num)){
+    if(!isNumberRangeCorrect(even_index_num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       in_stream.close();
       throw(INVALID_INDEX);
@@ -87,38 +87,31 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
       throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
       break;
     }
-    in_stream >> num2;
-    // cout << "num2 " << num2 << endl;
+    in_stream >> odd_index_num;
     if(in_stream.fail()){
       cerr << "Non-numeric character in plugboard file " << path << endl;
       in_stream.close();
       throw(NON_NUMERIC_CHARACTER);
     }
-    if(!isNumberRangeCorrect(num2)){
+    if(!isNumberRangeCorrect(odd_index_num)){
       cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
       in_stream.close();
       throw(INVALID_INDEX);
     }
 
-
     // ----------------------------------- //
-    // The spec says that the numbers are to be read off in pairs
-    // So I am checking if each number at even index has a pair
-    // Before calling checkMapping()
-    // cout << "num " << num << endl;
 
-    contacts.push_back(num);
-    if(checkAppearedBefore2(contacts, num, counter) != -1){
+    contacts.push_back(even_index_num);
+    if(checkAppearedBefore2(contacts, even_index_num, counter) != -1){
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
     counter++;
 
-    contacts.push_back(num2);
-    if(checkAppearedBefore2(contacts, num2, counter) != -1){
+    contacts.push_back(odd_index_num);
+    if(checkAppearedBefore2(contacts, odd_index_num, counter) != -1){
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
     counter++;
-
   }
   in_stream.close();
 }
