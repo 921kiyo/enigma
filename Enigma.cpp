@@ -125,20 +125,8 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
     in_stream >> ws;
     int end_of_file = in_stream.peek();
     if(end_of_file == EOF){
-      if(counter%2!=0){
-          cerr << "Incorrect (odd) number of parameters in reflector file " \
-          << path << endl;
-          in_stream.close();
-          throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-      }
-      if(counter != ALPHABET_LENGTH){
-        cerr << "Insufficient number of mappings in reflector file: " \
-        << path << endl;
-        in_stream.close();
-        throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
-      }
+      break;
     }
-
     in_stream >> num;
     if(in_stream.fail()){
       cerr << "Non-numeric character in reflector file " << path << endl;
@@ -152,13 +140,25 @@ void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
       throw(INVALID_INDEX);
     }
     contacts.push_back(num);
-    if(checkAppearedBefore(contacts, num, counter) != -1){
+    if(counter < ALPHABET_LENGTH && checkAppearedBefore(contacts, num, counter) != -1){
       in_stream.close();
       throw(INVALID_REFLECTOR_MAPPING);
     }
     counter++;
+
   }
   in_stream.close();
+
+  if(counter%2!=0){
+      cerr << "Incorrect (odd) number of parameters in reflector file " \
+      << path << endl;
+      throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+  }
+  if(counter != ALPHABET_LENGTH){
+    cerr << "Insufficient number of mappings in reflector file: " \
+    << path << endl;
+    throw(INCORRECT_NUMBER_OF_REFLECTOR_PARAMETERS);
+  }
 }
 
 void Enigma::checkRotorConfig(const char* path, vector<int>& contacts){
