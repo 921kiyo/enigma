@@ -52,7 +52,7 @@ Enigma::~Enigma(){
 }
 
 void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
-  int num;
+  int num, num2;
   int counter = 0;
   fstream in_stream;
   in_stream.open(path);
@@ -79,19 +79,48 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
       in_stream.close();
       throw(INVALID_INDEX);
     }
-    counter++;
+    // ----------------------------------- //
+    in_stream >> ws;
+    end_of_file = in_stream.peek();
+    if(end_of_file == EOF){
+      cerr << "Incorrect number of parameters in plugboard file " << path << endl;
+      throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
+      break;
+    }
+    in_stream >> num2;
+    // cout << "num2 " << num2 << endl;
+    if(in_stream.fail()){
+      cerr << "Non-numeric character in plugboard file " << path << endl;
+      in_stream.close();
+      throw(NON_NUMERIC_CHARACTER);
+    }
+    if(!isNumberRangeCorrect(num2)){
+      cerr << "The file " << path << " contains a number that is not between 0 and 25" << endl;
+      in_stream.close();
+      throw(INVALID_INDEX);
+    }
+
+
+    // ----------------------------------- //
+    // The spec says that the numbers are to be read off in pairs
+    // So I am checking if each number at even index has a pair
+    // Before calling checkMapping()
+    // cout << "num " << num << endl;
+
     contacts.push_back(num);
-    if(checkMapping(contacts, counter)){
+    if(checkAppearedBefore2(contacts, num, counter) != -1){
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
+    counter++;
+
+    contacts.push_back(num2);
+    if(checkAppearedBefore2(contacts, num2, counter) != -1){
+      throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
+    }
+    counter++;
+
   }
   in_stream.close();
-
-  if(counter%2!=0 || counter > ALPHABET_LENGTH){
-    cerr << "Incorrect number of parameters in plugboard file " << path << endl;
-    throw(INCORRECT_NUMBER_OF_PLUGBOARD_PARAMETERS);
-  }
-
 }
 
 void Enigma::checkReflectorConfig(const char* path, vector<int>& contacts){
@@ -252,6 +281,18 @@ int Enigma::checkAppearedBefore(vector<int> contacts, int num, int position){
   for(int x = 0; x < position; x++ ){
     if(contacts[x] == contacts[position]){
       return x;
+    }
+  }
+  return -1;
+}
+
+int Enigma::checkAppearedBefore2(vector<int> contacts, int num, int position){
+  for(int i = 0; i < position; i++ ){
+    if(contacts[i] == num){
+      cerr << "Invalid mapping of input " << position << " to output " << num \
+      << " (output " << num << " is already mapped to from input " \
+      << i << ")" << endl;
+      return i;
     }
   }
   return -1;
