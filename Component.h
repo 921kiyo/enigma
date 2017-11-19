@@ -3,6 +3,7 @@
 
 #include <vector>
 
+// Component class is used to create plugboard and reflector
 class Component{
 private:
   // Store pair letters index in each vector, so it is easy to
@@ -15,7 +16,8 @@ public:
   Component(const char* path);
   // Map the input accoding to wired-up pairs stored in
   // input_pair1_ and input_pair2_ .
-  // Otherwise return input itself.
+  // If corresponding input is not found in the pair vectors,
+  // return input itself.
   int map(int input);
 };
 
