@@ -96,7 +96,6 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     }
     contacts.push_back(even_index_num);
     if(checkAppearedBefore(contacts, even_index_num, counter) != -1){
-      cout << "plugboard1 " << endl;
       in_stream.close();
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
@@ -105,7 +104,6 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
     contacts.push_back(odd_index_num);
     if(checkAppearedBefore(contacts, odd_index_num, counter) != -1){
       in_stream.close();
-      cout << "plugboard2 " << endl;
       throw(IMPOSSIBLE_PLUGBOARD_CONFIGURATION);
     }
     counter++;
@@ -278,7 +276,6 @@ int Enigma::checkAppearedBefore(vector<int> contacts, int num, int position){
 
 void Enigma::encryptMessage(char& letter){
   int current_index = letter - 'A';
-  // cout << "current index before plugboard " << current_index << endl;
   current_index = plugboard_->map(current_index);
 
   if(num_of_rotors_ > 0){
@@ -289,11 +286,8 @@ void Enigma::encryptMessage(char& letter){
     for(int i = num_of_rotors_ ; i > 0; i--){
       // TODO Needs explanation here
       current_index = rotors_[i-1].shiftDown(current_index);
-      // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i-1].mapForward(current_index);
-      // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i-1].shiftUp(current_index);
-      // cout << "current_index3 " << current_index << endl;
       if(rotors_[i-1].isCurrentPositionInNotch() && \
          rotors_[i-1].getPreviousPosition() != \
          rotors_[i-1].getCurrentPosition()){
@@ -303,17 +297,12 @@ void Enigma::encryptMessage(char& letter){
       }
     }
   }
-
   current_index = reflector_->map(current_index);
-  // cout << "reversing from here... " << current_index << endl;
   if(num_of_rotors_ > 0){
     for(int i = 0; i < num_of_rotors_; i++){
       current_index = rotors_[i].shiftDown(current_index);
-      // cout << "current_index1 " << current_index << endl;
       current_index = rotors_[i].mapBackward(current_index);
-      // cout << "current_index2 " << current_index << endl;
       current_index = rotors_[i].shiftUp(current_index);
-      // cout << "current_index3 " << current_index << endl;
     }
   }
   current_index = plugboard_->map(current_index);
