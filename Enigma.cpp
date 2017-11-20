@@ -15,12 +15,14 @@ Enigma::Enigma(int argc, char** argv){
   vector<int> reflector_contacts;
   checkReflectorConfig(argv[2], reflector_contacts);
   vector<vector<int>> rotor_contacts_array;
+
   vector<int> rotor_contacts;
   for(int i = 3; i < argc-1; i++){
     checkRotorConfig(argv[i], rotor_contacts);
     rotor_contacts_array.push_back(rotor_contacts);
     rotor_contacts.clear();
   }
+  // 3 argc means no rotor is provided
   if(argc == 3){
     num_of_rotors_ = 0;
   }
@@ -29,14 +31,11 @@ Enigma::Enigma(int argc, char** argv){
   }
   checkRotorPositionConfig(argv[argc-1]);
 
-  // After checking all config files, instantiate each component so that
-  // There is no concern for memory leak, even if constructor fails
-  // in the middle of construction.
+  // All the checking is done at this point, so instantiate each component
 
   plugboard_ = new Component(argv[1]);
   reflector_ = new Component(argv[2]);
   for(int i = 0; i < num_of_rotors_; i++){
-    // TODO if starting_position is -1, do something!!
     Rotor rotor(argv[3+i], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }
