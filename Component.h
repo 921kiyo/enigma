@@ -3,7 +3,8 @@
 
 #include <vector>
 
-// Component class is used to create plugboard and reflector instance
+// Component class is used to create plugboard and reflector instance, 
+// since their functionality in terms of mapping is essentially the same
 class Component{
 private:
   // Store pair letters index in each vector, so it is easy to

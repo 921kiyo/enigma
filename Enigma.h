@@ -26,7 +26,7 @@ public:
   // each "checkXXXConfig" method.
   // Initialise all the components after all the check is done, so that, if
   // exception is thrown while checking config, it throws an error to main
-  // before a new heap is created in order to avoid unpredictable memory leak.
+  // before a new heap is created, thus avoiding unpredictable memory leak.
   Enigma(int argc, char** argv);
   // Free up plugboard and reflector heap in the destructor
   ~Enigma();
