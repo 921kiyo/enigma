@@ -251,10 +251,6 @@ void Enigma::checkRotorPositionConfig(const char* path){
     in_stream.close();
     throw(NO_ROTOR_STARTING_POSITION);
   }
-  // TODO Double check this
-  if(diff > 0){
-    // This should not happen, I guess.
-  }
   in_stream.close();
 }
 
