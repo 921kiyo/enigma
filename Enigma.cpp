@@ -51,7 +51,7 @@ Enigma::~Enigma(){
     }
 }
 
-bool Enigma::plugboardInputCheck(const char* path, fstream& in_stream, \
+bool Enigma::isPlugboardInputValid(const char* path, fstream& in_stream, \
   int& index_num){
   in_stream >> ws;
   int end_of_file = in_stream.peek();
@@ -85,10 +85,10 @@ void Enigma::checkPlugboardConfig(const char* path, vector<int>& contacts){
   }
 
   while(!in_stream.eof()){
-    if(!plugboardInputCheck(path, in_stream, even_index_num)){
+    if(!isPlugboardInputValid(path, in_stream, even_index_num)){
       break;
     }
-    if(!plugboardInputCheck(path, in_stream, odd_index_num)){
+    if(!isPlugboardInputValid(path, in_stream, odd_index_num)){
       cerr << "Incorrect number of parameters in plugboard file " \
       << path << endl;
       in_stream.close();
