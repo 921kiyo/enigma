@@ -44,6 +44,7 @@ A rotor (4) is a wheel with the upper-case alphabet (in order) on the rim and a 
 a rotor are 26 contacts each under a letter. Each contact on one side is wired to a contact on the other side at a
 different position, effectively mapping each letter to a different one.
 
+![Alt text](img/rotor.png?raw=true "Enigma Wiring")
 
 An Enigma machine has several rotors with different wiring inside each. These can be arranged in any order on
 the axle. At the start of the war, an Enigma machine had five different rotors available with room on the axle for
