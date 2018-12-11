@@ -44,7 +44,7 @@ A rotor (4) is a wheel with the upper-case alphabet (in order) on the rim and a 
 a rotor are 26 contacts each under a letter. Each contact on one side is wired to a contact on the other side at a
 different position, effectively mapping each letter to a different one.
 
-![Alt text](img/rotor.png?raw=true "Enigma Wiring")
+![Alt text](img/rotor.png?raw=true "Enigma Rotor")
 
 An Enigma machine has several rotors with different wiring inside each. These can be arranged in any order on
 the axle. At the start of the war, an Enigma machine had five different rotors available with room on the axle for
@@ -60,6 +60,7 @@ of one position, for example, a signal on the ‘A’ input would actually enter
 if the rotor maps the letter ‘B’ to the letter ‘G’, for example, then after the rotation the signal will exit the rotor
 in the previous ‘F’ position. This behaviour is illustrated by the diagram below:
 
+![Alt text](img/rotor_internal.png?raw=true "Enigma Rotor Internal")
 
 It was this rotation (coupled with the enormous number of possible starting configurations) that gave the Enigma
 machine such a powerful encryption, since it implemented a polyalphabetic encoding - notice in the diagram above
