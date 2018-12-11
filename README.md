@@ -3,9 +3,11 @@ An Enigma machine is a device that can encrypt and decrypt messages that are wri
 (usually the 26 upper-case Latin letters A-Z). Figure below shows how a battery powered Enigma machine with a four
 letter alphabet (ASDF) is wired. The machine is essentially an electric circuit that connects the input switches to
 the lights on the output board. In between the input switches and output board there is a complex mechanism that
-continually re-routes the circuit, thus scrambling the original message
+continually re-routes the circuit, thus scrambling the original message. 
 
-![Alt text](img/Enigma_wiring.png?raw=true "Enigma Wiring")
+<p align="center"> 
+<img src="img/Enigma_wiring.png" alt="Enigma Wiring">
+</p>
 
 The key components of an Enigma machine are:
 - a set of input switches (1)
@@ -23,6 +25,8 @@ the decrypted characters can be read off of the output board.
 Once configured, an Enigma machine encrypts its input using an invertible function. Thus, to decrypt a message
 one needs only to type the encrypted ciphertext into an identically configured Enigma machine, and then read the
 plaintext off the output board.
+
+Below is a brief description of each component. For details, please see the [Wikipedia page](https://en.wikipedia.org/wiki/Enigma_machine).
 
 ## Components
 
@@ -44,7 +48,10 @@ A rotor (4) is a wheel with the upper-case alphabet (in order) on the rim and a 
 a rotor are 26 contacts each under a letter. Each contact on one side is wired to a contact on the other side at a
 different position, effectively mapping each letter to a different one.
 
-![Alt text](img/rotor.png?raw=true "Enigma Rotor")
+<p align="center"> 
+<img src="img/rotor.png" alt="Enigma Rotor">
+</p>
+
 
 An Enigma machine has several rotors with different wiring inside each. These can be arranged in any order on
 the axle. At the start of the war, an Enigma machine had five different rotors available with room on the axle for
@@ -60,7 +67,9 @@ of one position, for example, a signal on the ‘A’ input would actually enter
 if the rotor maps the letter ‘B’ to the letter ‘G’, for example, then after the rotation the signal will exit the rotor
 in the previous ‘F’ position. This behaviour is illustrated by the diagram below:
 
-![Alt text](img/rotor_internal.png?raw=true "Enigma Rotor Internal")
+<p align="center"> 
+<img src="img/rotor_internal.png" alt="Enigma Rotor Internal">
+</p>
 
 It was this rotation (coupled with the enormous number of possible starting configurations) that gave the Enigma
 machine such a powerful encryption, since it implemented a polyalphabetic encoding - notice in the diagram above
