@@ -33,21 +33,12 @@ Enigma::Enigma(int argc, char** argv){
 
   // All the checking is done at this point, so instantiate each component
 
-  plugboard_ = new Component(argv[1]);
-  reflector_ = new Component(argv[2]);
+  plugboard_ = unique_ptr<Component>(new Component(argv[1]));
+  reflector_ = unique_ptr<Component>(new Component(argv[2]));
   for(int i = 0; i < num_of_rotors_; i++){
     Rotor rotor(argv[3+i], rotor_positions_[i]);
     rotors_.push_back(rotor);
   }
-}
-
-Enigma::~Enigma(){
-    if(plugboard_){
-        delete plugboard_;
-    }
-    if(reflector_){
-        delete reflector_;
-    }
 }
 
 bool Enigma::isPlugboardInputValid(const char* path, fstream& in_stream, \
