@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -20,16 +21,7 @@ int main(int argc, char** argv){
     cerr << "usage: enigma plugboard-file reflector-file (<rotor-file>* rotor-positions)?" << endl;
     return INSUFFICIENT_NUMBER_OF_PARAMETERS;
   }
-  Enigma *enigma = nullptr;
-  // Whenever exception is thrown in input error check, this try/catch will
-  // catch it and return an appropriate error code
-  try{
-    enigma = new Enigma(argc, argv);
-  }
-  catch(int error){
-    delete enigma;
-    return error;
-  }
+  std::unique_ptr<Enigma> enigma {new Enigma(argc, argv)};
 
   char letter;
   // Within this while loop,
@@ -46,12 +38,10 @@ int main(int argc, char** argv){
       // This line exceeds 80 characters, but if I break it into two lines,
       // I cannnot pass LabTS auto-tests
       cerr << letter << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
-      delete enigma;
       return INVALID_INPUT_CHARACTER;
     }
     enigma->encryptMessage(letter);
     cout << letter;
   }
-  delete enigma;
   return NO_ERROR;
 }
