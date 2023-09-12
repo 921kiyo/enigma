@@ -5,6 +5,7 @@
 #include "Rotor.h"
 #include <fstream>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -19,8 +20,8 @@ int num_of_rotors_;
 // C++ 11 default initialisation + use of nullptr
 // Plubboard and reflector are initialized after all input error check is done,
 // so that there is no concern for memory leak when an exception is thrown.
-Component *plugboard_{nullptr};
-Component *reflector_{nullptr};
+unique_ptr<Component>plugboard_;
+unique_ptr<Component>reflector_;
 public:
   // Within this constructor, check all input files are valid by calling
   // each "checkXXXConfig" method.
@@ -29,8 +30,6 @@ public:
   // before a new heap is created, thus avoiding memory leak even if
   //  constructor fails in the middle of construction.
   Enigma(int argc, char** argv);
-  // Free up plugboard and reflector heap in the destructor
-  ~Enigma();
   // These 4 checkConfig methods check each input file by extracting input
   // and check if each input is valid (and throws exception error
   // as defined in the spec).
