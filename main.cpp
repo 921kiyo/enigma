@@ -6,6 +6,9 @@
 #include <cstring>
 #include <string>
 #include <memory>
+#include <ctype.h>
+
+#define skipNonAlphabet 1
 
 using namespace std;
 
@@ -34,11 +37,22 @@ int main(int argc, char** argv){
       break;
     }
 
-    if(letter - 'A' < 0 || ALPHABET_LENGTH -1 < letter - 'A'){
+    if (islower(letter))
+    {
+      letter = toupper(letter);
+    }
+
+    if(isupper(letter) == 0){
       // This line exceeds 80 characters, but if I break it into two lines,
       // I cannnot pass LabTS auto-tests
-      cerr << letter << " is not a valid input character (input characters must be upper case letters A-Z)!" << endl;
+      if (skipNonAlphabet == 0)
+      {
+      cerr << letter << " is not a valid input character (input characters must be upper case letters A-Z, a-z)!" << endl;
       return INVALID_INPUT_CHARACTER;
+      }
+
+      // If skipNonAlphabet is 1, then skip the non-alphabet character and continue
+      continue;
     }
     enigma->encryptMessage(letter);
     cout << letter;
